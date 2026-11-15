@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sepotong — tebak lagu Indonesia dari 0,1 detik</title>
+<meta name="description" content="Game tebak lagu Indonesia. Dengar potongan 0,1 detik, buka makin panjang kalau mentok, poin makin kecil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0e0d'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%231fc8b4' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='16' r='3.4' fill='%231fc8b4'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="wordmark" href="./">Sepotong</a>
+  <div class="topbar-right">
+    <button class="ghost" id="btn-how" type="button">Cara main</button>
+  </div>
+</header>
+
+<main>
+  <section class="screen screen-start" id="screen-start">
+    <div class="start-grid">
+      <div class="start-copy">
+        <p class="kicker">Game tebak lagu · Indonesia</p>
+        <h1 class="display">Sepotong</h1>
+        <p class="lede">Kamu cuma dapat <em>0,1 detik</em> potongan lagu. Mentok? Buka potongannya lebih panjang — makin panjang, poinnya makin kecil.</p>
+
+        <div class="filters">
+          <div class="fgroup">
+            <span class="label">Era</span>
+            <div class="pills" id="pills-era" role="group" aria-label="Filter era"></div>
+          </div>
+          <div class="fgroup">
+            <span class="label">Genre</span>
+            <div class="pills" id="pills-genre" role="group" aria-label="Filter genre"></div>
+          </div>
+        </div>
+
+        <div class="startrow">
+          <button class="btn btn-primary" id="btn-start" type="button">
+            Mulai <span class="btn-sep">·</span> 10 soal
+          </button>
+          <span class="pool" id="poolcount">—</span>
+        </div>
+
+        <p class="hintbar"><kbd>1</kbd><span>–</span><kbd>4</kbd> jawab <i>·</i> <kbd>spasi</kbd> dengerin ulang <i>·</i> <kbd>enter</kbd> lanjut</p>
+      </div>
+
+      <aside class="start-side">
+        <span class="label">Coba dulu</span>
+        <div class="disc mini" id="demo-disc">
+          <div class="disc-label"><span>0,1</span></div>
+        </div>
+        <button class="btn btn-ghost" id="btn-demo" type="button">Dengar 0,1 detik</button>
+        <p class="side-note">Potongan acak dari bank lagu. Buat pemanasan, nggak dinilai.</p>
+        <dl class="side-stats">
+          <div><dt>Rentang tahun</dt><dd id="stat-years">—</dd></div>
+          <div><dt>Genre</dt><dd>Pop · Rock · Folk · Dangdut</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <p class="foot">Audio pakai preview resmi 30 detik dari katalog iTunes / Apple Music. Nama lagu &amp; tahun diambil dari metadata rilisnya.</p>
+  </section>
+
+  <section class="screen screen-play" id="screen-play" hidden>
+    <div class="playhead">
+      <div class="playinfo">
+        <div class="dots" id="dots" aria-hidden="true"></div>
+        <span class="label" id="round-label">Soal 1/10</span>
+      </div>
+      <div class="scorebox">
+        <span class="label">Skor</span>
+        <span class="score" id="score">0</span>
+      </div>
+    </div>
+
+    <div class="board">
+      <div class="player">
+        <div class="disc-stage">
+          <div class="disc" id="disc">
+            <div class="disc-label"><span id="disc-num">1</span></div>
+          </div>
+          <button class="play" id="btn-play" type="button" aria-label="Putar potongan lagu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg>
+          </button>
+          <div class="disc-ring" aria-hidden="true"></div>
+        </div>
+
+        <div class="wave" id="wave" aria-hidden="true"></div>
+
+        <div class="ladder">
+          <div class="ladder-head">
+            <span class="label">Panjang potongan</span>
+            <span class="label" id="ladder-note">0,1 detik</span>
+          </div>
+          <div class="ladder-steps" id="ladder" role="group" aria-label="Buka potongan lebih panjang"></div>
+        </div>
+      </div>
+
+      <div class="answers">
+        <div class="answers-head">
+          <span class="label">Pilih judul lagu</span>
+          <span class="label streak" id="streak"></span>
+        </div>
+        <div class="options" id="options"></div>
+
+        <div class="reveal" id="reveal" hidden>
+          <div class="reveal-media">
+            <img id="reveal-art" alt="" width="96" height="96" loading="lazy">
+            <div class="reveal-text">
+              <p class="verdict" id="reveal-verdict">Benar</p>
+              <p class="reveal-title" id="reveal-title">—</p>
+              <p class="reveal-meta" id="reveal-meta">—</p>
+            </div>
+            <div class="reveal-points">
+              <span class="pts" id="reveal-points">+0</span>
+              <span class="label" id="reveal-len">0,1 detik</span>
+            </div>
+          </div>
+          <div class="reveal-actions">
+            <button class="btn btn-ghost" id="btn-preview" type="button">Putar 30 detik</button>
+            <button class="btn btn-primary" id="btn-next" type="button">Lanjut <span class="btn-sep">→</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen screen-end" id="screen-end" hidden>
+    <p class="kicker" id="end-kicker">Sesi selesai</p>
+    <div class="endscore">
+      <span class="endscore-num" id="end-score">0</span>
+      <span class="endscore-of">/ 1000</span>
+    </div>
+    <p class="endline" id="end-line">—</p>
+
+    <dl class="stats">
+      <div><dt>Benar</dt><dd id="end-correct">0/10</dd></div>
+      <div><dt>Streak terpanjang</dt><dd id="end-streak">0</dd></div>
+      <div><dt>Rata-rata poin</dt><dd id="end-avg">0</dd></div>
+      <div><dt>Rekor</dt><dd id="end-best">0</dd></div>
+    </dl>
+
+    <div class="startrow">
+      <button class="btn btn-primary" id="btn-again" type="button">Main lagi</button>
+      <button class="btn btn-ghost" id="btn-settings" type="button">Ganti setelan</button>
+    </div>
+  </section>
+</main>
+
+<dialog class="how" id="how">
+  <h2>Cara main</h2>
+  <ol>
+    <li>Kamu dengar potongan lagu selama <b>0,1 detik</b>. Itu aja.</li>
+    <li>Kalau belum yakin, tekan <b>0,5</b> → <b>2</b> → <b>8</b> → <b>15 detik</b> buat buka potongan lebih panjang. Poin turun tiap buka.</li>
+    <li>Pilih satu dari empat judul. Salah = nol poin, langsung dikasih jawabannya.</li>
+    <li>10 soal per sesi. Poin maksimum 100 per soal (kalau jawab dari 0,1 detik).</li>
+  </ol>
+  <form method="dialog"><button class="btn btn-primary" type="submit">Ngerti</button></form>
+</dialog>
+
+<script src="songs.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
