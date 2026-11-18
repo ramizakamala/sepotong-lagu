@@ -655,7 +655,6 @@
         $('hintLine').textContent = 'Ketuk tombol putar';
         state.startedAt = performance.now();
         buildSearchIndex();
-        if (!keepToast) toast('Lagu siap. Ketuk putar.');
       })
       .catch(function () {
         toast('Lagu ini gagal dimuat. Coba lagi.');
