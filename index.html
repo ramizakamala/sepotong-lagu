@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261118b">
+<link rel="stylesheet" href="style.css?v=20261118d">
 </head>
 <body>
 
@@ -117,7 +117,7 @@
           <input id="guess" type="text" placeholder="Sebutkan judul lagunya" autocomplete="off" autocapitalize="off"
                  spellcheck="false" role="combobox" aria-expanded="false" aria-controls="suggest" aria-autocomplete="list">
         </div>
-        <button class="btn btn-secondary skipbtn" id="btnSkip">Lewati</button>
+        <button class="btn btn-secondary skipbtn" id="btnAction">Lewati ke 0,5s</button>
       </div>
       <ul class="suggest" id="suggest" role="listbox" hidden></ul>
       <p class="guesshint" id="guessHint"></p>
@@ -126,7 +126,7 @@
 
     <div class="gfoot">
       <span class="muted num" id="stageLabel">Tahap 1 dari 5</span>
-      <button class="link" id="btnGiveUp">Menyerah</button>
+      <span class="muted" id="actionHint">Enter juga bisa</span>
     </div>
   </section>
 
@@ -173,10 +173,10 @@
     </div>
     <ol>
       <li>Ketuk tombol putar. Kamu dengar potongan 0,1 detik.</li>
-      <li>Ketik judul lagunya, lalu pilih dari daftar saran.</li>
+      <li>Ketik judul lagunya, lalu tekan tombol <b>Tebak</b> (atau Enter, atau pilih dari saran).</li>
       <li>Salah tebak? Potongan yang sama dibuka lebih panjang, tetap dari titik yang sama. Judul yang sudah ditebak tidak muncul lagi di saran.</li>
-      <li>Tombol Lewati membuka potongan berikutnya tanpa menebak, tanpa memutus beruntun. Kalau sudah di 15 detik, tombol itu hilang.</li>
-      <li>Menyerah, atau salah tebak di tahap terakhir, memutus beruntunmu.</li>
+      <li>Kalau kolomnya kosong, tombol yang sama berubah jadi <b>Lewati ke …</b> dan hanya membuka potongan berikutnya, tanpa memutus beruntun.</li>
+      <li>Di potongan terpanjang (15 detik) tombol itu berubah jadi <b>Nyerah</b>; menekannya mengakhiri soal dan memutus beruntunmu. Salah tebak di tahap itu juga mengakhiri soal.</li>
       <li>Beruntun dihitung dari jumlah lagu yang kamu tebak benar tanpa terputus.</li>
     </ol>
     <button class="btn btn-primary btn-block" data-close>Ngerti</button>
@@ -228,7 +228,7 @@
 
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script src="songs.js?v=20261118b"></script>
-<script src="app.js?v=20261118b"></script>
+<script src="songs.js?v=20261118d"></script>
+<script src="app.js?v=20261118d"></script>
 </body>
 </html>

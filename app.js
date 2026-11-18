@@ -433,7 +433,6 @@
     $('suggest').hidden = true;
     $('suggest').innerHTML = '';
     $('tried').innerHTML = '';
-    $('btnGiveUp').hidden = true;
     $('guessHint').textContent = '';
     renderStreak();
     renderStages();
@@ -532,9 +531,11 @@
   $('guess').addEventListener('input', function () {
     state.suggestIndex = -1;
     renderSuggestions();
+    updateActionBtn();
   });
 
   $('guess').addEventListener('keydown', function (e) {
+    e.stopPropagation();
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       if (!state.suggestions.length) return;
@@ -563,6 +564,18 @@
     }
   });
 
+  function submitTyped(raw) {
+    var n = norm(raw);
+    var hit = null;
+    if (searchIndex) {
+      for (var i = 0; i < searchIndex.items.length; i++) {
+        if (searchIndex.items[i].t === n) { hit = searchIndex.items[i].song; break; }
+      }
+    }
+    if (hit) submitGuess(hit);
+    else submitGuess(null, raw);
+  }
+
   function submitGuess(song, typed) {
     if (state.solved || state.loading) return;
     if (!song) {
@@ -571,6 +584,7 @@
       if (state.triedNorm.indexOf(norm(raw)) !== -1) {
         toast('Judul itu sudah ditebak.');
         $('guess').value = '';
+        updateActionBtn();
         return;
       }
       wrongGuess(raw, null);
@@ -583,6 +597,7 @@
     if (state.triedIds.indexOf(song.id) !== -1 || state.triedNorm.indexOf(norm(song.title)) !== -1) {
       toast('Judul itu sudah ditebak.');
       $('guess').value = '';
+      updateActionBtn();
       return;
     }
     wrongGuess(song.title, song);
@@ -607,6 +622,7 @@
     $('guess').value = '';
     $('suggest').hidden = true;
     $('guess').setAttribute('aria-expanded', 'false');
+    updateActionBtn();
     beep('bad');
     buzz(25);
 
@@ -648,16 +664,18 @@
     showReveal(false, 0, reason);
   }
 
-  $('btnSkip').addEventListener('click', function () {
+  $('btnAction').addEventListener('click', function () {
     if (state.loading || state.solved) return;
-    if (!advanceStage()) {
-      toast('Sudah di potongan terpanjang. Pakai Menyerah kalau mau berhenti.');
+    var raw = $('guess').value.trim();
+    if (raw.length >= 2) {
+      submitTyped(raw);
+      return;
     }
-  });
-
-  $('btnGiveUp').addEventListener('click', function () {
-    if (state.loading || state.solved) return;
-    loseRound('giveup');
+    if (state.stage >= STAGES.length - 1) {
+      loseRound('giveup');
+      return;
+    }
+    advanceStage();
   });
 
   function renderStreak() {
@@ -677,11 +695,25 @@
     $('tlKnob').style.left = 'calc(' + pct + '% - ' + (pct / 100 * 10) + 'px)';
     $('playSecs').textContent = secLabel(STAGES[state.stage]);
     $('stageLabel').textContent = 'Tahap ' + (state.stage + 1) + ' dari ' + STAGES.length;
+    updateActionBtn();
+  }
+
+  function updateActionBtn() {
+    var b = $('btnAction');
+    var hasText = $('guess').value.trim().length >= 2;
     var last = state.stage >= STAGES.length - 1;
-    var skip = $('btnSkip');
-    skip.hidden = last;
-    if (!last) skip.textContent = 'Lewati ke ' + secLabel(STAGES[state.stage + 1]);
-    $('btnGiveUp').hidden = false;
+    if (hasText) {
+      b.textContent = 'Tebak';
+      b.classList.add('btn-primary');
+      b.classList.remove('btn-secondary');
+      $('actionHint').textContent = 'atau tekan Enter';
+    } else {
+      b.textContent = last ? 'Nyerah' : 'Lewati ke ' + secLabel(STAGES[state.stage + 1]);
+      b.classList.add('btn-secondary');
+      b.classList.remove('btn-primary');
+      $('actionHint').textContent = last ? 'potongan terpanjang' : 'kolom kosong = buka potongan';
+    }
+    b.disabled = !!state.solved || !!state.loading;
   }
 
   function setPlayState(s) {
@@ -698,6 +730,7 @@
       hint.textContent = 'Ketuk untuk dengar ulang · spasi';
       b.setAttribute('aria-label', 'Putar potongan lagu');
     }
+    updateActionBtn();
   }
 
   function playStage() {
