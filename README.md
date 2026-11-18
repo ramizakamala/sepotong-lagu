@@ -36,12 +36,15 @@ Tombol di kiri baris navigasi mengganti isinya antara **Genre** dan **Tahun**; b
 2. Ketik judulnya (minimal 3 huruf), pilih dari saran, lalu tekan **Tebak** atau Enter.
 3. Salah tebak: potongan yang sama dibuka lebih panjang. Judul yang sudah ditebak hilang dari daftar saran.
 4. Kolom kosong membuat tombol yang sama menjadi **Lewati**; di 15 detik tombolnya menjadi **Nyerah**.
-5. Layar hasil selalu vertikal dan rata tengah: cover album, judul, artis, album (tahun) · genre, badge hasil, satu baris keterangan, lalu satu tombol.
+5. Layar hasil selalu vertikal dan rata tengah: cover album, judul, artis, album (tahun) · genre, satu badge, lalu satu tombol. Tidak ada keterangan progres di layar ini.
 
 | Keadaan | Badge | Tombol | Artefak |
 | --- | --- | --- | --- |
-| Salah | **Salah Lo!** — garis luar merah, latar transparan, miring | **Ulang Lah!** — level yang sama dengan lagu acak baru | level tidak naik |
+| Nyerah | **Gitu aja nyerah!** — garis luar merah, latar transparan, miring | **Ulang Lah!** — level yang sama dengan lagu acak baru | level tidak naik |
+| Salah sampai tahap terakhir | **Salah Lo!** — gaya sama, merah | **Ulang Lah!** | level tidak naik |
 | Benar | **Anjay Bener!** — garis luar hijau, latar transparan, miring | **Lanjut Bro!** — naik ke level berikutnya | level bertambah |
+
+Selama cuplikan berbunyi, isi slider berjalan dari awal tahap ke akhir tahap sesuai durasinya, dan tombol putar berdenyut pelan dengan cincin garis putus-putus yang berputar. Keduanya berhenti begitu cuplikan selesai atau dihentikan, dan dimatikan oleh opsi "kurangi gerak". 
 
 ## Tema dan warna
 

@@ -1050,6 +1050,7 @@
   function syncStageUI() {
     var i = state.stage;
     $('stageRange').value = String(i);
+    $('railFill').style.transition = 'width 180ms ease';
     $('railFill').style.width = ((i + 1) / STAGES.length) * 100 + '%';
     var pct = ((i + 1) / STAGES.length) * 100;
     var mark = $('railMark');
@@ -1097,12 +1098,27 @@
     var done = function () {
       if (token !== playToken) return;
       clearTimeout(playTimer);
+      $('trackWrap').classList.remove('playing');
+      var f = $('railFill');
+      f.style.transition = 'width 160ms ease';
+      f.style.width = ((state.stage + 1) / STAGES.length) * 100 + '%';
       setPlayState('ready');
     };
 
     if (Engine.ctx && Engine.ctx.state !== 'running') {
       Engine.resume();
     }
+
+    /* rail berjalan dari awal tahap ke akhir tahap selama cuplikan berbunyi */
+    var segA = (state.stage / STAGES.length) * 100;
+    var segB = ((state.stage + 1) / STAGES.length) * 100;
+    var fill = $('railFill');
+    $('trackWrap').classList.add('playing');
+    fill.style.transition = 'none';
+    fill.style.width = segA + '%';
+    void fill.offsetWidth;
+    fill.style.transition = 'width ' + sec + 's linear';
+    fill.style.width = segB + '%';
 
     var clip = Engine.playClip(state.rec, sec);
     clip.ended.then(done);
@@ -1116,6 +1132,10 @@
       playToken++;
       clearTimeout(playTimer);
       Engine.stopClip();
+      $('trackWrap').classList.remove('playing');
+      var f = $('railFill');
+      f.style.transition = 'width 160ms ease';
+      f.style.width = ((state.stage + 1) / STAGES.length) * 100 + '%';
       setPlayState('ready');
       return;
     }
@@ -1171,23 +1191,16 @@
     if (img) img.addEventListener('error', function () { cover.innerHTML = '<span class="ph"></span>'; });
 
     var badge = $('revBadge');
-    badge.textContent = solved ? 'Anjay Bener!' : 'Salah Lo!';
+    badge.textContent = solved ? 'Anjay Bener!' : (reason === 'giveup' ? 'Gitu aja nyerah!' : 'Salah Lo!');
     badge.className = 'badge' + (solved ? ' good' : '');
 
     var apple = $('revApple');
     if (s.appleUrl) { apple.href = s.appleUrl; apple.hidden = false; } else { apple.hidden = true; }
 
-    var done = solved ? level.best : level.current;
+    /* tidak ada keterangan progres di layar hasil */
     var v = $('revVerdict');
-    v.className = 'verdict ' + (solved ? 'good' : 'neutral');
-    if (solved) {
-      v.innerHTML = '<b>Level ' + done + ' lewat</b>' +
-        '<span>lanjut ke level ' + level.current + '</span>';
-    } else {
-      var why = reason === 'giveup' ? 'kamu nyerah' : 'tidak ketemu';
-      v.innerHTML = '<b>Level ' + done + ' belum lewat</b>' +
-        '<span>' + why + ' · ulangi, lagunya bakal beda</span>';
-    }
+    v.innerHTML = '';
+    v.hidden = true;
 
     $('btnReplay').hidden = !!solved;
     $('btnNext').hidden = !solved;
