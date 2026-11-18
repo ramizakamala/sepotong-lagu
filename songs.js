@@ -5393,7 +5393,7 @@ window.SONGS = [
   "title": "Monokrom",
   "artist": "Tulus",
   "year": 2016,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Monokrom",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music18/v4/d1/8f/41/d18f41cf-45e4-39f4-4d10-0a0af01f7eb7/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f0/7b/00/f07b00d4-cea0-79f0-3062-7e2b2d2d274a/mzaf_7698224852945153762.plus.aac.p.m4a",
@@ -6043,7 +6043,7 @@ window.SONGS = [
   "title": "Monolog",
   "artist": "Pamungkas",
   "year": 2018,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Walk the Talk",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/64/c2/77/64c277c6-5ef3-8d5c-9a58-c1e55db864ae/3615933085924.png/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/22/b2/8a/22b28ac4-1162-2688-c2c9-b3367f48caa3/mzaf_18071050521705730116.plus.aac.p.m4a",
@@ -6363,7 +6363,7 @@ window.SONGS = [
   "title": "Evaluasi",
   "artist": "Hindia",
   "year": 2019,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Evaluasi",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/83/f6/8f/83f68f0a-8a30-9653-a3e2-dc37d9714946/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/3f/76/8b/3f768b2d-8843-f368-9235-78b3e3fe9871/mzaf_10478617535469036592.plus.aac.p.m4a",
@@ -6373,7 +6373,7 @@ window.SONGS = [
   "title": "Rumah Ke Rumah",
   "artist": "Hindia",
   "year": 2019,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Menari Dengan Bayangan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/2a/da/57/2ada5765-472f-3193-11a3-861db06da99d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2f/6a/33/2f6a3387-87af-d371-2fac-eafdae28a8f2/mzaf_5489739214735589568.plus.aac.p.m4a",
@@ -6493,7 +6493,7 @@ window.SONGS = [
   "title": "Sorai",
   "artist": "Nadin Amizah",
   "year": 2019,
-  "genre": "folk",
+  "genre": "gen z",
   "album": "Sorai",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/26/f8/ca/26f8cabe-a810-ba69-9239-5ea86c487a96/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/db/17/4a/db174ab3-8a22-65e4-416f-35955cd4410e/mzaf_2366501307663742132.plus.aac.p.m4a",
@@ -6723,7 +6723,7 @@ window.SONGS = [
   "title": "Serana",
   "artist": "For Revenge",
   "year": 2020,
-  "genre": "rock",
+  "genre": "gen z",
   "album": "Serana",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/1a/39/28/1a39285a-b5fa-5fe1-b2a9-6b6e804b930d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ff/07/a8/ff07a88b-3b23-9f2b-d0ca-33772266e308/mzaf_12056188825143834666.plus.aac.p.m4a",
@@ -6793,7 +6793,7 @@ window.SONGS = [
   "title": "Bertaut",
   "artist": "Nadin Amizah",
   "year": 2020,
-  "genre": "folk",
+  "genre": "gen z",
   "album": "Selamat Ulang Tahun",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/1d/10/9b/1d109b17-1bbf-1894-e774-4d9ad6baa7b3/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/69/5f/0f/695f0f18-4d4a-e00f-557a-482ba64c4390/mzaf_16230878472979709887.plus.aac.p.m4a",
@@ -7283,7 +7283,7 @@ window.SONGS = [
   "title": "Tak Segampang Itu",
   "artist": "Anggi Marito",
   "year": 2022,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Tak Segampang Itu",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/59/b4/b8/59b4b872-6c07-242b-4a46-dffd4aa22f77/22UM1IM34409.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/da/1f/93/da1f93b4-b2ca-5624-8cba-da0f1f123eed/mzaf_1374587696112479353.plus.aac.p.m4a",
@@ -7363,7 +7363,7 @@ window.SONGS = [
   "title": "Mangu (feat. Charita Utami)",
   "artist": "Fourtwnty",
   "year": 2022,
-  "genre": "folk",
+  "genre": "gen z",
   "album": "Mangu (feat. Charita Utami)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/12/67/6a/12676ab7-6d68-0dac-a3ee-aee732198f53/859761675336_cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ae/13/37/ae1337bf-7a9e-688b-b12c-0d72cff4a521/mzaf_11640501023499013282.plus.aac.p.m4a",
@@ -7523,7 +7523,7 @@ window.SONGS = [
   "title": "Ini Abadi",
   "artist": "Perunggu",
   "year": 2022,
-  "genre": "folk",
+  "genre": "gen z",
   "album": "Memorandum",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/46/f9/d8/46f9d899-0194-e9f1-5ea0-c4c4719a53b7/3551441.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/50/b9/d2/50b9d23e-9c29-f8a5-315a-70fe90d191df/mzaf_17144605862017180410.plus.aac.p.m4a",
@@ -7533,7 +7533,7 @@ window.SONGS = [
   "title": "33x",
   "artist": "Perunggu",
   "year": 2022,
-  "genre": "folk",
+  "genre": "gen z",
   "album": "Memorandum",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/46/f9/d8/46f9d899-0194-e9f1-5ea0-c4c4719a53b7/3551441.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/64/d3/23/64d323bf-6e0b-2d07-6ce2-da0ebc432081/mzaf_2093128220087522458.plus.aac.p.m4a",
@@ -7623,7 +7623,7 @@ window.SONGS = [
   "title": "Hati-Hati di Jalan",
   "artist": "Tulus",
   "year": 2022,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Manusia",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/6f/18/10/6f1810e0-2d6a-a456-1362-de607c70408a/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bb/50/cd/bb50cd11-dbbc-f84e-1244-f1b786af7ab4/mzaf_15441108959417505948.plus.aac.p.m4a",
@@ -7803,7 +7803,7 @@ window.SONGS = [
   "title": "Cincin",
   "artist": "Hindia",
   "year": 2023,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Lagipula Hidup Akan Berakhir",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7f/5f/99/7f5f99c7-1ddd-93cb-9b79-7efec9d6dd53/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0f/b6/76/0fb6764d-be60-02f7-fcc9-161ca440a10a/mzaf_3227369514347113276.plus.aac.p.m4a",
@@ -7943,7 +7943,7 @@ window.SONGS = [
   "title": "penjaga hati",
   "artist": "Nadhif Basalamah",
   "year": 2023,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "penjaga hati",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/81/07/bf/8107bf80-0d4e-8f5c-9dfe-544dbf3f2dd9/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e6/ca/05/e6ca05ae-a625-bc25-c579-d85d663a9e32/mzaf_12102823507856840081.plus.aac.p.m4a",
@@ -8000,6 +8000,16 @@ window.SONGS = [
   "id": 800
  },
  {
+  "title": "Lesung Pipi",
+  "artist": "Raim Laode",
+  "year": 2023,
+  "genre": "gen z",
+  "album": "Lesung Pipi",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/d6/9e/a3/d69ea311-9c75-0109-1938-1a6f00ba0cc4/5019.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/7d/1f/a2/7d1fa22e-4470-4e72-8e40-6def9dc9198f/mzaf_4002081953804272999.plus.aac.p.m4a",
+  "id": 801
+ },
+ {
   "title": "Tak Berharap Lagi",
   "artist": "Raisa",
   "year": 2023,
@@ -8007,7 +8017,7 @@ window.SONGS = [
   "album": "Tak Berharap Lagi",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c5/a6/d2/c5a6d268-75cd-9be1-aa18-cafc22fab35a/23UM1IM58820.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/10/20/bc/1020bc69-3a48-8d0b-2b8a-9093fc91ca09/mzaf_18186898386669672704.plus.aac.p.m4a",
-  "id": 801
+  "id": 802
  },
  {
   "title": "Cinta Sempurna",
@@ -8017,7 +8027,7 @@ window.SONGS = [
   "album": "Cinta Sempurna",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/4a/73/a3/4a73a3fa-3e71-8eb0-7e3c-85aef384af57/artwork.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/ae/4f/40/ae4f405c-353f-61db-8b9f-3efdd0f74c08/mzaf_5232955399352755050.plus.aac.p.m4a",
-  "id": 802
+  "id": 803
  },
  {
   "title": "Lupakan Cinta",
@@ -8027,7 +8037,7 @@ window.SONGS = [
   "album": "Another Journey : The Beginning",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/03/12/49/0312497e-b140-0c03-cbb5-463232465690/196922316425.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ae/00/e2/ae00e225-3153-402b-d255-a17c6e93e64a/mzaf_10946206560253778048.plus.aac.p.m4a",
-  "id": 803
+  "id": 804
  },
  {
   "title": "Besok kita pergi makan",
@@ -8037,7 +8047,7 @@ window.SONGS = [
   "album": "Besok kita pergi makan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/aa/c2/3a/aac23aa6-6802-72b6-4c7a-1cb5d6a55c0b/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/be/0a/9f/be0a9f57-6056-5f7c-cfb5-988a8467635e/mzaf_16780122619601213370.plus.aac.p.m4a",
-  "id": 804
+  "id": 805
  },
  {
   "title": "Slow Respon",
@@ -8047,7 +8057,7 @@ window.SONGS = [
   "album": "Slow Respon",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/13/5a/40/135a40de-3d73-af3e-e2e4-36ddf71b4026/197338287811.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/df/5b/1c/df5b1c5a-db41-3551-bcce-6aaa864e32d6/mzaf_11987212101390697059.plus.aac.p.m4a",
-  "id": 805
+  "id": 806
  },
  {
   "title": "Rindu Semalam",
@@ -8057,7 +8067,7 @@ window.SONGS = [
   "album": "Rindu Semalam",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/ac/ea/be/aceabefe-f630-63a9-7c16-0cb955b8663e/197338934463.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/3a/da/57/3ada5765-27ce-23a4-8708-f59d3253c23d/mzaf_9797174403514409498.plus.aac.p.m4a",
-  "id": 806
+  "id": 807
  },
  {
   "title": "Tega",
@@ -8067,7 +8077,7 @@ window.SONGS = [
   "album": "Tega",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/70/5f/58/705f58a0-8c6b-fb8b-45c2-02a00401079c/23UMGIM49936.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/4d/85/a8/4d85a8a7-2c35-dc1d-90d0-438bd899dd94/mzaf_2345531667191724518.plus.aac.p.m4a",
-  "id": 807
+  "id": 808
  },
  {
   "title": "Saat Kau Telah Mengerti",
@@ -8077,7 +8087,7 @@ window.SONGS = [
   "album": "Saat Kau Telah Mengerti",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f0/c7/9f/f0c79f9b-3f95-9a4b-3bb6-ef4fa5eec4a6/810009381358_Cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bb/bf/45/bbbf456d-1e9c-62f0-0548-644df8d75bce/mzaf_7815253679004917157.plus.aac.p.m4a",
-  "id": 808
+  "id": 809
  },
  {
   "title": "Menyesal",
@@ -8087,7 +8097,7 @@ window.SONGS = [
   "album": "Menyesal",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/10/80/cf/1080cf2d-4f5e-3900-3ea9-89133da9bec2/23UMGIM15356.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e0/70/4a/e0704a2a-ca12-f650-0514-b5d84dd947b6/mzaf_7032498769557878039.plus.aac.p.m4a",
-  "id": 809
+  "id": 810
  },
  {
   "title": "Sumpah Cintaku",
@@ -8097,7 +8107,7 @@ window.SONGS = [
   "album": "Sumpah Cintaku",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b9/5f/a8/b95fa86b-1294-70ba-5984-76c9dfb1ef4a/23UM1IM00180.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/eb/b7/01/ebb70189-d265-0f82-2da4-a2c03ec08f31/mzaf_2879993187739373488.plus.aac.p.m4a",
-  "id": 810
+  "id": 811
  },
  {
   "title": "Jalan Pulang",
@@ -8107,7 +8117,7 @@ window.SONGS = [
   "album": "Jalan Pulang",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/f1/c2/ea/f1c2ea1a-e696-12a1-e1c9-0befdbd08079/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/09/a5/fb/09a5fbd9-2bc5-6258-c22f-6206c5757188/mzaf_8367667029719856749.plus.aac.p.m4a",
-  "id": 811
+  "id": 812
  },
  {
   "title": "Lihatlah Lebih Dekat",
@@ -8117,27 +8127,27 @@ window.SONGS = [
   "album": "Lihatlah Lebih Dekat",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/7c/73/f4/7c73f45d-443c-2bec-e76a-0172d5ea00d0/25UM1IM05182.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bc/2e/28/bc2e288e-f6f3-9af0-1850-29df29b617bb/mzaf_7333603430650221684.plus.aac.p.m4a",
-  "id": 812
+  "id": 813
  },
  {
   "title": "Tarot",
   "artist": ".Feast",
   "year": 2024,
-  "genre": "rock",
+  "genre": "gen z",
   "album": "Membangun & Menghancurkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/07/95/66/07956604-57ed-5a20-3c98-536c847f8ac2/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b4/e1/a5/b4e1a53b-ecad-986c-3305-c523ffcde555/mzaf_6946463728211422361.plus.aac.p.m4a",
-  "id": 813
+  "id": 814
  },
  {
   "title": "Nina",
   "artist": ".Feast",
   "year": 2024,
-  "genre": "rock",
+  "genre": "gen z",
   "album": "Nina",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f1/28/34/f12834cb-932f-cca6-58d7-3b5a790d83c2/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/06/80/1c/06801c98-6d91-292c-52c6-93104dc0553a/mzaf_9433716051835362604.plus.aac.p.m4a",
-  "id": 814
+  "id": 815
  },
  {
   "title": "o,Tuan",
@@ -8147,7 +8157,7 @@ window.SONGS = [
   "album": "Membangun & Menghancurkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/07/95/66/07956604-57ed-5a20-3c98-536c847f8ac2/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/50/74/cc/5074cca9-4a11-ee7e-29e9-e5cedb9340ed/mzaf_7359183162543363225.plus.aac.p.m4a",
-  "id": 815
+  "id": 816
  },
  {
   "title": "Arteri",
@@ -8157,7 +8167,7 @@ window.SONGS = [
   "album": "Membangun & Menghancurkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/07/95/66/07956604-57ed-5a20-3c98-536c847f8ac2/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e4/e4/df/e4e4df18-7597-bb3e-4734-81c9f27c07a3/mzaf_3862442064332915823.plus.aac.p.m4a",
-  "id": 816
+  "id": 817
  },
  {
   "title": "Metakritik",
@@ -8167,7 +8177,7 @@ window.SONGS = [
   "album": "Membangun & Menghancurkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/07/95/66/07956604-57ed-5a20-3c98-536c847f8ac2/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c3/05/ae/c305aed0-c09f-0b36-2d5b-02c6c9778869/mzaf_9285858886754152338.plus.aac.p.m4a",
-  "id": 817
+  "id": 818
  },
  {
   "title": "menghancurkan",
@@ -8177,7 +8187,7 @@ window.SONGS = [
   "album": "Membangun & Menghancurkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/07/95/66/07956604-57ed-5a20-3c98-536c847f8ac2/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e3/1a/1e/e31a1e9c-0be0-5ad3-7d44-4ddf93d50fd5/mzaf_9436671811251810529.plus.aac.p.m4a",
-  "id": 818
+  "id": 819
  },
  {
   "title": "Konsekuens",
@@ -8187,7 +8197,7 @@ window.SONGS = [
   "album": "Membangun & Menghancurkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/07/95/66/07956604-57ed-5a20-3c98-536c847f8ac2/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/34/c4/21/34c42103-40c0-f681-4723-f9bd36c1c77a/mzaf_6983829398113098492.plus.aac.p.m4a",
-  "id": 819
+  "id": 820
  },
  {
   "title": "Masih Hatiku",
@@ -8197,7 +8207,7 @@ window.SONGS = [
   "album": "Masih Hatiku",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/15/23/ef/1523ef9a-64b9-2551-5458-84b6e3b2b836/24UMGIM13322.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/21/f7/84/21f7841e-70c8-62a9-1722-c349934b4e37/mzaf_9652739581336749728.plus.aac.p.m4a",
-  "id": 820
+  "id": 821
  },
  {
   "title": "Mimpilah Seliar-liarnya",
@@ -8207,7 +8217,7 @@ window.SONGS = [
   "album": "Tumbuh dan Menjadi",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/eb/a9/3f/eba93f14-7ef6-fcda-e220-75ebb2e88b98/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/15/3c/42/153c421d-5584-01a0-19b9-006552209aa4/mzaf_2526508515014692257.plus.aac.p.m4a",
-  "id": 821
+  "id": 822
  },
  {
   "title": "Untungnya, Hidup Harus Tetap Berjalan",
@@ -8217,7 +8227,7 @@ window.SONGS = [
   "album": "Sialnya, Hidup Harus Tetap Berjalan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9c/9f/80/9c9f80d1-cb53-db64-9bca-03f06cd1000c/24UMGIM57224.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/49/ff/48/49ff48c0-c632-7fdd-2e15-2879a6a9e51e/mzaf_815192612749261657.plus.aac.p.m4a",
-  "id": 822
+  "id": 823
  },
  {
   "title": "Kata Mereka Ini Berlebihan",
@@ -8227,7 +8237,7 @@ window.SONGS = [
   "album": "Kata Mereka Ini Berlebihan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3b/c0/95/3bc0954c-b332-3e09-1e6b-287f7c59afdd/24UMGIM03336.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5e/95/84/5e9584dc-22a4-7d65-3287-b296d8d3bcee/mzaf_1421687586915931032.plus.aac.p.m4a",
-  "id": 823
+  "id": 824
  },
  {
   "title": "Lama-Lama",
@@ -8237,7 +8247,7 @@ window.SONGS = [
   "album": "Sialnya, Hidup Harus Tetap Berjalan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9c/9f/80/9c9f80d1-cb53-db64-9bca-03f06cd1000c/24UMGIM57224.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b2/31/d3/b231d3f0-f392-af75-4406-8dcca8e15677/mzaf_16092403126938390587.plus.aac.p.m4a",
-  "id": 824
+  "id": 825
  },
  {
   "title": "Kini Mereka Tahu",
@@ -8247,7 +8257,7 @@ window.SONGS = [
   "album": "Kini Mereka Tahu",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/3c/57/0a/3c570a1e-a983-b14b-5f66-a15bf36a5a7c/24UMGIM37488.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/06/30/ef/0630efd0-ef54-2b25-8224-1875da685ed0/mzaf_17465203508968984545.plus.aac.p.m4a",
-  "id": 825
+  "id": 826
  },
  {
   "title": "Sialnya, Hidup Harus Tetap Berjalan",
@@ -8257,7 +8267,7 @@ window.SONGS = [
   "album": "Sialnya, Hidup Harus Tetap Berjalan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/9c/9f/80/9c9f80d1-cb53-db64-9bca-03f06cd1000c/24UMGIM57224.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1f/85/e3/1f85e3f9-31a7-c322-1dcb-5c944b9aa94d/mzaf_8017641799955262832.plus.aac.p.m4a",
-  "id": 826
+  "id": 827
  },
  {
   "title": "Sigar",
@@ -8267,7 +8277,7 @@ window.SONGS = [
   "album": "Sigar",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/68/33/7a/68337ac5-981a-de0d-8999-a3505f05642f/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0b/e1/8e/0be18ee1-e109-73b7-0b6c-732ed95b425c/mzaf_6835293960109766506.plus.aac.p.m4a",
-  "id": 827
+  "id": 828
  },
  {
   "title": "Penyangkalan",
@@ -8277,7 +8287,7 @@ window.SONGS = [
   "album": "Penyangkalan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/70/0f/eb/700feb8e-04ab-9302-8f10-47df720e9121/196872239584.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ff/08/a8/ff08a830-4ebc-92fc-54e1-05b6e693255e/mzaf_14001965140715416593.plus.aac.p.m4a",
-  "id": 828
+  "id": 829
  },
  {
   "title": "Sadrah",
@@ -8287,7 +8297,7 @@ window.SONGS = [
   "album": "Sadrah",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/eb/46/e7/eb46e7fd-8490-49c8-174d-580ded414707/196871931847.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ee/b4/f2/eeb4f2b9-e6d4-13d0-b2e2-c6088040eef3/mzaf_16954651809604457163.plus.aac.p.m4a",
-  "id": 829
+  "id": 830
  },
  {
   "title": "Kalah (feat. Hasan Toys)",
@@ -8297,7 +8307,7 @@ window.SONGS = [
   "album": "Kalah (feat. Hasan Toys)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/0d/8e/14/0d8e14b7-dea0-4513-f00e-f59fdaacb603/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5d/c1/8d/5dc18dc1-23d2-1135-a1ce-791c19eb61e9/mzaf_7258272754977522843.plus.aac.p.m4a",
-  "id": 830
+  "id": 831
  },
  {
   "title": "Emut Bae",
@@ -8307,7 +8317,7 @@ window.SONGS = [
   "album": "Top Hits Sunda",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/36/3f/d9/363fd9e7-a15a-f303-a7ff-73d8d4768d49/24UMGIM75947.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9e/02/e2/9e02e2cd-5d1a-1934-106d-f4705ac0d279/mzaf_9265242666155662263.plus.aac.p.m4a",
-  "id": 831
+  "id": 832
  },
  {
   "title": "Lumpur Dan Berlian",
@@ -8317,7 +8327,7 @@ window.SONGS = [
   "album": "Lumpur Dan Berlian",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d5/67/42/d5674204-7ef0-5177-000c-2f8e7c888cff/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/16/cf/14/16cf141c-f097-ea85-8405-f42c3fa311c3/mzaf_11201688611515788128.plus.aac.p.m4a",
-  "id": 832
+  "id": 833
  },
  {
   "title": "Bukan Dengan Dia",
@@ -8327,7 +8337,17 @@ window.SONGS = [
   "album": "Bukan Dengan Dia",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/af/f2/bc/aff2bc6d-70fd-38b0-aff4-0e7948985b58/196872206395.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/76/3d/1d/763d1d7b-3d95-df8b-6a53-128e74f35644/mzaf_10967099216511350841.plus.aac.p.m4a",
-  "id": 833
+  "id": 834
+ },
+ {
+  "title": "Pica Pica",
+  "artist": "Juan Reza",
+  "year": 2024,
+  "genre": "gen z",
+  "album": "Pica Pica",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/6b/43/df/6b43df6f-c0ba-5322-47db-6a48944f255b/199339664707.png/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/39/a5/64/39a564e5-282f-604d-03fa-f00d28d59dd6/mzaf_6993618182978071013.plus.aac.p.m4a",
+  "id": 835
  },
  {
   "title": "Lampu Kuning",
@@ -8337,7 +8357,7 @@ window.SONGS = [
   "album": "Nonfiksi",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/26/0c/be/260cbe21-9d2d-a2ab-3391-f8fde6ad6840/198704005169_Cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b0/d4/47/b0d447f4-7460-1c0b-97c6-e4a0628db2a0/mzaf_11409265310389392960.plus.aac.p.m4a",
-  "id": 834
+  "id": 836
  },
  {
   "title": "Sampaikan Rindu",
@@ -8347,7 +8367,7 @@ window.SONGS = [
   "album": "Melangkah",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/53/20/8a/53208abf-bf60-4e2c-4e30-34d4c33a59a4/24UM1IM01212.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2c/e3/70/2ce3706c-aeed-1c27-3ada-db2efb569259/mzaf_10028362738075861050.plus.aac.p.m4a",
-  "id": 835
+  "id": 837
  },
  {
   "title": "Malu Malu Tapi Nyaman",
@@ -8357,7 +8377,7 @@ window.SONGS = [
   "album": "Melangkah",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/53/20/8a/53208abf-bf60-4e2c-4e30-34d4c33a59a4/24UM1IM01212.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/b1/3d/4f/b13d4f44-9e73-5d59-4851-cb6f2a7ac7c1/mzaf_2435495122230027948.plus.aac.p.m4a",
-  "id": 836
+  "id": 838
  },
  {
   "title": "Mati-Matian",
@@ -8367,7 +8387,7 @@ window.SONGS = [
   "album": "Mati-Matian",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e6/91/eb/e691eb58-7ae3-cb1b-0a5f-839ad3a010e0/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/29/e8/10/29e8108c-a605-34e9-340e-eb15843978a4/mzaf_6232590663506982387.plus.aac.p.m4a",
-  "id": 837
+  "id": 839
  },
  {
   "title": "Mencintaimu",
@@ -8377,7 +8397,7 @@ window.SONGS = [
   "album": "Mencintaimu",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d8/f1/b8/d8f1b8fd-9d72-a56b-f86d-9305637dde5a/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c2/f1/6c/c2f16ca7-a2d4-505d-6814-3ceae758443b/mzaf_13135194633921981804.plus.aac.p.m4a",
-  "id": 838
+  "id": 840
  },
  {
   "title": "Aku Takdirmu",
@@ -8387,7 +8407,7 @@ window.SONGS = [
   "album": "Aku Takdirmu",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c0/a6/65/c0a66554-6437-f3c2-51d5-bd8f18be2313/24UMGIM47706.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/3e/b2/ff/3eb2ffed-e3f2-07b8-d507-db6022c4fb95/mzaf_15798149409507303592.plus.aac.p.m4a",
-  "id": 839
+  "id": 841
  },
  {
   "title": "Piwales Tresno",
@@ -8397,7 +8417,7 @@ window.SONGS = [
   "album": "Piwales Tresno",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f6/26/ff/f626ff70-db64-68d9-15b9-9ce79f79dfc2/15287.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/33/9a/a2/339aa202-205d-6f1d-d6bc-cf32d0585a3b/mzaf_15322893890173624129.plus.aac.p.m4a",
-  "id": 840
+  "id": 842
  },
  {
   "title": "jatuh cinta lagi",
@@ -8407,7 +8427,7 @@ window.SONGS = [
   "album": "Nadhif",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/44/bb/57/44bb57de-c25d-645b-d8c7-da5aaca0ef43/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2f/50/5b/2f505b0e-1ae6-e6a1-80ed-a3c747933f4f/mzaf_8260603018295039878.plus.aac.p.m4a",
-  "id": 841
+  "id": 843
  },
  {
   "title": "penuh",
@@ -8417,7 +8437,7 @@ window.SONGS = [
   "album": "Nadhif",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/44/bb/57/44bb57de-c25d-645b-d8c7-da5aaca0ef43/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/da/da/0c/dada0cd5-70de-574c-0978-3f8fb9e422c5/mzaf_6163703970226050167.plus.aac.p.m4a",
-  "id": 842
+  "id": 844
  },
  {
   "title": "sesuatu",
@@ -8427,7 +8447,7 @@ window.SONGS = [
   "album": "Nadhif",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/44/bb/57/44bb57de-c25d-645b-d8c7-da5aaca0ef43/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/14/ff/4e/14ff4e1e-1f36-a1f8-b2af-384f5752dabe/mzaf_15081380749427812758.plus.aac.p.m4a",
-  "id": 843
+  "id": 845
  },
  {
   "title": "tiba-tiba jumat lagi",
@@ -8437,7 +8457,7 @@ window.SONGS = [
   "album": "tiba-tiba jumat lagi",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/40/83/5f/40835fdd-822b-6aa0-7778-7414e205de6d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c0/17/68/c01768b3-4fb6-b1e8-da50-787f848bc6fe/mzaf_7603396803508833608.plus.aac.p.m4a",
-  "id": 844
+  "id": 846
  },
  {
   "title": "bersimpuh",
@@ -8447,7 +8467,7 @@ window.SONGS = [
   "album": "Nadhif",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/44/bb/57/44bb57de-c25d-645b-d8c7-da5aaca0ef43/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/09/7a/80/097a8006-cba5-7081-eced-6e7b3440b0e3/mzaf_7235746239520553542.plus.aac.p.m4a",
-  "id": 845
+  "id": 847
  },
  {
   "title": "Tapi",
@@ -8457,7 +8477,17 @@ window.SONGS = [
   "album": "Dalam Dinamika",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0b/a8/73/0ba8733c-7a06-2167-169d-87a21fcab951/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/76/42/30/764230f6-0da8-dd4b-0ca8-ff2be69bcd88/mzaf_18276725716208951659.plus.aac.p.m4a",
-  "id": 846
+  "id": 848
+ },
+ {
+  "title": "Bersenja Gurau",
+  "artist": "Raim Laode",
+  "year": 2024,
+  "genre": "gen z",
+  "album": "iqro'",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/3b/26/cb/3b26cbe3-8140-6f42-7b56-036a4e192ba5/2947485.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fa/38/f8/fa38f818-c82c-663d-d976-93d24ca70bf4/mzaf_5745692049447534385.plus.aac.p.m4a",
+  "id": 849
  },
  {
   "title": "Si Paling Mahir",
@@ -8467,7 +8497,7 @@ window.SONGS = [
   "album": "Si Paling Mahir",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d5/cc/67/d5cc674b-2abf-867e-ed5f-ae5b32bfd292/24UM1IM09629.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6f/3d/22/6f3d22ea-fde8-3777-eaf4-839cfacaede3/mzaf_13288594488356292695.plus.aac.p.m4a",
-  "id": 847
+  "id": 850
  },
  {
   "title": "Gala bunga matahari",
@@ -8477,7 +8507,7 @@ window.SONGS = [
   "album": "MARKERS AND SUCH PENS FLASHDISKS",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/fa/a8/4c/faa84c4f-0f09-3730-6460-8c53e9dc159d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/f2/7c/a1/f27ca1f0-12a3-a7c4-4158-97491a2f1efd/mzaf_7079244332144273794.plus.aac.p.m4a",
-  "id": 848
+  "id": 851
  },
  {
   "title": "I'd like to watch you sleeping",
@@ -8487,7 +8517,7 @@ window.SONGS = [
   "album": "MARKERS AND SUCH PENS FLASHDISKS",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/fa/a8/4c/faa84c4f-0f09-3730-6460-8c53e9dc159d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/38/4d/81/384d81bb-90aa-ac66-83f9-1c66e8f38275/mzaf_7328576799796895481.plus.aac.p.m4a",
-  "id": 849
+  "id": 852
  },
  {
   "title": "Ada titik-titik di ujung doa",
@@ -8497,7 +8527,7 @@ window.SONGS = [
   "album": "MARKERS AND SUCH PENS FLASHDISKS",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/fa/a8/4c/faa84c4f-0f09-3730-6460-8c53e9dc159d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/74/b6/d0/74b6d096-72b6-0b16-f798-7a25bc12ad02/mzaf_10799404817311327212.plus.aac.p.m4a",
-  "id": 850
+  "id": 853
  },
  {
   "title": "Foto kita blur",
@@ -8507,7 +8537,7 @@ window.SONGS = [
   "album": "MARKERS AND SUCH PENS FLASHDISKS",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/fa/a8/4c/faa84c4f-0f09-3730-6460-8c53e9dc159d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/87/7a/04/877a04d4-39bb-2c44-db7c-3117f4fa1ae8/mzaf_4981093427837040989.plus.aac.p.m4a",
-  "id": 851
+  "id": 854
  },
  {
   "title": "Biar jadi urusanku",
@@ -8517,7 +8547,7 @@ window.SONGS = [
   "album": "MARKERS AND SUCH PENS FLASHDISKS",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/fa/a8/4c/faa84c4f-0f09-3730-6460-8c53e9dc159d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c8/a4/77/c8a477c4-4496-2716-3754-c925dad5559e/mzaf_13922945996125975241.plus.aac.p.m4a",
-  "id": 852
+  "id": 855
  },
  {
   "title": "From the Doc to the Dog (feat. Dr. Ring-Ding)",
@@ -8527,7 +8557,17 @@ window.SONGS = [
   "album": "Bersinar",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e2/b3/0d/e2b30d79-f7a8-051f-9a1a-9b94796cdaf7/859753733150_cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9b/a2/85/9ba28544-44a7-4aaf-1247-c418acc7b93e/mzaf_2386157212460593546.plus.aac.p.m4a",
-  "id": 853
+  "id": 856
+ },
+ {
+  "title": "Garam & Madu (Sakit Dadaku)",
+  "artist": "Tenxi, Jemsii & Naykilla",
+  "year": 2024,
+  "genre": "gen z",
+  "album": "Garam & Madu (Sakit Dadaku)",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/49/13/7e/49137e2e-38f2-213a-11e6-00d5c194c05d/195140103213.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/02/03/87/02038701-9b27-8374-77ff-ea9685273acd/mzaf_11595144849955956941.plus.aac.p.m4a",
+  "id": 857
  },
  {
   "title": "Kupu - Kupu",
@@ -8537,7 +8577,7 @@ window.SONGS = [
   "album": "Kupu - Kupu",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/cc/bb/ee/ccbbeebc-431b-9227-c8d9-b7e24af270c5/24UMGIM09590.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/aa/9c/8b/aa9c8bde-3124-8d3f-94ef-0b6212b399f2/mzaf_5375182623788692896.plus.aac.p.m4a",
-  "id": 854
+  "id": 858
  },
  {
   "title": "Cinta",
@@ -8547,7 +8587,7 @@ window.SONGS = [
   "album": "Legacy: Greatest Hits Vol. 2",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bc/2c/a8/bc2ca887-af21-67e8-ffbe-e2e0ad3725cb/24UMGIM77325.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8b/48/d5/8b48d580-d9fe-d609-d6d0-2a97b37afb53/mzaf_672047272486704144.plus.aac.p.m4a",
-  "id": 855
+  "id": 859
  },
  {
   "title": "Terlalu Cinta",
@@ -8557,7 +8597,7 @@ window.SONGS = [
   "album": "Terlalu Cinta",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/93/b9/5d/93b95d35-0e81-de82-99e7-8ec0abba4b7f/24UMGIM72605.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/09/63/0e/09630e02-b069-15fa-06bc-2f1438b81b7d/mzaf_9670475105022083324.plus.aac.p.m4a",
-  "id": 856
+  "id": 860
  },
  {
   "title": "Gemilang",
@@ -8567,7 +8607,7 @@ window.SONGS = [
   "album": "Kirana",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ed/ea/47/edea474c-bae7-0314-b776-562e25356771/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/35/3a/5f/353a5fc3-6324-32b8-afb7-f19cfb555827/mzaf_7966596109116757049.plus.aac.p.m4a",
-  "id": 857
+  "id": 861
  },
  {
   "title": "Bahagia di Ujung Jalan (New Buzz in Life)",
@@ -8577,7 +8617,7 @@ window.SONGS = [
   "album": "Bahagia di Ujung Jalan (New Buzz in Life)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8f/38/5f/8f385f6d-c4fd-2742-0cfe-7cf8bd48c315/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/6a/35/e1/6a35e1c0-9606-4479-8438-d66a1715b8e3/mzaf_10107482192085015962.plus.aac.p.m4a",
-  "id": 858
+  "id": 862
  },
  {
   "title": "Menjadi Dewasa",
@@ -8587,7 +8627,17 @@ window.SONGS = [
   "album": "Menjadi Dewasa",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/95/03/a1/9503a13a-ebf4-0324-0f13-b8397c3c95dd/25UM1IM64617.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/9d/ab/25/9dab2561-3a99-8fcd-0df5-08adfcb267ae/mzaf_1910177467138138763.plus.aac.p.m4a",
-  "id": 859
+  "id": 863
+ },
+ {
+  "title": "Kita Usahakan Lagi",
+  "artist": "Batas Senja",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "Kita Usahakan Lagi",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/6d/4f/8e/6d4f8e52-c9ea-957c-1611-7777e6ab6010/8721215087298.png/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/33/bf/72/33bf7286-48c4-32b2-1d62-682457611c7a/mzaf_17036411156948677582.plus.aac.p.m4a",
+  "id": 864
  },
  {
   "title": "Sinarengan (feat. Bella Bonita)",
@@ -8597,7 +8647,7 @@ window.SONGS = [
   "album": "Sinarengan (feat. Bella Bonita)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/07/55/da/0755da6b-dcb8-9837-9c77-c52552dac73b/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dd/1d/49/dd1d4944-fc29-f58c-27cf-cab5c85093c4/mzaf_18430277536357850019.plus.aac.p.m4a",
-  "id": 860
+  "id": 865
  },
  {
   "title": "Tunggal Eka",
@@ -8607,7 +8657,27 @@ window.SONGS = [
   "album": "Tunggal Eka",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/5a/b4/d65ab4d1-79af-44bb-cd52-2504c4ff77d3/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0e/66/fa/0e66fa29-a1ff-a872-d743-2564f33b8209/mzaf_14337235556433168182.plus.aac.p.m4a",
-  "id": 861
+  "id": 866
+ },
+ {
+  "title": "Orang Baru Lebe Gacor",
+  "artist": "Ecko Show, Juan Reza & Chesylino",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "Orang Baru Lebe Gacor",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c1/70/44/c170441a-cf97-a088-8b4a-d41762fb58c2/2230224.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/84/03/25/84032581-4114-8317-34af-ff38eab889de/mzaf_9708798792321036933.plus.aac.p.m4a",
+  "id": 867
+ },
+ {
+  "title": "Stecu Stecu",
+  "artist": "Faris Adam",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "Stecu Stecu",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f4/85/e2/f485e212-6415-25d3-709c-645129dabe67/cover.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2f/83/76/2f8376f9-c3cb-4517-19de-e0154e39179f/mzaf_1171188008250273521.plus.aac.p.m4a",
+  "id": 868
  },
  {
   "title": "Saat Kubenci Dunia dan Seisinya",
@@ -8617,17 +8687,17 @@ window.SONGS = [
   "album": "Perayaan Patah Hati - Babak 2",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/de/c4/ee/dec4eed0-6eec-f029-c9fc-a288ec1792d0/196873848853.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/43/36/60/433660db-0577-7931-44a3-b1fbffb39507/mzaf_73524597238055815.plus.aac.p.m4a",
-  "id": 862
+  "id": 869
  },
  {
   "title": "everything u are",
   "artist": "Hindia",
   "year": 2025,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Doves, '25 on Blank Canvas",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/57/f8/d2/57f8d295-5ea9-f7b2-70ff-9494ce50fc5c/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ab/cb/60/abcb6010-e7cd-2a91-3cd2-e1c9cbd9cb75/mzaf_4791923426563091224.plus.aac.p.m4a",
-  "id": 863
+  "id": 870
  },
  {
   "title": "semua lagu cinta terdengar sama",
@@ -8637,7 +8707,7 @@ window.SONGS = [
   "album": "Doves, '25 on Blank Canvas",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/57/f8/d2/57f8d295-5ea9-f7b2-70ff-9494ce50fc5c/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/07/8e/a9/078ea9aa-9cb3-3404-8a0e-abddc1762530/mzaf_11565018389834681900.plus.aac.p.m4a",
-  "id": 864
+  "id": 871
  },
  {
   "title": "kids",
@@ -8647,7 +8717,17 @@ window.SONGS = [
   "album": "Doves, '25 on Blank Canvas",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/57/f8/d2/57f8d295-5ea9-f7b2-70ff-9494ce50fc5c/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/95/eb/b3/95ebb318-82b7-584b-718d-e9446430ba05/mzaf_7614726570062092046.plus.aac.p.m4a",
-  "id": 865
+  "id": 872
+ },
+ {
+  "title": "Sedia Aku Sebelum Hujan",
+  "artist": "Idgitaf",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "Sedia Aku Sebelum Hujan",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/78/d2/b3/78d2b35f-8a06-9449-4d95-9416e16b206f/cover.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cf/18/e7/cf18e700-281f-7229-8c02-2136fbbe84ac/mzaf_8034491079933215145.plus.aac.p.m4a",
+  "id": 873
  },
  {
   "title": "Mutiara",
@@ -8657,7 +8737,7 @@ window.SONGS = [
   "album": "Mutiara",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c2/df/f4/c2dff46c-c23c-de31-f5f3-e5cfd7a99b58/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/82/8f/cb/828fcb63-83e6-547a-c880-aa9aeb65f746/mzaf_14637804195697759299.plus.aac.p.m4a",
-  "id": 866
+  "id": 874
  },
  {
   "title": "Teganya Kau",
@@ -8667,7 +8747,7 @@ window.SONGS = [
   "album": "Teganya Kau",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/3a/2b/e9/3a2be9c0-eca7-0367-a3e1-d0790d56fec2/25UM1IM67324.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f4/25/4b/f4254b82-ba8d-22c8-d0d8-50c253f5572f/mzaf_18443230810308322327.plus.aac.p.m4a",
-  "id": 867
+  "id": 875
  },
  {
   "title": "Bodohnya Aku",
@@ -8677,7 +8757,7 @@ window.SONGS = [
   "album": "Bodohnya Aku",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/46/e9/0e/46e90eeb-4515-dae9-b7c8-3f313527991e/25UM1IM02181.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/72/16/0f/72160f22-5ca3-7bd1-80b9-cafe3f273b54/mzaf_3992884512190586142.plus.aac.p.m4a",
-  "id": 868
+  "id": 876
  },
  {
   "title": "Untuk Yang Bersama Nya",
@@ -8687,7 +8767,7 @@ window.SONGS = [
   "album": "Koma,",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e6/4c/65/e64c65bd-914a-dff9-de6a-c721540dc7ec/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/cb/05/60/cb0560ed-f07e-f03d-0193-8ce69ac0da9e/mzaf_6738922912044927118.plus.aac.p.m4a",
-  "id": 869
+  "id": 877
  },
  {
   "title": "Batasi Rasa",
@@ -8697,7 +8777,7 @@ window.SONGS = [
   "album": "Koma,",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e6/4c/65/e64c65bd-914a-dff9-de6a-c721540dc7ec/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/03/ec/8a/03ec8ac1-d2c8-599c-fa88-b1c506d996e4/mzaf_12870438375557559576.plus.aac.p.m4a",
-  "id": 870
+  "id": 878
  },
  {
   "title": "Kemarilah Tenang",
@@ -8707,7 +8787,7 @@ window.SONGS = [
   "album": "Koma,",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e6/4c/65/e64c65bd-914a-dff9-de6a-c721540dc7ec/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/9d/f2/56/9df256bf-afe5-3134-7a70-90b066eee07e/mzaf_9381900515145113784.plus.aac.p.m4a",
-  "id": 871
+  "id": 879
  },
  {
   "title": "Kawin Lari (feat. Rayi Putra)",
@@ -8717,7 +8797,7 @@ window.SONGS = [
   "album": "Gemini",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/95/cf/2d/95cf2d51-4dd5-6365-7041-580189f5819a/25UM1IM76827.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8d/cc/0d/8dcc0def-6c59-43f8-e911-882da8ea23e2/mzaf_5439332674915547777.plus.aac.p.m4a",
-  "id": 872
+  "id": 880
  },
  {
   "title": "BYE",
@@ -8727,7 +8807,17 @@ window.SONGS = [
   "album": "Gemini",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/95/cf/2d/95cf2d51-4dd5-6365-7041-580189f5819a/25UM1IM76827.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/05/b0/03/05b00324-1c84-477a-ec4f-3d2b4d7843c3/mzaf_599193354851767549.plus.aac.p.m4a",
-  "id": 873
+  "id": 881
+ },
+ {
+  "title": "Aku Dah Lupa",
+  "artist": "MikkyZia & F4dli",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "Aku Dah Lupa",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/3d/80/a73d8019-6646-6a48-411f-78744bfb7af5/3617390765036.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/85/61/5e/85615e8a-a291-7352-3632-d74298fb167a/mzaf_10041186183422755346.plus.aac.p.m4a",
+  "id": 882
  },
  {
   "title": "Tresno Tekane Mati",
@@ -8737,27 +8827,27 @@ window.SONGS = [
   "album": "Tresno Tekane Mati",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5f/95/ac/5f95ac02-b6c7-3892-60b2-506d1e249dda/8990009089446.png/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/24/fb/10/24fb1058-17a2-2b97-c61d-166808dc2deb/mzaf_4675074720920977978.plus.aac.p.m4a",
-  "id": 874
+  "id": 883
  },
  {
   "title": "kota ini tak sama tanpamu",
   "artist": "Nadhif Basalamah",
   "year": 2025,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Nadhif (laman berikutnya)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/9c/56/76/9c567682-493a-1063-d424-14232fea7828/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2b/d8/ae/2bd8ae14-f573-9cf6-6174-a97635ae4087/mzaf_760508910811340009.plus.aac.p.m4a",
-  "id": 875
+  "id": 884
  },
  {
   "title": "bergema sampai selamanya",
   "artist": "Nadhif Basalamah",
   "year": 2025,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "bergema sampai selamanya",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c6/11/53/c61153d3-9a49-88df-9869-3e662f4b7651/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/86/4f/ba/864fbaae-c269-c807-e053-8d31b7840b36/mzaf_15457697094395164557.plus.aac.p.m4a",
-  "id": 876
+  "id": 885
  },
  {
   "title": "masih ada waktunya",
@@ -8767,7 +8857,7 @@ window.SONGS = [
   "album": "masih ada waktunya",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c1/98/c1/c198c1b8-c4a0-6417-9009-b4f9753c58f6/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/18/ab/97/18ab97e5-e42e-bb61-7265-92ebbd92d761/mzaf_2764812997571691681.plus.aac.p.m4a",
-  "id": 877
+  "id": 886
  },
  {
   "title": "Sambung",
@@ -8777,7 +8867,7 @@ window.SONGS = [
   "album": "Sambung",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e7/15/72/e71572eb-d685-bb23-a55d-143e90eb663e/8721416053603.png/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fe/4b/73/fe4b73b5-eaa1-98fb-3a9a-c9cb24046feb/mzaf_6788774018080541634.plus.aac.p.m4a",
-  "id": 878
+  "id": 887
  },
  {
   "title": "Pikiran Yang Matang",
@@ -8787,7 +8877,7 @@ window.SONGS = [
   "album": "Dalam Dinamika",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0b/a8/73/0ba8733c-7a06-2167-169d-87a21fcab951/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/15/9a/b0/159ab067-b032-9203-34c9-cd67c6a223ff/mzaf_11782976533090474322.plus.aac.p.m4a",
-  "id": 879
+  "id": 888
  },
  {
   "title": "Aku Ada Untukmu",
@@ -8797,7 +8887,7 @@ window.SONGS = [
   "album": "Dalam Dinamika",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0b/a8/73/0ba8733c-7a06-2167-169d-87a21fcab951/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2f/1f/fc/2f1ffce7-f098-d58d-d858-36e770867493/mzaf_770583828676454801.plus.aac.p.m4a",
-  "id": 880
+  "id": 889
  },
  {
   "title": "Berhasil",
@@ -8807,7 +8897,17 @@ window.SONGS = [
   "album": "Dalam Dinamika",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/0b/a8/73/0ba8733c-7a06-2167-169d-87a21fcab951/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ac/5c/ae/ac5cae07-0dab-3460-c639-bef78a63aa83/mzaf_2007250806901265664.plus.aac.p.m4a",
-  "id": 881
+  "id": 890
+ },
+ {
+  "title": "Bahagia Lagi",
+  "artist": "Piche Kota",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "Bahagia Lagi",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/0e/85/cf/0e85cf8d-7748-9044-0e7c-ea8a88efe3e4/25UM1IM53003.rgb.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/37/77/f1/3777f10c-ec53-cc15-d36c-9f6b0809e877/mzaf_11900891544933171228.plus.aac.p.m4a",
+  "id": 891
  },
  {
   "title": "Bila",
@@ -8817,7 +8917,7 @@ window.SONGS = [
   "album": "ambiVert",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e3/c5/de/e3c5dec9-330c-22d0-6671-42bed632f5b2/25UMGIM58920.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2b/77/59/2b77594c-8cc6-c252-9f90-d4be3af9d30d/mzaf_11665507368448228605.plus.aac.p.m4a",
-  "id": 882
+  "id": 892
  },
  {
   "title": "Awal Kisah Selamanya (feat. Barsena Bestandhi)",
@@ -8827,7 +8927,7 @@ window.SONGS = [
   "album": "ambiVert",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e3/c5/de/e3c5dec9-330c-22d0-6671-42bed632f5b2/25UMGIM58920.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/81/e2/ed/81e2edf9-efb4-5a6e-b039-fc690873b4a2/mzaf_17740832844181346577.plus.aac.p.m4a",
-  "id": 883
+  "id": 893
  },
  {
   "title": "Terserah",
@@ -8837,7 +8937,7 @@ window.SONGS = [
   "album": "Terserah",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/be/26/82/be26829f-da6a-7e18-11b4-eb53f5b89d72/25UMGIM58861.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/58/fc/65/58fc6531-554d-d7df-5bc3-437d144e7ee6/mzaf_8671658558352779902.plus.aac.p.m4a",
-  "id": 884
+  "id": 894
  },
  {
   "title": "Tetap Bukan Kamu (feat. Rony Parulian)",
@@ -8847,7 +8947,7 @@ window.SONGS = [
   "album": "ambiVert",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/e3/c5/de/e3c5dec9-330c-22d0-6671-42bed632f5b2/25UMGIM58920.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/59/7c/0d/597c0d07-3de9-61e3-1c94-44942c8048c5/mzaf_15049342348540324585.plus.aac.p.m4a",
-  "id": 885
+  "id": 895
  },
  {
   "title": "Malam Rawan",
@@ -8857,17 +8957,27 @@ window.SONGS = [
   "album": "Malam Rawan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/55/4a/1f/554a1fb3-aee4-204c-d580-9dcefb594c98/25UMGIM80429.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b7/7f/39/b77f3903-4a97-8ee4-cb6a-c5bb983f56a9/mzaf_11306276520545477006.plus.aac.p.m4a",
-  "id": 886
+  "id": 896
  },
  {
   "title": "Alamak",
   "artist": "Rizky Febian & Adrian Khalif",
   "year": 2025,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Alamak",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b8/88/0d/b8880d04-e5a6-acc3-25d0-424d6ae806f4/198704756115_Cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a0/92/ee/a092ee86-9cb4-ddba-7da6-fb7848029b89/mzaf_6783600636827461890.plus.aac.p.m4a",
-  "id": 887
+  "id": 897
+ },
+ {
+  "title": "Pesona Sederhana",
+  "artist": "Rony Parulian",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "Rahasia Pertama",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/2c/71/93/2c719383-4134-1cc6-d94b-494c2b3babc5/25UMGIM58555.rgb.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/09/d3/5c/09d35c84-be7c-6d0b-6b07-18a2b6af91dc/mzaf_16648640644944925301.plus.aac.p.m4a",
+  "id": 898
  },
  {
   "title": "Pelampiasanku",
@@ -8877,7 +8987,17 @@ window.SONGS = [
   "album": "Pelampiasanku",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/76/30/0e/76300e89-cdaf-a634-5a4f-2e6dd45cdb2d/5026854005102.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2c/2a/9a/2c2a9aec-93fb-71da-0647-0824e7035fca/mzaf_6721496148501219164.plus.aac.p.m4a",
-  "id": 888
+  "id": 899
+ },
+ {
+  "title": "TABOLA BALE",
+  "artist": "Silet Open Up, Jacson Seran, Juan Reza & Diva Aurel",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "TABOLA BALE",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/81/e2/51/81e25101-b6c1-ec65-843b-06469cf2e01e/321336.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4f/57/2e/4f572ede-547d-0226-d940-98cab0bd4510/mzaf_18104107997750671925.plus.aac.p.m4a",
+  "id": 900
  },
  {
   "title": "Semusim",
@@ -8887,17 +9007,27 @@ window.SONGS = [
   "album": "Semusim",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/59/22/63/592263c0-d368-9853-7a88-7135c3890388/196873793603.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/67/11/bd/6711bd90-31cc-b39d-59e6-97dd6651306e/mzaf_515371480176692431.plus.aac.p.m4a",
-  "id": 889
+  "id": 901
+ },
+ {
+  "title": "Ngapain Repot (feat. Wizz Baker & Fresly Nikijuluw)",
+  "artist": "Toton Caribo",
+  "year": 2025,
+  "genre": "gen z",
+  "album": "Ngapain Repot (feat. Wizz Baker & Fresly Nikijuluw)",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/01/20/ab/0120ab7d-ba2e-901c-ba9f-cd0a2cdac646/6829.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/de/75/3c/de753cdf-eab5-d97e-7670-d57a1ae6f4cd/mzaf_14381362703231263259.plus.aac.p.m4a",
+  "id": 902
  },
  {
   "title": "Tanpa Cinta",
   "artist": "Yovie Widianto & Tiara Andini",
   "year": 2025,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Tanpa Cinta",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/da/09/0a/da090a2d-3b84-b796-4ad6-1a1a574e6e8b/25UMGIM55617.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/bc/89/94/bc899490-b312-2dd6-f6dd-43add84a594e/mzaf_17584604111107113811.plus.aac.p.m4a",
-  "id": 890
+  "id": 903
  },
  {
   "title": "Tanda",
@@ -8907,7 +9037,7 @@ window.SONGS = [
   "album": "Tanda",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/56/2e/87/562e8723-6a7c-dad0-9403-fd37b5304092/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dd/24/bf/dd24bfe0-f533-43de-2980-de29fa345f1a/mzaf_12091130177043176771.plus.aac.p.m4a",
-  "id": 891
+  "id": 904
  },
  {
   "title": "Mau Jadi Apa?",
@@ -8917,7 +9047,7 @@ window.SONGS = [
   "album": "Mau Jadi Apa?",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d7/54/1e/d7541e9f-3482-18bd-39e1-0cd76c449c6c/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/68/c4/db/68c4db20-3531-946e-7344-ca8dbc7fb08b/mzaf_444284820297472452.plus.aac.p.m4a",
-  "id": 892
+  "id": 905
  },
  {
   "title": "Naksir",
@@ -8927,7 +9057,7 @@ window.SONGS = [
   "album": "Sehidup Semusik",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/12/1b/6c/121b6cbd-148b-f2fa-c054-d83f054735fb/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7e/56/db/7e56db34-2367-2686-7e17-71bc8be067d7/mzaf_4121037454412154621.plus.aac.p.m4a",
-  "id": 893
+  "id": 906
  },
  {
   "title": "Rabun Jauh",
@@ -8937,7 +9067,7 @@ window.SONGS = [
   "album": "Rabun Jauh",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a9/f7/c5/a9f7c53c-8a18-3e44-4fa8-473e57c5ca68/26UMGIM32434.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/6c/4a/e6/6c4ae6da-3adb-3c3b-7fa7-b714463f83d6/mzaf_3476254401068557590.plus.aac.p.m4a",
-  "id": 894
+  "id": 907
  },
  {
   "title": "Cari Aku di Bandung",
@@ -8947,7 +9077,7 @@ window.SONGS = [
   "album": "Semoga Hanya di Mimpi (Pagi Setelahnya)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5c/ac/bc/5cacbc46-5b07-7522-4212-8ea8d04d9a37/26UM1IM34006.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/39/b3/b1/39b3b1d1-af29-61b3-3c1d-6e4a28b6b3ea/mzaf_11966184991797522999.plus.aac.p.m4a",
-  "id": 895
+  "id": 908
  },
  {
   "title": "Kita Buat Menyenangkan",
@@ -8957,7 +9087,7 @@ window.SONGS = [
   "album": "Kita Buat Menyenangkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/50/c0/8b/50c08bf3-f106-9b29-5bf0-4a9c269add43/26UMGIM00072.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/63/d9/ec/63d9ec71-3d71-7624-3c3d-46b2ec3be3f5/mzaf_8219786240056148480.plus.aac.p.m4a",
-  "id": 896
+  "id": 909
  },
  {
   "title": "Laut yang Tenang",
@@ -8967,7 +9097,7 @@ window.SONGS = [
   "album": "Semoga Hanya di Mimpi (Pagi Setelahnya)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5c/ac/bc/5cacbc46-5b07-7522-4212-8ea8d04d9a37/26UM1IM34006.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d4/f1/df/d4f1dfb9-a07e-2682-e8c0-aaad797289d3/mzaf_14963645342476273928.plus.aac.p.m4a",
-  "id": 897
+  "id": 910
  },
  {
   "title": "Peluk Aku Sekarang! (feat. Perunggu)",
@@ -8977,7 +9107,7 @@ window.SONGS = [
   "album": "Semoga Hanya di Mimpi (Pagi Setelahnya)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5c/ac/bc/5cacbc46-5b07-7522-4212-8ea8d04d9a37/26UM1IM34006.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/15/54/88/1554883c-bed0-23fb-1f4d-030daa950206/mzaf_11953220386814376490.plus.aac.p.m4a",
-  "id": 898
+  "id": 911
  },
  {
   "title": "Nanti Juga Kita Mengerti",
@@ -8987,7 +9117,7 @@ window.SONGS = [
   "album": "Semoga Hanya di Mimpi (Pagi Setelahnya)",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5c/ac/bc/5cacbc46-5b07-7522-4212-8ea8d04d9a37/26UM1IM34006.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/3e/3b/5c/3e3b5c08-d235-c3b4-1d0c-f623bd1ac484/mzaf_2434707087565594018.plus.aac.p.m4a",
-  "id": 899
+  "id": 912
  },
  {
   "title": "Negoro Angin",
@@ -8997,7 +9127,7 @@ window.SONGS = [
   "album": "Negoro Angin",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/f5/f3/47/f5f3479e-06f4-27cd-4784-15b762104f9d/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a4/f5/6f/a4f56fa8-6796-4cc8-e988-58311a280c7c/mzaf_10179182957796315027.plus.aac.p.m4a",
-  "id": 900
+  "id": 913
  },
  {
   "title": "Laut Kidul",
@@ -9007,7 +9137,17 @@ window.SONGS = [
   "album": "Laut Kidul",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/0a/62/a7/0a62a7df-98f0-a7f8-428c-6104998f053b/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/84/e5/1f/84e51f2f-4a32-411a-12fc-3fac6b9a8329/mzaf_8383091391619561609.plus.aac.p.m4a",
-  "id": 901
+  "id": 914
+ },
+ {
+  "title": "Jangan Paksa Rindu (Beda)",
+  "artist": "Ifan Seventeen",
+  "year": 2026,
+  "genre": "gen z",
+  "album": "Jangan Paksa Rindu (Beda)",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/d1/c0/4c/d1c04c8b-efb8-b81f-bff8-5d5e86114b7a/cover.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/0d/a0/b8/0da0b846-cc87-f165-7bfa-651b5de2ba09/mzaf_14930526114726518671.plus.aac.p.m4a",
+  "id": 915
  },
  {
   "title": "Salah Apa",
@@ -9017,7 +9157,7 @@ window.SONGS = [
   "album": "Salah Apa",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/7c/4d/e2/7c4de2ba-b8ba-e921-761c-2f4311939221/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2d/f7/d8/2df7d83d-40f3-badf-b61b-c5d2778fa881/mzaf_13847092399612313267.plus.aac.p.m4a",
-  "id": 902
+  "id": 916
  },
  {
   "title": "Be Alright",
@@ -9027,7 +9167,7 @@ window.SONGS = [
   "album": "EKLEKTIKO",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/1f/cd/dd/1fcddd15-18ae-4a14-0c08-1c528bec15b7/26UMGIM44548.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/93/bb/52/93bb52cd-b4ec-17f2-4d50-78eadc2dfef2/mzaf_18400331843816215039.plus.aac.p.m4a",
-  "id": 903
+  "id": 917
  },
  {
   "title": "Ceritaku Ceritamu",
@@ -9037,7 +9177,7 @@ window.SONGS = [
   "album": "Ceritaku Ceritamu",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b7/b5/2d/b7b52d67-8447-3f2a-d223-377b0adf563e/26UMGIM84422.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/62/1c/c8/621cc8c6-7ceb-fe13-49b9-43ed1c9aa772/mzaf_3380429876976138224.plus.aac.p.m4a",
-  "id": 904
+  "id": 918
  },
  {
   "title": "bERANI",
@@ -9047,7 +9187,7 @@ window.SONGS = [
   "album": "bERANI",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/42/11/e8/4211e874-629f-5243-6fa8-415bc264cbdc/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/13/bd/fb/13bdfbfc-ef20-d3f7-24bc-ac6b05446b61/mzaf_6643794668306997819.plus.aac.p.m4a",
-  "id": 905
+  "id": 919
  },
  {
   "title": "Apa Maksud Tuhan Pertemukan Kita?",
@@ -9057,7 +9197,7 @@ window.SONGS = [
   "album": "Terkunci Di Kamu",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5d/f4/6e/5df46e45-e384-0ae8-642e-104d09714bc4/26UM1IM11648.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/12/1c/dc/121cdc57-042b-1489-72c9-3011f1bafac7/mzaf_7055310924095399953.plus.aac.p.m4a",
-  "id": 906
+  "id": 920
  },
  {
   "title": "Percuma",
@@ -9067,7 +9207,7 @@ window.SONGS = [
   "album": "Percuma",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bb/dd/66/bbdd66d0-f0f4-bad8-b15b-ef0b8754da5b/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/aa/a0/c5/aaa0c578-35b4-6682-af40-e803ea74f158/mzaf_17096200456680374077.plus.aac.p.m4a",
-  "id": 907
+  "id": 921
  },
  {
   "title": "Kan",
@@ -9077,7 +9217,7 @@ window.SONGS = [
   "album": "Kan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d3/7d/54/d37d5408-6ae3-1d76-6f5d-a49655a399a4/26UMGIM98229.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/43/82/af/4382af94-e213-cda6-a875-04af62fbd223/mzaf_346926069549031161.plus.aac.p.m4a",
-  "id": 908
+  "id": 922
  },
  {
   "title": "Oh Semoga",
@@ -9087,7 +9227,7 @@ window.SONGS = [
   "album": "Oh Semoga",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/fe/61/5f/fe615fbb-09d0-1462-1b1a-2258f9006611/26UM1IM21121.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/83/1e/08/831e085b-fd2d-726a-3b7c-b8500399e2f1/mzaf_6896382471919207193.plus.aac.p.m4a",
-  "id": 909
+  "id": 923
  },
  {
   "title": "Amarah",
@@ -9097,7 +9237,7 @@ window.SONGS = [
   "album": "Laika, Yang Ditinggalkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/41/e3/45/41e345f2-772f-2b3a-dda5-b09a90b07ab3/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e6/02/ce/e602ce5d-cd15-d65b-220c-51ec268206d6/mzaf_11574087297346928480.plus.aac.p.m4a",
-  "id": 910
+  "id": 924
  },
  {
   "title": "Berapa Kali Kita Akan Saling Memaafkan",
@@ -9107,7 +9247,7 @@ window.SONGS = [
   "album": "Berapa Kali Kita Akan Saling Memaafkan",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/70/60/77/70607770-6c49-ed4f-9827-503eee681c58/8721465617283.png/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e8/f6/47/e8f64758-8e4f-c5d6-0953-6e4f9ccbbaf6/mzaf_5170600524931112286.plus.aac.p.m4a",
-  "id": 911
+  "id": 925
  },
  {
   "title": "Adam",
@@ -9117,7 +9257,27 @@ window.SONGS = [
   "album": "Adam",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/66/09/0c/66090c25-9844-520c-315e-d03a9d6d2c33/8721554188038.png/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5c/66/8b/5c668b99-2e67-6870-b900-96043cd84c72/mzaf_7157917623424498733.plus.aac.p.m4a",
-  "id": 912
+  "id": 926
+ },
+ {
+  "title": "Iqro'",
+  "artist": "Raim Laode",
+  "year": 2026,
+  "genre": "gen z",
+  "album": "Iqro'",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/99/3a/ca/993aca2e-32b9-0304-4446-a23da44a13d7/326772.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/33/94/07/3394075f-3def-721b-0d50-bdd91714e97e/mzaf_17153796042547154909.plus.aac.p.m4a",
+  "id": 927
+ },
+ {
+  "title": "Dunia Yang Nanti",
+  "artist": "Raim Laode",
+  "year": 2026,
+  "genre": "gen z",
+  "album": "iqro'",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/87/da/83/87da8377-ecbc-b53f-9719-7fab3092fe80/3589989.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/75/31/bb/7531bb82-777d-67f1-9833-99be4c646fb0/mzaf_6862810624610418487.plus.aac.p.m4a",
+  "id": 928
  },
  {
   "title": "Mencinta Tanpa Arah",
@@ -9127,7 +9287,7 @@ window.SONGS = [
   "album": "Mencinta Tanpa Arah",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c5/be/51/c5be5169-0d80-7983-0661-9e78bd6be458/26UMGIM13771.rgb.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e9/16/f1/e916f105-bce0-4d2a-9fff-e4a91f503cd6/mzaf_17338002256637224658.plus.aac.p.m4a",
-  "id": 913
+  "id": 929
  },
  {
   "title": "Jangan Tunggu Lama Lama",
@@ -9137,7 +9297,7 @@ window.SONGS = [
   "album": "Jangan Tunggu Lama Lama",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fa/6d/b2/fa6db245-4e59-e00a-67b4-d4af3f543d7b/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/7d/f2/db/7df2db3b-fd7c-1108-75ce-dc2a26b2d51a/mzaf_1907204624021102714.plus.aac.p.m4a",
-  "id": 914
+  "id": 930
  },
  {
   "title": "Mau Adat Apa",
@@ -9147,17 +9307,17 @@ window.SONGS = [
   "album": "Mau Adat Apa",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a1/ed/34/a1ed342d-112b-ae8d-8474-2e3be648adff/1200214443900.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ca/6f/d3/ca6fd399-df26-f40d-4af4-9fedee3f6c65/mzaf_9396266284992359516.plus.aac.p.m4a",
-  "id": 915
+  "id": 931
  },
  {
   "title": "Teh Hijau",
   "artist": "Tulus",
   "year": 2026,
-  "genre": "pop",
+  "genre": "gen z",
   "album": "Teh Hijau",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bb/12/3e/bb123e64-7747-78f3-ce81-8b04bfe30e73/cover.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/88/fe/74/88fe7468-da1c-ad60-2080-f88563e38040/mzaf_5665775858853510745.plus.aac.p.m4a",
-  "id": 916
+  "id": 932
  },
  {
   "title": "Bulan Bintang, Garis Menyilang",
@@ -9167,6 +9327,16 @@ window.SONGS = [
   "album": "Bulan Bintang, Garis Menyilang",
   "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/28/0e/09/280e0995-ef75-e04c-3d37-b8ff497945ae/1277387.jpg/600x600bb.jpg",
   "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d5/31/8a/d5318a8c-ea8e-80e3-d418-b240e4fb8381/mzaf_9463221665654253587.plus.aac.p.m4a",
-  "id": 917
+  "id": 933
+ },
+ {
+  "title": "Sesi Potret",
+  "artist": "eńau & Ari Lesmana",
+  "year": 2026,
+  "genre": "gen z",
+  "album": "Sesi Potret",
+  "art": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/3d/e1/41/3de14120-ccc4-3cb4-0d93-541b551bd1c5/26UMGIM01710.rgb.jpg/600x600bb.jpg",
+  "preview": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/04/65/ed/0465ed21-5925-0ef9-9431-2c2113f6c774/mzaf_11673502120588688638.plus.aac.p.m4a",
+  "id": 934
  }
 ];
