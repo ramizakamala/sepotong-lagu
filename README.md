@@ -19,7 +19,7 @@ lalu buka http://127.0.0.1:8000
 ## Alur satu lagu
 
 1. Klip 0,1 detik diputar otomatis. Tombol putar dan tombol spasi memutar ulang potongan yang sama tanpa biaya.
-2. Pemain mengetik judul. Saran muncul dari bank lagu (judul dan nama artis), maksimal 6 baris, dan jawaban diambil dari saran itu supaya tidak ada salah ketik yang dihitung salah.
+2. Pemain mengetik judul. Saran muncul dari bank lagu (judul dan nama artis), maksimal 6 baris; memilih saran hanya mengisi kolom, tebakan baru dikirim saat tombol Tebak atau Enter ditekan, jadi tidak ada salah kirim.
 3. Tebakan salah: potongan dibuka ke tahap berikutnya dari titik yang sama dan diputar otomatis. Tebakan yang sudah dicoba ditandai, dan judulnya tidak muncul lagi di daftar saran. Mengetik ulang judul itu akan ditolak tanpa memakai tahap.
 4. Satu tombol di kanan kolom tebak yang mengikuti keadaan: kalau kolom berisi judul, tombolnya menjadi **Tebak** (sama dengan menekan Enter); kalau kolom kosong, tombolnya menjadi **Lewati ke …** dan hanya membuka potongan berikutnya tanpa memutus beruntun.
 5. Benar: beruntun bertambah, waktu tebak tercatat, dan layar jawaban muncul dengan cover, judul, artis, tahun, genre, pemutar 30 detik, dan tautan Apple Music kalau ada.

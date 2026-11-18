@@ -523,7 +523,13 @@
     if (!li) return;
     e.preventDefault();
     var song = state.suggestions[Number(li.dataset.i)];
-    if (song) submitGuess(song);
+    if (!song) return;
+    $('guess').value = song.title;
+    state.suggestIndex = -1;
+    $('suggest').hidden = true;
+    $('guess').setAttribute('aria-expanded', 'false');
+    updateActionBtn();
+    $('guess').focus();
   }
   $('suggest').addEventListener('mousedown', onSuggestPick);
   $('suggest').addEventListener('click', onSuggestPick);
