@@ -1,8 +1,8 @@
 # Sepotong
 
-Game tebak lagu Indonesia. Pemain mendengar potongan **0,1 detik**. Kalau belum yakin, potongan yang sama dibuka lebih panjang: 0,5 → 2 → 8 → 15 detik, dan poin turun tiap kali dibuka. Satu sesi 10 soal.
+Game tebak lagu Indonesia dengan potongan 0,1 detik. Pemain mendengar potongan pendek, mengetik judul lagunya, dan setiap tebakan yang salah membuka potongan yang sama lebih panjang: 0,1 → 0,5 → 2 → 8 → 15 detik. Skornya bukan poin, tapi **beruntun** (jumlah lagu yang ditebak benar tanpa terputus) dan waktu tebak.
 
-Referensi mekanik: songspot.net (versi aslinya memakai lagu luar). Bank lagu, aturan skor, dan tampilan di sini dibuat sendiri.
+Sistemnya mengikuti Songspot (songspot.net): ketik judul, salah tebak membuka klip, lewati atau menyerah memutus beruntun. Bedanya, bank lagu di sini khusus lagu Indonesia.
 
 ## Cara jalanin
 
@@ -16,40 +16,44 @@ python -m http.server 8000
 
 lalu buka http://127.0.0.1:8000
 
+## Alur satu lagu
+
+1. Klip 0,1 detik diputar otomatis. Tombol putar dan tombol spasi memutar ulang potongan yang sama tanpa biaya.
+2. Pemain mengetik judul. Saran muncul dari bank lagu (judul dan nama artis), maksimal 6 baris, dan jawaban diambil dari saran itu supaya tidak ada salah ketik yang dihitung salah.
+3. Tebakan salah: potongan dibuka ke tahap berikutnya dari titik yang sama dan diputar otomatis. Tebakan yang sudah dicoba ditandai.
+4. Benar: beruntun bertambah, waktu tebak tercatat, dan layar jawaban muncul dengan cover, judul, artis, tahun, genre, pemutar 30 detik, dan tautan Apple Music kalau ada.
+5. Salah di tahap terakhir, lewati, atau menyerah: beruntun kembali ke nol, rekor tetap tersimpan. Layar jawaban menampilkan lagu yang sebenarnya.
+
 ## Isi
 
 | File | Fungsi |
 | --- | --- |
-| `index.html` | struktur layar Beranda, Main, Jawaban, Ringkasan, dan tiga sheet |
+| `index.html` | struktur layar Beranda, Main, Jawaban, dan dua sheet |
 | `style.css` | token desain di `:root`, tema terang + gelap, tata letak satu kolom |
-| `app.js` | mesin audio Web Audio API, alur permainan, skor, penyimpanan lokal |
+| `app.js` | mesin audio Web Audio API, pencocokan judul, alur permainan, beruntun |
 | `songs.js` | bank lagu (188 entri): judul, artis, tahun, genre, cover, preview |
 | `og-image.png` | gambar 1200×630 untuk pratinjau tautan |
 
 ## Audio
 
-- Sumber: preview resmi 30 detik dari katalog iTunes / Apple Music (`itunes.apple.com/search`, negara ID). Tidak ada file audio di repo, jadi butuh internet.
-- Pemutaran memakai Web Audio API (`AudioBufferSourceNode.start(0, offset, durasi)`), bukan `<audio>` + timer. Diukur di Chrome: 0,1 s → 0,10 s; 0,5 s → 0,51 s; 2 s → 2,01 s; 8 s → 8,01 s; 15 s → 15,01 s (selisih 1–11 ms).
-- Preview iTunes mengirim `Access-Control-Allow-Origin: *`, jadi bisa di-fetch dan di-decode langsung dari browser. Ini yang membuat Web Audio bisa dipakai tanpa server sendiri; sudah diperiksa lewat header respons.
-- Titik mulai diacak di rentang 3–13 detik, lalu digeser ke bagian yang volumenya minimal 35% dari puncak preview (RMS jendela 0,1 detik). Tujuannya supaya potongan 0,1 detik tidak pernah jatuh di bagian hening. Titik mulai yang sama dipakai untuk semua tahap.
-- Soal berikutnya di-preload selagi pemain berpikir. Kalau satu lagu gagal dimuat, dicoba sekali lagi, lalu diganti lagu lain tanpa mengurangi jumlah soal.
-- Satu suara aktif pada satu waktu; memutar yang baru menghentikan yang lama.
+- Sumber: preview resmi 30 detik dari katalog iTunes / Apple Music (`itunes.apple.com/search`, negara ID). Tidak ada berkas audio di repo, jadi butuh internet.
+- Pemutaran memakai Web Audio API (`AudioBufferSourceNode.start(0, offset, durasi)`), bukan `<audio>` + timer. Diukur di Chrome: 0,1 s → 0,104 s; 2 s → 2,009 s; 15 s → 15,008 s (selisih 4–9 ms).
+- Preview iTunes mengirim `Access-Control-Allow-Origin: *`, jadi bisa di-fetch dan di-decode langsung dari browser tanpa server sendiri.
+- Titik mulai diacak di rentang 3–13 detik lalu digeser ke bagian yang volumenya minimal 35% dari puncak preview (RMS jendela 0,1 detik), supaya potongan 0,1 detik tidak jatuh di bagian hening. Titik yang sama dipakai untuk semua tahap.
+- Bisa diganti ke "awal lagu" lewat Pengaturan: potongan dimulai dari detik 0.
+- Lagu berikutnya di-preload saat pemain masih mengetik. Kalau satu lagu gagal dimuat, dicoba sekali lagi lalu diganti lagu lain.
 
-## Aturan main
+## Beruntun dan rekor
 
-- 10 soal per sesi, 4 pilihan judul, tanpa batas waktu.
-- Poin per soal menurut tahap saat benar: 100 / 70 / 45 / 25 / 10. Salah tidak mengakhiri soal: jawaban salah dimatikan, klip dibuka ke tahap berikutnya (poin ikut turun), lalu pemain masih boleh menebak.
-- Tombol Lewati membuka tahap berikutnya tanpa menebak; di tahap terakhir berubah jadi menyerah (0 poin).
-- Ringkasan menampilkan skor dari 1000, gelar, grid emoji hasil, akurasi, rata-rata tahap, dan rincian per soal. Teks bagikan tidak memuat judul lagu.
-- Keyboard: `1`–`4` menjawab, `spasi` memutar ulang, `enter` lanjut, `esc` menutup sheet.
-- Tema terang dan gelap mengikuti preferensi sistem dan bisa dipaksa lewat Pengaturan. Pilihan tema, suara efek, dan getar disimpan di `localStorage` (`sepotong:v1:*`).
+- `localStorage` kunci `sepotong:v1:streak` menyimpan `{ current, best }`.
+- Beruntun naik untuk setiap lagu yang ditebak benar, dan kembali ke nol saat pemain kalah, lewati, menyerah, atau keluar dari sesi.
+- Rekor (beruntun terbaik) tidak pernah turun.
 
 ## Catatan implementasi
 
-- Dua warna di spesifikasi gagal uji kontras pada latar terang: `--warn #E0A100` (2,12:1) dan `--orange #E87A1E` (2,72:1), padahal komponen UI minimal 3:1. Keduanya digelapkan jadi `#B37F00` (3,30:1) dan `#C05F0C` (4,03:1); pasangan warna lain lolos apa adanya, termasuk `--accent-ink` di atas `--accent` (4,59:1).
-- Bank lagu belum punya URL Apple Music per lagu, jadi tautan "Buka di Apple Music" disembunyikan sesuai aturan (tautan hanya tampil kalau URL tersedia).
-- Bonus beruntun (bagian 8 spesifikasi) belum diterapkan karena masuk fase P2; chip 🔥 tetap menampilkan jumlah jawaban benar berurutan. Skor maksimum tetap 1000.
-- Yang belum ada (fase berikutnya): mode Harian, mode Susah dengan autocomplete, Statistik, Survival, Satu Artis, petunjuk artis, dan genre tambahan.
+- Kesulitan bertingkat ala Songspot (Easy sampai Impossible) **tidak** diadopsi. Di sana tingkat kesulitan ditentukan dari jumlah stream lagu; data itu tidak tersedia untuk bank lagu Indonesia di sini, dan menebaknya berarti mengarang angka. Penyeimbang kesulitan di versi ini: filter genre dan era, plus pilihan titik mulai.
+- Bank lagu belum punya URL Apple Music per lagu, jadi tautan "Buka di Apple Music" hanya muncul kalau URL tersedia.
+- Pencocokan judul mengabaikan huruf besar, tanda baca, dan diakritik. Mengetik judul lengkap lalu Enter juga diterima, tidak harus memilih dari saran.
 
 ## Nambah lagu
 
