@@ -1083,19 +1083,38 @@
     updateActionBtn();
   }
 
+  var playToken = 0;
+  var playTimer = 0;
+
   function playStage() {
-    if (!state.rec || state.solved) return;
+    if (!state.rec) return;
     var sec = STAGES[state.stage];
+    var token = ++playToken;
+    clearTimeout(playTimer);
     setPlayState('playing');
+
+    /* hanya potongan terbaru yang boleh mengubah keadaan tombol */
+    var done = function () {
+      if (token !== playToken) return;
+      clearTimeout(playTimer);
+      setPlayState('ready');
+    };
+
+    if (Engine.ctx && Engine.ctx.state !== 'running') {
+      Engine.resume();
+    }
+
     var clip = Engine.playClip(state.rec, sec);
-    clip.ended.then(function () {
-      if (!state.solved) setPlayState('ready');
-    });
+    clip.ended.then(done);
+    /* jaring pengaman: kalau audio gagal berbunyi, tombol tetap balik sendiri */
+    playTimer = setTimeout(done, sec * 1000 + 400);
   }
 
   $('btnPlay').addEventListener('click', function () {
     if (state.loading) return;
     if ($('btnPlay').dataset.state === 'playing') {
+      playToken++;
+      clearTimeout(playTimer);
       Engine.stopClip();
       setPlayState('ready');
       return;

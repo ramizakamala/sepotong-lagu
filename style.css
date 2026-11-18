@@ -261,19 +261,22 @@ a { color: var(--accent); text-decoration: none; }
 }
 
 .playrow {
-  margin-top: 34px; display: flex; align-items: center; justify-content: center; gap: 16px;
+  margin-top: 26px; display: flex; align-items: center; justify-content: center; gap: 16px;
 }
 .play {
-  width: 140px; height: 140px; border-radius: 50%;
+  width: 104px; height: 104px; border-radius: 50%;
   background: var(--accent); color: var(--on-accent);
   display: grid; place-items: center;
-  box-shadow: 0 16px 34px -14px var(--shadow-accent);
+  box-shadow: 0 10px 22px -12px var(--shadow-accent);
   transition: transform 120ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 .play:active { transform: scale(.98); }
 .play[data-state="loading"] {
   background: var(--surface-2); color: var(--text-2); box-shadow: none;
 }
+.play svg { width: 30px; height: 30px; }
+.play .ico-pause { width: 26px; height: 26px; }
+.play .ico-wait { width: 20px; height: 20px; }
 .play .ico-pause, .play .ico-wait { display: none; }
 .play[data-state="playing"] .ico-play { display: none; }
 .play[data-state="playing"] .ico-pause { display: block; }
@@ -285,7 +288,7 @@ a { color: var(--accent); text-decoration: none; }
 .play[data-state="playing"] { background: var(--accent-deep); color: var(--on-accent); box-shadow: 0 14px 30px -14px var(--shadow-accent); }
 @keyframes spin { to { transform: rotate(360deg); } }
 .playsecs {
-  font-size: 15px; font-weight: 700; color: var(--text);
+  font-size: 14px; font-weight: 700; color: var(--text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -541,7 +544,7 @@ a { color: var(--accent); text-decoration: none; }
 @media (max-width: 1500px) {
   .shell { grid-template-columns: 230px minmax(0, 1fr) 320px; }
   .side { padding: 22px 18px; }
-  .play { width: 126px; height: 126px; }
+  .play { width: 96px; height: 96px; }
   .logo { font-size: 56px; }
 }
 
@@ -549,7 +552,7 @@ a { color: var(--accent); text-decoration: none; }
   body { overflow: auto; }
   .shell { grid-template-columns: 200px minmax(0, 1fr) 270px; }
   .logo { font-size: 46px; }
-  .play { width: 112px; height: 112px; }
+  .play { width: 88px; height: 88px; }
   .center-inner { padding-top: 24px; }
   .cards { grid-template-columns: repeat(3, 1fr); }
 }
@@ -591,7 +594,7 @@ a { color: var(--accent); text-decoration: none; }
     max-width: 520px;
   }
   .logo { font-size: 40px; }
-  .play { width: 104px; height: 104px; }
+  .play { width: 84px; height: 84px; }
   .playrow { margin-top: 22px; }
   .inputrow { margin-top: 22px; }
   .track { margin-top: 16px; }
