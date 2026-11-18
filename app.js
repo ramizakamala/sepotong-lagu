@@ -1,14 +1,19 @@
 /* ============================================================
-   Sepotong — sistem tebak: ketik judul, salah = klip kebuka,
-   skor = beruntun lagu + waktu tebak.
+   Sepotong — satu layar: sidebar genre/era/kesulitan, area putar,
+   panel pemutaran. Skor = beruntun lagu.
    ============================================================ */
 (function () {
   'use strict';
 
-  var LS = 'sepotong:v1:';
+  var LS = 'sepotong:v2:';
   var STAGES = [0.1, 0.5, 2, 8, 15];
-  var SITE = 'https://ramizakamala.github.io/sepotong-lagu/';
-
+  var TIERS = [
+    { id: 'easy', label: 'Easy' },
+    { id: 'medium', label: 'Medium' },
+    { id: 'hard', label: 'Hard' },
+    { id: 'expert', label: 'Expert' },
+    { id: 'impossible', label: 'Impossible' }
+  ];
   var GENRE_LABEL = {
     pop: 'Pop', rock: 'Rock', folk: 'Folk', dangdut: 'Dangdut', jazz: 'Jazz',
     indie: 'Indie', religi: 'Religi', keroncong: 'Keroncong', campursari: 'Campursari'
@@ -26,9 +31,7 @@
       .replace(/[^a-z0-9]+/g, ' ').trim();
   }
   function secLabel(n) { return String(n).replace('.', ',') + 's'; }
-  function reduced() {
-    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }
+  function eraLabel(d) { return d >= 2000 ? d + '-an' : String(d).slice(2) + '-an'; }
   function shuffle(a) {
     for (var i = a.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
@@ -50,12 +53,21 @@
     }
   };
 
-  var settings = Object.assign(
-    { theme: 'auto', sound: true, haptic: true, startPoint: 'hook' },
-    store.get('settings', {})
-  );
+  var settings = Object.assign({
+    genre: 'semua', era: 'semua', tier: 'easy',
+    startStage: 0, startPoint: 'hook', easySearch: false,
+    volume: 80, sound: true, haptic: true, reduceMotion: false
+  }, store.get('settings', {}));
+
   var streak = Object.assign({ current: 0, best: 0 }, store.get('streak', {}));
-  var setup = Object.assign({ genre: 'semua', era: 'semua' }, store.get('lastSetup', {}));
+  if (!store.get('streak', null)) {
+    try {
+      var oldStreak = JSON.parse(localStorage.getItem('sepotong:v1:streak') || 'null');
+      if (oldStreak && typeof oldStreak.best === 'number') streak = Object.assign(streak, oldStreak);
+    } catch (e) {}
+  }
+
+  function saveSettings() { store.set('settings', settings); }
 
   /* ---------------- bank lagu ---------------- */
   var SONGS = (window.SONGS || []).map(function (s) {
@@ -75,6 +87,23 @@
     return s.title && s.artist && s.year >= 1900 && s.previewUrl;
   });
 
+  /* kesulitan: banyaknya lagu artis itu di bank (proxy keterkenalan) */
+  var artistCount = (function () {
+    var m = new Map();
+    SONGS.forEach(function (s) { m.set(s.artist, (m.get(s.artist) || 0) + 1); });
+    return m;
+  })();
+
+  function tierOf(song) {
+    var n = artistCount.get(song.artist) || 1;
+    if (n >= 5) return 'easy';
+    if (n === 4) return 'medium';
+    if (n === 3) return 'hard';
+    if (n === 2) return 'expert';
+    return 'impossible';
+  }
+  SONGS.forEach(function (s) { s.tier = tierOf(s); });
+
   var GENRES = (function () {
     var m = new Map();
     SONGS.forEach(function (s) { m.set(s.genre, (m.get(s.genre) || 0) + 1); });
@@ -90,24 +119,27 @@
     return Array.from(m.entries()).sort(function (a, b) { return a[0] - b[0]; });
   })();
 
-  function eraLabel(d) { return d >= 2000 ? d + '-an' : String(d).slice(2) + '-an'; }
-
-  function poolFor(genre, era) {
+  function baseFilter(genre, era, tier) {
     return SONGS.filter(function (s) {
       var gOK = genre === 'semua' || s.genre === genre;
       var eOK = era === 'semua' || Math.floor(s.year / 10) * 10 === Number(era);
-      return gOK && eOK;
+      var tOK = tier === 'semua' || s.tier === tier;
+      return gOK && eOK && tOK;
     });
   }
 
-  /* ---------------- efek suara ---------------- */
+  function poolNow() {
+    return baseFilter(settings.genre, settings.era, settings.tier);
+  }
+
+  /* ---------------- efek ---------------- */
   function beep(kind) {
     if (!settings.sound) return;
     try {
       var ctx = Engine.init();
       var t = ctx.currentTime;
       var osc = ctx.createOscillator();
-      var gain = ctx.createGain();
+      var g = ctx.createGain();
       osc.type = 'sine';
       if (kind === 'good') {
         osc.frequency.setValueAtTime(620, t);
@@ -116,11 +148,11 @@
         osc.frequency.setValueAtTime(240, t);
         osc.frequency.exponentialRampToValueAtTime(160, t + 0.14);
       }
-      gain.gain.setValueAtTime(0.0001, t);
-      gain.gain.exponentialRampToValueAtTime(0.10, t + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.09, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+      osc.connect(g);
+      g.connect(Engine.master());
       osc.start(t);
       osc.stop(t + 0.24);
     } catch (e) {}
@@ -141,6 +173,7 @@
     cache: new Map(),
     active: null,
     full: null,
+    gainNode: null,
 
     init: function () {
       if (!this.ctx) {
@@ -148,6 +181,21 @@
         this.ctx = new AC();
       }
       return this.ctx;
+    },
+
+    master: function () {
+      var ctx = this.init();
+      if (!this.gainNode) {
+        this.gainNode = ctx.createGain();
+        this.gainNode.gain.value = (settings.volume / 100) * 1;
+        this.gainNode.connect(ctx.destination);
+      }
+      return this.gainNode;
+    },
+
+    setVolume: function (v) {
+      settings.volume = v;
+      if (this.gainNode) this.gainNode.gain.value = v / 100;
     },
 
     resume: function () {
@@ -183,9 +231,7 @@
     },
 
     startAt: function (rec) {
-      if (settings.startPoint === 'zero') return 0;
-      if (settings.startPoint === 'full') return 0;
-      return rec.offset;
+      return settings.startPoint === 'zero' ? 0 : rec.offset;
     },
 
     stopClip: function () {
@@ -206,7 +252,7 @@
       gain.gain.setValueAtTime(0.0001, t0);
       gain.gain.linearRampToValueAtTime(1, t0 + 0.006);
       src.connect(gain);
-      gain.connect(ctx.destination);
+      gain.connect(this.master());
       var start = this.startAt(rec);
       var maxStart = Math.max(0, rec.buf.duration - sec - 0.02);
       if (start > maxStart) start = maxStart;
@@ -242,7 +288,7 @@
       src.buffer = rec.buf;
       gain.gain.value = 1;
       src.connect(gain);
-      gain.connect(ctx.destination);
+      gain.connect(this.master());
       var dur = rec.buf.duration;
       var startedAt = ctx.currentTime;
       var self = this;
@@ -263,7 +309,6 @@
     stopAll: function () { this.stopClip(); this.stopFull(); }
   };
 
-  /* titik mulai: hindari potongan hening (RMS jendela 0,1 detik) */
   function pickOffset(buf) {
     var ch = buf.getChannelData(0);
     var sr = buf.sampleRate;
@@ -297,20 +342,21 @@
 
   /* ---------------- state ---------------- */
   var state = {
-    view: 'home',
-    stage: 0,
-    loading: false,
-    solved: false,
+    pool: [],
     song: null,
     rec: null,
+    stage: 0,
+    loading: true,
+    solved: false,
     tried: [],
     triedNorm: [],
     triedIds: [],
-    pool: [],
     recent: [],
     startedAt: 0,
     suggestIndex: -1,
-    suggestions: []
+    suggestions: [],
+    searchIndex: null,
+    bankPreview: null
   };
 
   /* ---------------- toast ---------------- */
@@ -320,158 +366,316 @@
     el.textContent = msg;
     el.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { el.classList.remove('show'); }, 2500);
+    toastTimer = setTimeout(function () { el.classList.remove('show'); }, 2400);
   }
 
-  function show(name) {
-    state.view = name;
-    var onMain = name === 'main' || name === 'reveal';
-    $('view-home').hidden = name !== 'home';
-    $('view-main').hidden = !onMain;
-    $('view-reveal').hidden = name !== 'reveal';
-    if (!onMain) Engine.stopClip();
-    if (name !== 'reveal') stopFullPlayer();
-    document.body.style.overflow = onMain ? 'hidden' : '';
+  /* ---------------- sheet ---------------- */
+  var openSheetEl = null;
+  var lastFocus = null;
+
+  function openSheet(el) {
+    lastFocus = document.activeElement;
+    openSheetEl = el;
+    $('backdrop').hidden = false;
+    el.hidden = false;
+    var f = el.querySelector('input, button');
+    if (f) setTimeout(function () { f.focus(); }, 40);
   }
-
-  /* ---------------- beranda ---------------- */
-  function renderHome() {
-    $('homeCurrent').textContent = streak.current;
-    $('homeBest').textContent = streak.best;
-
-    $('genreChips').innerHTML =
-      '<button class="chip" data-genre="semua" aria-pressed="' + (setup.genre === 'semua') + '">Semua genre</button>' +
-      GENRES.map(function (g) {
-        return '<button class="chip" data-genre="' + esc(g[0]) + '" aria-pressed="' + (setup.genre === g[0]) + '">' +
-          esc(g[0]) + '<span class="n">' + g[1] + '</span></button>';
-      }).join('');
-
-    $('eraChips').innerHTML =
-      '<button class="chip" data-era="semua" aria-pressed="' + (setup.era === 'semua') + '">Semua era</button>' +
-      DECADES.map(function (d) {
-        return '<button class="chip" data-era="' + d[0] + '" aria-pressed="' + (setup.era === String(d[0])) + '">' +
-          eraLabel(d[0]) + '<span class="n">' + d[1] + '</span></button>';
-      }).join('');
-
-    var n = poolFor(setup.genre, setup.era).length;
-    var note = $('bankNote');
-    var start = $('btnStart');
-    if (n < 4) {
-      note.className = 'bank warn';
-      note.textContent = 'Kombinasi ini cuma ' + n + ' lagu. Longgarkan genre atau era.';
-      start.disabled = true;
-    } else {
-      note.className = 'bank';
-      note.textContent = n + ' lagu di bank';
-      start.disabled = false;
-    }
+  function closeSheet() {
+    if (!openSheetEl) return;
+    openSheetEl.hidden = true;
+    openSheetEl = null;
+    $('backdrop').hidden = true;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
-
-  function persistSetup() {
-    store.set('lastSetup', { genre: setup.genre, era: setup.era });
-  }
-
-  $('genreChips').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-genre]');
-    if (!b) return;
-    setup.genre = b.dataset.genre;
-    persistSetup();
-    renderHome();
+  $('backdrop').addEventListener('click', closeSheet);
+  document.querySelectorAll('[data-close]').forEach(function (b) {
+    b.addEventListener('click', closeSheet);
   });
 
-  $('eraChips').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-era]');
+  document.addEventListener('keydown', function (e) {
+    if (openSheetEl) {
+      if (e.key === 'Escape') { e.preventDefault(); closeSheet(); }
+      return;
+    }
+    if (e.code === 'Space' && document.activeElement !== $('guess')) {
+      e.preventDefault();
+      if (!state.loading && !state.solved) Engine.resume().then(playStage);
+    }
+    if (e.key === 'Escape') closeDrawers();
+  });
+
+  /* ---------------- drawer (mobile) ---------------- */
+  function openDrawer(which) {
+    closeDrawers();
+    $(which).classList.add('open');
+  }
+  function closeDrawers() {
+    $('sideLeft').classList.remove('open');
+    $('sideRight').classList.remove('open');
+  }
+  $('btnDrawerLeft').addEventListener('click', function () { openDrawer('sideLeft'); });
+  $('btnDrawerRight').addEventListener('click', function () { openDrawer('sideRight'); });
+  document.querySelectorAll('[data-drawer-close]').forEach(function (b) {
+    b.addEventListener('click', closeDrawers);
+  });
+
+  /* ---------------- filter UI ---------------- */
+  function renderSelects() {
+    $('selGenre').innerHTML =
+      '<option value="semua">Semua genre</option>' +
+      GENRES.map(function (g) {
+        return '<option value="' + esc(g[0]) + '">' + esc(g[0]) + ' — ' + g[1] + ' lagu</option>';
+      }).join('');
+    $('selGenre').value = settings.genre;
+
+    $('selEra').innerHTML =
+      '<option value="semua">Semua era</option>' +
+      DECADES.map(function (d) {
+        return '<option value="' + d[0] + '">' + eraLabel(d[0]) + ' — ' + d[1] + ' lagu</option>';
+      }).join('');
+    $('selEra').value = settings.era;
+  }
+
+  function renderGenreNav() {
+    var items = [{ key: 'semua', label: 'Semua' }].concat(
+      GENRES.slice(0, 5).map(function (g) { return { key: g[0], label: g[0] }; })
+    );
+    $('genreNav').innerHTML = items.map(function (it) {
+      return '<button data-nav="' + esc(it.key) + '" aria-pressed="' + (settings.genre === it.key) + '">' +
+        esc(it.label) + '</button>';
+    }).join('') +
+      '<button class="switch" id="btnShuffleGenre" aria-label="Acak genre">' +
+      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+      '<path d="M16 3h5v5M4 20l6-6M21 3l-7 7M16 21h5v-5M4 4l5 5"/></svg></button>';
+  }
+
+  function renderPills() {
+    $('tierPills').innerHTML = TIERS.map(function (t) {
+      return '<button class="pill" data-tier="' + t.id + '" aria-pressed="' +
+        (settings.tier === t.id) + '">' + t.label + '</button>';
+    }).join('');
+  }
+
+  function renderDiffList() {
+    $('diffList').innerHTML = TIERS.map(function (t) {
+      return '<button class="diff-row" data-diff="' + t.id + '" aria-pressed="' +
+        (settings.tier === t.id) + '">' + t.label +
+        '<span class="swatch" style="background:var(--' + t.id + ')"></span></button>';
+    }).join('');
+  }
+
+  function renderStartGrid() {
+    $('startGrid').innerHTML = STAGES.map(function (s, i) {
+      return '<button class="dur-btn" data-start="' + i + '" aria-pressed="' +
+        (settings.startStage === i) + '">' + secLabel(s) + '</button>';
+    }).join('');
+  }
+
+  function renderSettingsUI() {
+    $('optHook').setAttribute('aria-pressed', String(settings.startPoint === 'hook'));
+    $('optZero').setAttribute('aria-pressed', String(settings.startPoint === 'zero'));
+    $('optEasy').setAttribute('aria-pressed', String(!!settings.easySearch));
+    $('optSound').setAttribute('aria-pressed', String(!!settings.sound));
+    $('optHaptic').setAttribute('aria-pressed', String(!!settings.haptic));
+    $('optMotion').setAttribute('aria-pressed', String(!!settings.reduceMotion));
+    $('volRange').value = String(settings.volume);
+    $('volFill').style.width = settings.volume + '%';
+    $('volPct').textContent = settings.volume + '%';
+    document.documentElement.classList.toggle('reduce-motion', !!settings.reduceMotion);
+  }
+
+  function applyFilters() {
+    state.pool = poolNow();
+    state.searchIndex = null;
+    $('bankCount').textContent = state.pool.length + ' dari ' + SONGS.length + ' judul';
+    renderSelects();
+    renderGenreNav();
+    renderPills();
+    renderDiffList();
+    bindFilterEvents();
+    if (!state.pool.length) {
+      toast('Kombinasi ini kosong. Longgarkan genre, era, atau kesulitan.');
+    }
+    startSong();
+  }
+
+  function bindFilterEvents() {
+    $('genreNav').onclick = function (e) {
+      var b = e.target.closest('[data-nav]');
+      if (b) { settings.genre = b.dataset.nav; saveSettings(); applyFilters(); return; }
+      if (e.target.closest('#btnShuffleGenre')) {
+        var g = GENRES[Math.floor(Math.random() * GENRES.length)][0];
+        settings.genre = g; saveSettings(); applyFilters();
+        toast('Genre: ' + g);
+      }
+    };
+    $('tierPills').onclick = function (e) {
+      var b = e.target.closest('[data-tier]');
+      if (!b) return;
+      settings.tier = b.dataset.tier;
+      saveSettings();
+      applyFilters();
+    };
+    $('diffList').onclick = function (e) {
+      var b = e.target.closest('[data-diff]');
+      if (!b) return;
+      settings.tier = b.dataset.diff;
+      saveSettings();
+      applyFilters();
+    };
+  }
+
+  $('selGenre').addEventListener('change', function () {
+    settings.genre = this.value;
+    saveSettings();
+    applyFilters();
+  });
+  $('selEra').addEventListener('change', function () {
+    settings.era = this.value;
+    saveSettings();
+    applyFilters();
+  });
+
+  /* ---------------- panel kanan ---------------- */
+  $('optHook').addEventListener('click', function () {
+    settings.startPoint = 'hook'; saveSettings(); renderSettingsUI();
+  });
+  $('optZero').addEventListener('click', function () {
+    settings.startPoint = 'zero'; saveSettings(); renderSettingsUI();
+    if (!state.solved) playStage();
+  });
+  $('optPreview').addEventListener('click', function () {
+    if (state.loading || state.solved || !state.rec) return;
+    Engine.resume().then(function () {
+      settings.startPoint = 'hook';
+      saveSettings();
+      renderSettingsUI();
+      var last = STAGES.length - 1;
+      if (state.stage !== last) {
+        state.stage = last;
+        syncStageUI();
+        toast('Semua potongan dibuka (tahap 5).');
+      }
+      var clip = Engine.playFull(state.rec, function () {
+        if (!state.solved) setPlayState('ready');
+      });
+      setPlayState('playing');
+      state.previewPlaying = true;
+      clip.onDone = null;
+    });
+  });
+  $('optEasy').addEventListener('click', function () {
+    settings.easySearch = !settings.easySearch;
+    saveSettings();
+    renderSettingsUI();
+    toast(settings.easySearch ? 'Easy search nyala: ketikan sebagian diterima.' : 'Easy search mati: pilih dari saran.');
+  });
+  $('optSound').addEventListener('click', function () {
+    settings.sound = !settings.sound; saveSettings(); renderSettingsUI();
+    if (settings.sound) beep('good');
+  });
+  $('optHaptic').addEventListener('click', function () {
+    settings.haptic = !settings.haptic; saveSettings(); renderSettingsUI(); buzz(18);
+  });
+  $('optMotion').addEventListener('click', function () {
+    settings.reduceMotion = !settings.reduceMotion; saveSettings(); renderSettingsUI();
+  });
+
+  $('uiOptHead').addEventListener('click', function () {
+    var open = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', String(!open));
+    $('uiOptBody').hidden = open;
+  });
+
+  $('startGrid').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-start]');
     if (!b) return;
-    setup.era = b.dataset.era;
-    persistSetup();
-    renderHome();
+    settings.startStage = Number(b.dataset.start);
+    saveSettings();
+    renderStartGrid();
+    if (!state.tried.length && !state.solved) {
+      state.stage = settings.startStage;
+      syncStageUI();
+      toast('Mulai dari ' + secLabel(STAGES[state.stage]) + '.');
+      if (!state.loading) playStage();
+    } else {
+      toast('Berlaku untuk lagu berikutnya.');
+    }
+  });
+
+  $('volRange').addEventListener('input', function () {
+    Engine.setVolume(Number(this.value));
+    $('volFill').style.width = this.value + '%';
+    $('volPct').textContent = this.value + '%';
+    saveSettings();
   });
 
   /* ---------------- sesi ---------------- */
-  function startSession() {
-    state.pool = poolFor(setup.genre, setup.era);
-    if (state.pool.length < 4) {
-      toast('Lagu di kombinasi ini kurang dari 4.');
-      return;
-    }
-    state.solved = false;
-    state.tried = [];
-    persistSetup();
-    Engine.init();
-    Engine.resume();
-    show('main');
-    nextSong();
-  }
-
   function pickSong() {
     var pool = state.pool.filter(function (s) { return state.recent.indexOf(s.id) === -1; });
-    if (!pool.length) {
-      state.recent = [];
-      pool = state.pool.slice();
-    }
+    if (!pool.length) { state.recent = []; pool = state.pool.slice(); }
     var s = pool[Math.floor(Math.random() * pool.length)];
     state.recent.push(s.id);
     if (state.recent.length > Math.min(40, Math.floor(state.pool.length * 0.6))) state.recent.shift();
     return s;
   }
 
-  function nextSong() {
+  function startSong(keepToast) {
+    if (!state.pool.length) return;
+    Engine.stopAll();
     state.song = pickSong();
-    state.stage = 0;
+    state.stage = Math.min(settings.startStage, STAGES.length - 1);
     state.tried = [];
     state.triedNorm = [];
     state.triedIds = [];
-    state.answeredWrong = false;
     state.loading = true;
     state.solved = false;
     state.rec = null;
-    state.suggestions = [];
     state.suggestIndex = -1;
-
+    state.suggestions = [];
     $('guess').value = '';
     $('guess').disabled = true;
     $('suggest').hidden = true;
     $('suggest').innerHTML = '';
     $('tried').innerHTML = '';
-    $('guessHint').textContent = '';
-    renderStreak();
-    renderStages();
+    $('hintLine').textContent = 'Menyiapkan klip…';
     setPlayState('loading');
+    syncStageUI();
+    renderStreak();
 
-    Engine.load(state.song).catch(function () {
-      return Engine.load(state.song);
-    }).then(function (rec) {
-      if (!state.song) return;
-      state.rec = rec;
-      state.loading = false;
-      $('guess').disabled = false;
-      setPlayState('ready');
-      state.startedAt = performance.now();
-      setTimeout(function () { if (!state.solved) playStage(); }, 60);
-      buildIndices();
-    }).catch(function () {
-      toast('Lagu ini gagal dimuat. Lanjut ke lagu berikutnya.');
-      nextSong();
+    var song = state.song;
+    Engine.load(song).catch(function () { return Engine.load(song); })
+      .then(function (rec) {
+        if (state.song !== song) return;
+        state.rec = rec;
+        state.loading = false;
+        $('guess').disabled = false;
+        setPlayState('ready');
+        $('hintLine').textContent = 'Ketuk tombol putar';
+        state.startedAt = performance.now();
+        buildSearchIndex();
+        if (!keepToast) toast('Lagu siap. Ketuk putar.');
+      })
+      .catch(function () {
+        toast('Lagu ini gagal dimuat. Coba lagi.');
+        setPlayState('ready');
+      });
+  }
+
+  function buildSearchIndex() {
+    if (state.searchIndex) return;
+    state.searchIndex = state.pool.map(function (s) {
+      return { song: s, t: norm(s.title), a: norm(s.artist), ta: norm(s.title + ' ' + s.artist) };
     });
   }
 
-  /* indeks pencarian untuk saran judul */
-  var searchIndex = null;
-  function buildIndices() {
-    if (searchIndex && searchIndex.pool === state.pool) return;
-    searchIndex = {
-      pool: state.pool,
-      items: state.pool.map(function (s) {
-        return { song: s, t: norm(s.title), a: norm(s.artist), ta: norm(s.title + ' ' + s.artist) };
-      })
-    };
-  }
-
+  /* ---------------- pencarian judul ---------------- */
   function findSuggestions(q) {
     var nq = norm(q);
-    if (nq.length < 2 || !searchIndex) return [];
+    if (nq.length < 2 || !state.searchIndex) return [];
     var out = [];
-    searchIndex.items.forEach(function (it) {
+    state.searchIndex.forEach(function (it) {
       if (state.triedIds.indexOf(it.song.id) !== -1) return;
       if (state.triedNorm.indexOf(it.t) !== -1) return;
       var score = 0;
@@ -504,18 +708,15 @@
       return;
     }
     list.innerHTML = state.suggestions.map(function (s, i) {
-      return '<li role="option" id="sg' + i + '" class="sg' + (i === state.suggestIndex ? ' on' : '') + '"' +
-        ' data-i="' + i + '" aria-selected="' + (i === state.suggestIndex) + '">' +
+      return '<li role="option" id="sg' + i + '" class="sg' + (i === state.suggestIndex ? ' on' : '') +
+        '" data-i="' + i + '" aria-selected="' + (i === state.suggestIndex) + '">' +
         '<span class="st">' + esc(s.title) + '</span>' +
         '<span class="sa">' + esc(s.artist) + ' · ' + s.year + '</span></li>';
     }).join('');
     list.hidden = false;
     $('guess').setAttribute('aria-expanded', 'true');
-    if (state.suggestIndex >= 0) {
-      $('guess').setAttribute('aria-activedescendant', 'sg' + state.suggestIndex);
-    } else {
-      $('guess').removeAttribute('aria-activedescendant');
-    }
+    if (state.suggestIndex >= 0) $('guess').setAttribute('aria-activedescendant', 'sg' + state.suggestIndex);
+    else $('guess').removeAttribute('aria-activedescendant');
   }
 
   function onSuggestPick(e) {
@@ -559,24 +760,23 @@
       if (state.suggestIndex >= 0 && state.suggestions[state.suggestIndex]) {
         submitGuess(state.suggestions[state.suggestIndex]);
       } else {
-        var typed = $('guess').value.trim();
-        if (!typed) return;
-        var exact = state.suggestions.find(function (s) {
-          return norm(s.title) === norm(typed);
-        });
-        if (exact) submitGuess(exact);
-        else submitGuess(null, typed);
+        submitTyped($('guess').value.trim());
       }
     }
   });
 
   function submitTyped(raw) {
+    if (raw.length < 2) return;
     var n = norm(raw);
     var hit = null;
-    if (searchIndex) {
-      for (var i = 0; i < searchIndex.items.length; i++) {
-        if (searchIndex.items[i].t === n) { hit = searchIndex.items[i].song; break; }
+    if (state.searchIndex) {
+      for (var i = 0; i < state.searchIndex.length; i++) {
+        if (state.searchIndex[i].t === n) { hit = state.searchIndex[i].song; break; }
       }
+    }
+    if (!hit && settings.easySearch) {
+      var partial = findSuggestions(raw);
+      if (partial.length) hit = partial[0];
     }
     if (hit) submitGuess(hit);
     else submitGuess(null, raw);
@@ -596,10 +796,7 @@
       wrongGuess(raw, null);
       return;
     }
-    if (song.id === state.song.id) {
-      solveRound();
-      return;
-    }
+    if (song.id === state.song.id) { solveRound(); return; }
     if (state.triedIds.indexOf(song.id) !== -1 || state.triedNorm.indexOf(norm(song.title)) !== -1) {
       toast('Judul itu sudah ditebak.');
       $('guess').value = '';
@@ -607,17 +804,6 @@
       return;
     }
     wrongGuess(song.title, song);
-  }
-
-  function advanceStage() {
-    if (state.stage >= STAGES.length - 1) return false;
-    state.stage++;
-    renderStages();
-    $('guessHint').textContent = 'Potongan dibuka jadi ' + secLabel(STAGES[state.stage]) + '.';
-    setTimeout(function () {
-      if (!state.solved) playStage();
-    }, 300);
-    return true;
   }
 
   function wrongGuess(label, song) {
@@ -632,17 +818,15 @@
     beep('bad');
     buzz(25);
 
-    if (state.stage >= STAGES.length - 1) {
-      loseRound('gb');
-      return;
-    }
-    advanceStage();
+    if (state.stage >= STAGES.length - 1) { loseRound('wrong'); return; }
+    state.stage++;
+    syncStageUI();
+    $('hintLine').textContent = 'Belum tepat. Potongan dibuka jadi ' + secLabel(STAGES[state.stage]) + '.';
+    setTimeout(function () { if (!state.solved) playStage(); }, 320);
   }
 
   function renderTried() {
-    var wrap = $('tried');
-    var items = state.tried.slice(-4);
-    wrap.innerHTML = items.map(function (t) {
+    $('tried').innerHTML = state.tried.slice(-4).map(function (t) {
       return '<li>' + esc(t) + '</li>';
     }).join('');
   }
@@ -670,72 +854,66 @@
     showReveal(false, 0, reason);
   }
 
-  $('btnAction').addEventListener('click', function () {
-    if (state.loading || state.solved) return;
-    var raw = $('guess').value.trim();
-    if (raw.length >= 2) {
-      submitTyped(raw);
-      return;
-    }
-    if (state.stage >= STAGES.length - 1) {
-      loseRound('giveup');
-      return;
-    }
-    advanceStage();
-  });
-
-  function renderStreak() {
-    $('streakNow').textContent = streak.current;
-    $('bestNow').textContent = streak.best;
-    var chip = $('streakChip');
-    chip.classList.toggle('hot', streak.current >= 3);
-  }
-
-  function renderStages() {
-    var segs = $('tlSegs').children;
-    for (var i = 0; i < segs.length; i++) {
-      segs[i].className = 's' + (i + 1) + (i <= state.stage ? ' open' : '') + (i === state.stage ? ' on' : '');
-    }
-    var pct = ((state.stage + 1) / STAGES.length) * 100;
-    $('tlFill').style.width = pct + '%';
-    $('tlKnob').style.left = 'calc(' + pct + '% - ' + (pct / 100 * 10) + 'px)';
-    $('playSecs').textContent = secLabel(STAGES[state.stage]);
-    $('stageLabel').textContent = 'Tahap ' + (state.stage + 1) + ' dari ' + STAGES.length;
-    updateActionBtn();
-  }
-
+  /* ---------------- tombol aksi ---------------- */
   function updateActionBtn() {
     var b = $('btnAction');
     var hasText = $('guess').value.trim().length >= 2;
     var last = state.stage >= STAGES.length - 1;
     if (hasText) {
       b.textContent = 'Tebak';
-      b.classList.add('btn-primary');
-      b.classList.remove('btn-secondary');
-      $('actionHint').textContent = 'atau tekan Enter';
+      b.classList.add('primary');
     } else {
       b.textContent = last ? 'Nyerah' : 'Lewati ke ' + secLabel(STAGES[state.stage + 1]);
-      b.classList.add('btn-secondary');
-      b.classList.remove('btn-primary');
-      $('actionHint').textContent = last ? 'potongan terpanjang' : 'kolom kosong = buka potongan';
+      b.classList.remove('primary');
     }
     b.disabled = !!state.solved || !!state.loading;
   }
 
+  $('btnAction').addEventListener('click', function () {
+    if (state.loading || state.solved) return;
+    var raw = $('guess').value.trim();
+    if (raw.length >= 2) { submitTyped(raw); return; }
+    if (state.stage >= STAGES.length - 1) { loseRound('giveup'); return; }
+    state.stage++;
+    syncStageUI();
+    $('hintLine').textContent = 'Potongan dibuka jadi ' + secLabel(STAGES[state.stage]) + '.';
+    setTimeout(function () { if (!state.solved) playStage(); }, 260);
+  });
+
+  /* ---------------- slider tahap ---------------- */
+  function syncStageUI() {
+    var i = state.stage;
+    $('stageRange').value = String(i);
+    $('railFill').style.width = ((i + 1) / STAGES.length) * 100 + '%';
+    var pct = ((i + 1) / STAGES.length) * 100;
+    var mark = $('railMark');
+    mark.textContent = secLabel(STAGES[i]);
+    mark.style.left = Math.min(100, Math.max(0, pct)) + '%';
+    $('playSecs').textContent = secLabel(STAGES[i]);
+    updateActionBtn();
+  }
+
+  $('stageRange').addEventListener('input', function () {
+    var target = Number(this.value);
+    if (state.solved) { this.value = String(state.stage); return; }
+    if (target < state.stage) {
+      this.value = String(state.stage);
+      toast('Potongan tidak bisa dipendekkan lagi.');
+      return;
+    }
+    if (target === state.stage) return;
+    state.stage = target;
+    syncStageUI();
+    $('hintLine').textContent = 'Potongan dibuka jadi ' + secLabel(STAGES[state.stage]) + '.';
+    if (!state.loading) playStage();
+  });
+
+  /* ---------------- putar ---------------- */
   function setPlayState(s) {
     var b = $('btnPlay');
     b.dataset.state = s;
-    var hint = $('playHint');
-    if (s === 'loading') {
-      hint.textContent = 'Menyiapkan klip…';
-      b.setAttribute('aria-label', 'Memuat audio');
-    } else if (s === 'playing') {
-      hint.textContent = 'Memutar…';
-      b.setAttribute('aria-label', 'Sedang memutar');
-    } else {
-      hint.textContent = 'Ketuk untuk dengar ulang · spasi';
-      b.setAttribute('aria-label', 'Putar potongan lagu');
-    }
+    b.setAttribute('aria-label',
+      s === 'loading' ? 'Memuat audio' : s === 'playing' ? 'Sedang memutar' : 'Putar potongan');
     updateActionBtn();
   }
 
@@ -745,13 +923,27 @@
     setPlayState('playing');
     var clip = Engine.playClip(state.rec, sec);
     clip.ended.then(function () {
-      if (state.view === 'main' && !state.solved) setPlayState('ready');
+      if (!state.solved) setPlayState('ready');
     });
   }
 
   $('btnPlay').addEventListener('click', function () {
-    if (state.loading || state.solved) return;
-    Engine.resume().then(playStage);
+    if (state.loading) return;
+    Engine.resume().then(function () {
+      if (state.solved) { toast('Lagu ini sudah selesai. Tekan Lagu berikutnya.'); return; }
+      playStage();
+    });
+  });
+
+  /* ---------------- reroll ---------------- */
+  $('btnReroll').addEventListener('click', function () {
+    if (state.solved) { startSong(); closeDrawers(); return; }
+    if (state.tried.length || state.stage > settings.startStage) {
+      toast('Sudah mulai menebak. Pakai Nyerah kalau mau ganti lagu.');
+      return;
+    }
+    startSong();
+    closeDrawers();
   });
 
   /* ---------------- layar jawaban ---------------- */
@@ -759,10 +951,7 @@
   var fullRaf = 0;
 
   function stopFullPlayer() {
-    if (fullPlayer) {
-      try { fullPlayer.stop(); } catch (e) {}
-      fullPlayer = null;
-    }
+    if (fullPlayer) { try { fullPlayer.stop(); } catch (e) {} fullPlayer = null; }
     cancelAnimationFrame(fullRaf);
     var b = $('btnFull');
     if (b) {
@@ -796,204 +985,114 @@
     };
     tick();
   }
-
   $('btnFull').addEventListener('click', toggleFull);
+
+  function renderStreak() {
+    $('streakNow').textContent = streak.current;
+    $('bestNow').textContent = streak.best;
+    $('streakChip').classList.toggle('hot', streak.current >= 3);
+  }
 
   function showReveal(solved, seconds, reason) {
     Engine.stopClip();
     stopFullPlayer();
     var s = state.song;
-
     $('revEyebrow').textContent = solved ? 'Kena' : 'Itu tadi';
     $('revTitle').textContent = s.title;
     $('revArtist').textContent = s.artist;
     $('revLine2').textContent = s.year + ' · ' + s.genre;
 
     var cover = $('revCover');
-    cover.innerHTML = s.art
-      ? '<img alt="" src="' + esc(s.art) + '" loading="lazy">'
-      : '<span class="ph-line"></span>';
+    cover.innerHTML = s.art ? '<img alt="" src="' + esc(s.art) + '" loading="lazy">' : '<span class="ph"></span>';
     var img = cover.querySelector('img');
-    if (img) {
-      img.addEventListener('error', function () {
-        cover.innerHTML = '<span class="ph-line"></span>';
-      });
-    }
+    if (img) img.addEventListener('error', function () { cover.innerHTML = '<span class="ph"></span>'; });
 
     var apple = $('revApple');
-    if (s.appleUrl) { apple.href = s.appleUrl; apple.hidden = false; }
-    else { apple.hidden = true; }
+    if (s.appleUrl) { apple.href = s.appleUrl; apple.hidden = false; } else { apple.hidden = true; }
 
     var v = $('revVerdict');
     v.className = 'verdict ' + (solved ? 'good' : 'neutral');
     if (solved) {
-      v.innerHTML = '<b class="num">Beruntun ' + streak.current + '</b>' +
+      v.innerHTML = '<b>Beruntun ' + streak.current + '</b>' +
         '<span>Tahap ' + (state.stage + 1) + ' · ' + secLabel(STAGES[state.stage]) +
         ' · ' + seconds + ' detik' +
         (streak.current === streak.best && streak.best > 1 ? ' · rekor baru' : '') + '</span>';
     } else {
-      var why = reason === 'skip' ? 'Kamu lewati' : reason === 'giveup' ? 'Kamu menyerah' : 'Tidak ketemu';
-      v.innerHTML = '<b class="num">Beruntun terhenti</b>' +
+      var why = reason === 'giveup' ? 'Kamu nyerah' : reason === 'skip' ? 'Kamu lewati' : 'Tidak ketemu';
+      v.innerHTML = '<b>Beruntun terhenti</b>' +
         '<span>' + why + ' · rekor kamu tetap ' + streak.best + '</span>';
     }
-
-    $('btnNext').textContent = 'Lagu berikutnya';
-    show('reveal');
-    $('btnNext').focus();
+    openSheet($('sheetReveal'));
   }
 
   $('btnNext').addEventListener('click', function () {
-    Engine.stopClip();
-    show('main');
-    nextSong();
+    closeSheet();
+    startSong();
   });
 
-  $('btnBackHome').addEventListener('click', function () {
-    Engine.stopAll();
-    show('home');
-    renderHome();
-  });
-
-  $('btnStart').addEventListener('click', startSession);
-
-  $('btnQuit').addEventListener('click', function () {
-    if (window.confirm('Keluar dari sesi? Beruntun sekarang hilang.')) {
-      Engine.stopAll();
-      streak.current = 0;
-      store.set('streak', streak);
-      show('home');
-      renderHome();
-    }
-  });
-
-  /* ---------------- sheet ---------------- */
-  var openSheetEl = null;
-  var lastFocus = null;
-
-  function openSheet(el) {
-    lastFocus = document.activeElement;
-    openSheetEl = el;
-    $('backdrop').hidden = false;
-    el.hidden = false;
-    var first = el.querySelector('button, [href], input, select, textarea');
-    if (first) first.focus();
-  }
-  function closeSheet() {
-    if (!openSheetEl) return;
-    openSheetEl.hidden = true;
-    openSheetEl = null;
-    $('backdrop').hidden = true;
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-
-  $('backdrop').addEventListener('click', closeSheet);
-  document.querySelectorAll('[data-close]').forEach(function (b) {
-    b.addEventListener('click', closeSheet);
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (openSheetEl) {
-      if (e.key === 'Escape') { e.preventDefault(); closeSheet(); }
-      if (e.key === 'Tab') {
-        var f = openSheetEl.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        if (!f.length) return;
-        var first = f[0], last = f[f.length - 1];
-        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-      }
-      return;
-    }
-    if (state.view === 'main' && e.code === 'Space' && document.activeElement !== $('guess')) {
-      e.preventDefault();
-      if (!state.loading && !state.solved) Engine.resume().then(playStage);
-    }
-    if (state.view === 'reveal' && e.key === 'Enter') {
-      e.preventDefault();
-      $('btnNext').click();
-    }
-  });
-
-  /* ---------------- pengaturan ---------------- */
-  function applyTheme() {
-    if (settings.theme === 'auto') document.documentElement.removeAttribute('data-theme');
-    else document.documentElement.setAttribute('data-theme', settings.theme);
-    Array.prototype.forEach.call($('segTheme').children, function (b) {
-      b.setAttribute('aria-pressed', String(b.dataset.themeOpt === settings.theme));
+  /* ---------------- sheet tambahan ---------------- */
+  document.querySelectorAll('[data-sheet]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.dataset.sheet;
+      if (k === 'howto') openSheet($('sheetHowTo'));
+      if (k === 'about') openSheet($('sheetAbout'));
+      if (k === 'bank') { renderBank(''); openSheet($('sheetBank')); }
     });
-  }
-
-  function syncSettingsUI() {
-    Array.prototype.forEach.call($('segSound').children, function (b) {
-      b.setAttribute('aria-pressed', String((b.dataset.sound === '1') === !!settings.sound));
-    });
-    Array.prototype.forEach.call($('segHaptic').children, function (b) {
-      b.setAttribute('aria-pressed', String((b.dataset.haptic === '1') === !!settings.haptic));
-    });
-    Array.prototype.forEach.call($('segStart').children, function (b) {
-      b.setAttribute('aria-pressed', String(b.dataset.start === settings.startPoint));
-    });
-    applyTheme();
-  }
-
-  $('segTheme').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-theme-opt]');
-    if (!b) return;
-    settings.theme = b.dataset.themeOpt;
-    store.set('settings', settings);
-    applyTheme();
-  });
-
-  $('segSound').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-sound]');
-    if (!b) return;
-    settings.sound = b.dataset.sound === '1';
-    store.set('settings', settings);
-    syncSettingsUI();
-    if (settings.sound) beep('good');
-  });
-
-  $('segHaptic').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-haptic]');
-    if (!b) return;
-    settings.haptic = b.dataset.haptic === '1';
-    store.set('settings', settings);
-    syncSettingsUI();
-    buzz(20);
-  });
-
-  $('segStart').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-start]');
-    if (!b) return;
-    settings.startPoint = b.dataset.start;
-    store.set('settings', settings);
-    syncSettingsUI();
-  });
-
-  if (navigator.vibrate) $('rowHaptic').hidden = false;
-
-  $('btnSettings').addEventListener('click', function () {
-    syncSettingsUI();
-    openSheet($('sheetSettings'));
   });
   $('btnHowTo').addEventListener('click', function () { openSheet($('sheetHowTo')); });
 
-  /* ---------------- start ---------------- */
-  applyTheme();
-  renderHome();
-
-  if (!store.get('seenHowTo', false)) {
-    store.set('seenHowTo', true);
-    setTimeout(function () { openSheet($('sheetHowTo')); }, 600);
+  function renderBank(q) {
+    var nq = norm(q);
+    var list = SONGS.filter(function (s) {
+      if (!nq) return true;
+      return norm(s.title).indexOf(nq) !== -1 || norm(s.artist).indexOf(nq) !== -1;
+    }).slice(0, 60);
+    $('bankList').innerHTML = list.map(function (s) {
+      return '<button class="bankrow" data-play="' + esc(s.id) + '">' +
+        '<span class="t"><b>' + esc(s.title) + '</b><span>' + esc(s.artist) + ' · ' + s.year +
+        ' · ' + esc(s.genre) + '</span></span>' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6a.7.7 0 0 0 1.07.6l10.2-6.8a.7.7 0 0 0 0-1.2L9.07 4.6A.7.7 0 0 0 8 5.2z"/></svg>' +
+        '</button>';
+    }).join('') || '<p style="font-size:12px;color:var(--muted)">Tidak ada yang cocok.</p>';
   }
+
+  $('bankSearch').addEventListener('input', function () { renderBank(this.value); });
+
+  $('bankList').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-play]');
+    if (!b) return;
+    var song = SONGS.find(function (s) { return s.id === b.dataset.play; });
+    if (!song) return;
+    Engine.resume().then(function () { return Engine.load(song); })
+      .then(function (rec) {
+        Engine.stopAll();
+        Engine.playFull(rec);
+        toast('Memutar ' + song.title);
+      })
+      .catch(function () { toast('Gagal memuat lagu ini.'); });
+  });
+
+  /* ---------------- start ---------------- */
+  applyFilters();
+  renderStartGrid();
+  renderSettingsUI();
+  renderStreak();
+  Engine.setVolume(settings.volume);
+  startSong(true);
 
   window.SEPOTONG = {
     engine: Engine,
     state: state,
     stages: STAGES,
+    tiers: TIERS,
     streak: function () { return { current: streak.current, best: streak.best }; },
-    setStreak: function (c, b) { streak.current = c; streak.best = b; store.set('streak', streak); renderStreak(); },
+    setStreak: function (c, b) {
+      streak.current = c; streak.best = b; store.set('streak', streak); renderStreak();
+    },
     pool: function () { return state.pool; },
     answer: function () { return state.song; },
+    settings: function () { return settings; },
+    tierOf: tierOf,
     playClipTiming: function (sec) {
       if (!state.rec) return Promise.resolve(null);
       return new Promise(function (resolve) {
