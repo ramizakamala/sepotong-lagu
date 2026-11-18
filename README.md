@@ -1,22 +1,10 @@
-# Sepotong
+# Spekulasi
 
-Game tebak lagu Indonesia dengan potongan 0,1 detik. Pemain mendengar potongan pendek, mengetik judulnya, dan setiap tebakan yang salah membuka potongan yang sama lebih panjang: 0,1 → 0,5 → 2 → 8 → 15 detik. Skornya bukan poin, tapi **beruntun** (jumlah lagu yang ditebak benar tanpa terputus) dan waktu tebak.
+Game tebak lagu Indonesia dari potongan 0,1 detik. Pemain mendengar potongan pendek, mengetik judulnya, dan setiap tebakan yang salah membuka potongan yang sama lebih panjang: 0,1 → 0,5 → 2 → 8 → 15 detik.
 
-Tata letaknya mengikuti Songspot (songspot.net): tiga kolom dengan panel genre/era/kesulitan di kiri, area putar di tengah, dan panel pemutaran di kanan. Warnanya bukan tiruan Songspot — dipakai palet sendiri: latar krem hangat `#FBF7F0` dengan aksen merah-oranye `#CF3218`, teks cokelat tua `#221A14`. Isinya khusus lagu Indonesia.
+Satu level terdiri dari satu lagu acak. Benar berarti naik level; salah berarti level tetap di tempat dan lagunya diganti.
 
-### Warna
-
-| Token | Nilai | Dipakai untuk |
-| --- | --- | --- |
-| `--bg` | `#FBF7F0` | latar halaman dan panel samping |
-| `--center` | `#F5EEE2` | bidang trapesium area putar |
-| `--surface` | `#FFFFFF` | kartu, kolom tebakan, daftar saran |
-| `--accent` | `#CF3218` | tombol putar, tombol utama, penanda aktif |
-| `--accent-soft` | `#F7DFD6` | latar pilihan aktif |
-| `--text` / `--text-2` / `--muted` | `#221A14` / `#6B5E52` / `#7C6E60` | teks utama, kedua, label |
-| `--line` | `#E6DBCB` | garis pemisah dan tepi kartu |
-
-Tingkat kesulitan punya warnanya sendiri: Easy `#1F7A4C`, Medium `#946A00`, Hard `#B4550A`, Expert `#B3261E`, Impossible `#6B4E9B`. Kontras teks sudah diperiksa: teks utama 16,0:1, teks kedua 5,9:1, label 4,6:1, teks putih di tombol aksen 4,8:1, di badge merah 6,2:1, di badge hijau 5,0:1.
+Tata letaknya mengikuti Songspot (songspot.net): tiga kolom dengan panel genre/era/kesulitan di kiri, area putar di tengah, dan panel pemutaran di kanan. Warnanya bukan tiruan Songspot: dipakai palet oranye hangat dengan dua tema, terang dan gelap.
 
 ## Cara jalanin
 
@@ -35,71 +23,85 @@ lalu buka http://127.0.0.1:8000
 | Bagian | Isi |
 | --- | --- |
 | Sidebar kiri (260px) | menu, dropdown genre, dropdown era, lima tingkat kesulitan, reroll lagu |
-| Area tengah | logo, navigasi genre cepat (bisa digeser kiri-kanan: drag mouse, usap jari, atau scroll), pil kesulitan, slider panjang potongan, tombol putar 140px, kolom tebakan + tombol aksi, tiga kartu bantuan |
-| Sidebar kanan (370px) | mode pemutaran, easy search, "tebak setelah" (durasi awal), volume, UI options |
+| Area tengah | nama situs, navigasi cepat yang bisa digeser (genre atau tahun), pil kesulitan, slider panjang potongan, tombol putar 140px, kolom tebakan + tombol aksi, tiga kartu bantuan |
+| Sidebar kanan (370px) | mode pemutaran, saran judul, "tebak setelah", volume, UI options (termasuk tema) |
 
-Area tengah memakai `clip-path` untuk siluet trapesium seperti referensi. Di layar di bawah 900px kedua sidebar berubah menjadi drawer yang dibuka dari bar atas, dan konten tengah mengalir normal tanpa gulir mendatar.
+Area tengah memakai `clip-path` untuk siluet trapesium. Di layar di bawah 900px kedua sidebar berubah menjadi drawer dari bar atas.
 
-## Alur satu lagu
+Tombol di kiri baris navigasi mengganti isinya antara **Genre** dan **Tahun**; barisnya bisa digeser kiri-kanan lewat usapan, tarikan mouse, atau roda tetikus, dengan penanda tepi yang hanya muncul ketika isinya memang lebih lebar.
 
-1. Klip diputar otomatis setelah pemain mengetuk tombol putar pertama (peramban butuh gestur pengguna untuk audio).
-2. Pemain mengetik judul. Saran muncul setelah 3 huruf, maksimal 4 baris, dan **hanya dicocokkan ke judul** — mengetik nama artis tidak memunculkan daftar lagunya. Memilih saran hanya mengisi kolom; tebakan dikirim lewat tombol Tebak atau Enter. Saran bisa dimatikan di panel kanan untuk mode ketik penuh.
-3. Tebakan salah: potongan dibuka ke tahap berikutnya dari titik yang sama dan diputar otomatis. Judul yang sudah ditebak hilang dari saran.
-4. Saat kolom kosong, tombol aksi berubah menjadi **Lewati ke …** dan hanya membuka potongan berikutnya. Di tahap 15 detik tombolnya menjadi **Nyerah**.
-5. Jawaban benar: beruntun bertambah dan layar jawaban muncul. Layarnya vertikal dan rata tengah: cover album, judul, artis, album (tahun) · genre, badge hasil, ringkasan beruntun, lalu tombol.
+## Alur satu level
 
-### Layar jawaban
+1. Ketuk tombol putar. Selama potongan berbunyi, ikon tombolnya berubah menjadi tanda jeda dan bisa ditekan untuk berhenti.
+2. Ketik judulnya (minimal 3 huruf), pilih dari saran, lalu tekan **Tebak** atau Enter.
+3. Salah tebak: potongan yang sama dibuka lebih panjang. Judul yang sudah ditebak hilang dari daftar saran.
+4. Kolom kosong membuat tombol yang sama menjadi **Lewati**; di 15 detik tombolnya menjadi **Nyerah**.
+5. Layar hasil selalu vertikal dan rata tengah: cover album, judul, artis, album (tahun) · genre, badge hasil, satu baris keterangan, lalu satu tombol.
 
-| Keadaan | Badge | Tombol |
-| --- | --- | --- |
-| Salah, nyerah, atau tidak ketemu | **Salah Lo!** (merah) | **Ulang Lah!** (ungu–merah, memutar preview 30 detik) dan **Lanjut bro!** |
-| Benar | **Anjay Bener** (hijau) | **Lanjut bro!** saja |
+| Keadaan | Badge | Tombol | Artefak |
+| --- | --- | --- | --- |
+| Salah | **Salah Lo!** — garis luar merah, latar transparan, miring | **Ulang Lah!** — level yang sama dengan lagu acak baru | level tidak naik |
+| Benar | **Anjay Bener!** — garis luar hijau, latar transparan, miring | **Lanjut Bro!** — naik ke level berikutnya | level bertambah |
 
-Tautan "Buka di Apple Music" hanya muncul kalau lagunya punya URL Apple Music.
+## Tema dan warna
+
+Dua tema, dipilih di panel kanan → UI options → Tema: **Terang**, **Gelap**, atau **Auto** (mengikuti setelan sistem). Pilihannya disimpan dan `<meta name="theme-color">` ikut berubah.
+
+| Token | Terang | Gelap | Dipakai untuk |
+| --- | --- | --- | --- |
+| `--bg` | `#FDF6EE` | `#17100B` | latar halaman dan panel samping |
+| `--center` | `#F7EADB` | `#1F1710` | bidang trapesium |
+| `--surface` | `#FFFFFF` | `#241A12` | kartu, kolom tebakan, saran |
+| `--accent` | `#B85110` | `#F5863C` | tombol putar, tombol utama, slider |
+| `--accent-soft` | `#FBE2CB` | `#3A2314` | latar pilihan aktif |
+| `--on-accent` | `#FFF8F1` | `#1B1208` | teks di atas aksen |
+| `--text` | `#2A1C12` | `#F7EEE6` | teks utama |
+| `--text-2` / `--muted` | `#6E5847` / `#7F6957` | `#C4B0A0` / `#9C8878` | teks kedua, label |
+| `--line` | `#EFDECB` | `#3A2C20` | garis dan tepi kartu |
+
+Tingkat kesulitan punya warnanya sendiri: Easy `#1F7A4C`, Medium `#8A6500`, Hard `#B4550A`, Expert `#B3261E`, Impossible `#6B4E9B` (versi lebih terang dipakai di tema gelap).
+
+Kontras diukur, bukan dikira: tema terang — teks utama 15,4:1, teks kedua 6,2:1, label 4,8:1, teks di tombol aksen 4,7:1, aksen di latar 4,6:1; tema gelap — teks utama 16,4:1, teks kedua 9,0:1, label 5,6:1, teks di tombol aksen 7,4:1.
 
 ## Kesulitan
 
-Songspot menentukan Easy–Impossible dari jumlah stream lagu. Angka itu tidak tersedia untuk bank lagu ini, jadi versi ini memakai ukuran yang benar-benar bisa dihitung dari data: **peringkat artis menurut jumlah lagunya di dalam bank**.
+Songspot menentukan Easy–Impossible dari jumlah stream. Angka itu tidak tersedia untuk bank lagu ini, jadi dipakai ukuran yang bisa dihitung dari data: **peringkat artis menurut jumlah lagunya di bank**, dibagi rata per kuantil (masing-masing sekitar 20% dari total). Dengan 917 lagu hasilnya: Easy 192, Medium 180, Hard 185, Expert 180, Impossible 180.
 
-Artis diurutkan dari yang paling banyak lagunya, lalu dibagi rata menjadi lima tingkat (masing-masing sekitar 20% dari total lagu). Dengan 917 lagu hasilnya: Easy 192, Medium 180, Hard 185, Expert 180, Impossible 180.
-
-Asumsinya: bank ini disusun dari lagu-lagu yang dikenal, jadi artis yang muncul berkali-kali lebih besar peluangnya dikenali. Ini proksi, bukan angka streaming, dan ditulis apa adanya supaya tidak terlihat seperti data yang dikarang.
+Ini proksi, bukan angka streaming, dan ditulis apa adanya.
 
 ## Panel kanan
 
-- **Bagian ramai / Dari awal lagu** — titik mulai potongan: bagian yang volumenya cukup, atau detik 0.
-- **Preview 30 detik** — bantuan: membuka semua tahap (tahap 5) lalu memutar preview penuh.
-- **Saran judul** — nyala: autocomplete judul (minimal 3 huruf, maksimal 4 baris, hanya cocok ke judul). Mati: tanpa saran, judul harus diketik lengkap. Ini juga menutup celah "lihat daftar lagu lewat pencarian".
-- **Tebak setelah** — durasi awal tiap lagu baru (0,1s sampai 15s).
+- **Bagian ramai / Dari awal lagu** — titik mulai potongan.
+- **Preview 30 detik** — bantuan: membuka semua tahap lalu memutar preview penuh.
+- **Saran judul** — nyala: autocomplete setelah 3 huruf, maksimal 4 baris, hanya cocok ke judul. Mati: tanpa saran, judul harus diketik lengkap.
+- **Tebak setelah** — durasi awal tiap lagu baru.
 - **Volume** — penguatan audio di mesin Web Audio.
-- **UI options** — suara efek, getar, kurangi gerak.
+- **UI options** — tema, suara efek, getar, kurangi gerak.
 
 ## Audio
 
 - Sumber: preview resmi 30 detik dari katalog iTunes / Apple Music (`itunes.apple.com/search`, negara ID). Tidak ada berkas audio di repo, jadi butuh internet.
-- Pemutaran memakai Web Audio API (`AudioBufferSourceNode.start(0, offset, durasi)`). Diukur di Chrome: 0,1 s → 0,104 s; 2 s → 2,009 s; 15 s → 15,008 s (selisih 4–9 ms).
-- Preview iTunes mengirim `Access-Control-Allow-Origin: *`, jadi bisa di-fetch dan di-decode langsung dari browser tanpa server sendiri.
-- Titik mulai diacak di rentang 3–13 detik lalu digeser ke bagian yang volumenya minimal 35% dari puncak preview (RMS jendela 0,1 detik), supaya potongan 0,1 detik tidak jatuh di bagian hening.
+- Pemutaran memakai Web Audio API (`AudioBufferSourceNode.start(0, offset, durasi)`). Diukur di Chrome: 0,1 s → 0,10 s; 15 s → 15,01 s.
+- Titik mulai diacak di 3–13 detik lalu digeser ke bagian yang volumenya minimal 35% dari puncak preview, supaya potongan 0,1 detik tidak jatuh di bagian hening.
 
-## Catatan data bank lagu
+## Data bank lagu
 
 - 917 lagu dari 162 artis: 1970-an 9, 1980-an 43, 1990-an 70, 2000-an 248, 2010-an 291, 2020-an 256; pop 556, rock 132, folk 123, dangdut 85, jazz 21.
 - Semua judul, artis, tahun, dan tautan preview diambil dari metadata iTunes Search API. Setiap tautan preview diperiksa: HTTP 200, tipe audio, ukuran di atas 50 KB.
-- Lagu live, karaoke, remix, instrumental, dan versi tribute dibuang saat pengambilan, dan tidak ada judul/artis yang dobel.
-- Tahun mengikuti metadata rilis iTunes, jadi beberapa lagu lama bisa tercatat pada tahun album kompilasinya. Filter era memakai angka itu apa adanya.
+- Lagu live, karaoke, remix, instrumental, dan tribute dibuang saat pengambilan; tidak ada judul/artis yang dobel.
+- Tahun mengikuti metadata rilis iTunes, jadi sebagian lagu lama tercatat pada tahun album kompilasinya.
 
-## Beruntun dan penyimpanan
+## Penyimpanan
 
-- `sepotong:v2:streak` menyimpan `{ current, best }`; `sepotong:v2:settings` menyimpan filter dan preferensi.
-- Beruntun naik untuk setiap lagu yang ditebak benar, dan kembali ke nol saat nyerah, salah di tahap terakhir, atau keluar.
-- Rekor tidak pernah turun. Nilai dari kunci versi lama (`sepotong:v1:streak`) dipakai sekali saat pembukaan pertama.
+- `sepotong:v2:level` menyimpan `{ current, best }`; `sepotong:v2:settings` menyimpan filter, tema, dan preferensi.
+- Level hanya bertambah saat jawaban benar; salah atau nyerah tidak menurunkannya. Rekor menyimpan level tertinggi.
 
 ## Isi repo
 
 | File | Fungsi |
 | --- | --- |
 | `index.html` | struktur tiga kolom dan empat sheet |
-| `style.css` | token warna krem + aksen merah-oranye, grid, trapesium, drawer |
-| `app.js` | mesin audio, pencarian judul, alur permainan, beruntun, panel |
-| `songs.js` | bank lagu (917 entri, 162 artis): judul, artis, tahun, genre, cover, preview |
+| `style.css` | token dua tema, grid, trapesium, drawer, layar hasil |
+| `app.js` | mesin audio, pencarian judul, level, panel, tema |
+| `songs.js` | bank lagu (917 entri): judul, artis, tahun, genre, cover, preview |
 | `og-image.png` | gambar 1200×630 untuk pratinjau tautan |

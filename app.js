@@ -55,15 +55,18 @@
 
   var settings = Object.assign({
     genre: 'semua', era: 'semua', tier: 'easy',
-    startStage: 0, startPoint: 'hook', suggest: true,
+    startStage: 0, startPoint: 'hook', suggest: true, navMode: 'genre', theme: 'auto',
     volume: 80, sound: true, haptic: true, reduceMotion: false
   }, store.get('settings', {}));
 
-  var streak = Object.assign({ current: 0, best: 0 }, store.get('streak', {}));
-  if (!store.get('streak', null)) {
+  var level = Object.assign({ current: 1, best: 1 }, store.get('level', {}));
+  if (!store.get('level', null)) {
     try {
-      var oldStreak = JSON.parse(localStorage.getItem('sepotong:v1:streak') || 'null');
-      if (oldStreak && typeof oldStreak.best === 'number') streak = Object.assign(streak, oldStreak);
+      var oldStreak = JSON.parse(localStorage.getItem('sepotong:v2:streak') || 'null');
+      if (oldStreak && typeof oldStreak.best === 'number') {
+        level.best = Math.max(1, oldStreak.best + 1);
+        level.current = level.best;
+      }
     } catch (e) {}
   }
 
@@ -443,15 +446,40 @@
     $('selEra').value = settings.era;
   }
 
+  function navItems() {
+    if (settings.navMode === 'era') {
+      var active = settings.era;
+      return [{ key: 'semua', label: 'Semua' }].concat(
+        DECADES.map(function (d) {
+          return { key: String(d[0]), label: eraLabel(d[0]) };
+        })
+      ).map(function (it) {
+        it.on = String(active) === it.key;
+        return it;
+      });
+    }
+    return [{ key: 'semua', label: 'Semua' }].concat(
+      GENRES.map(function (g) { return { key: g[0], label: g[0] }; })
+    ).map(function (it) {
+      it.on = settings.genre === it.key;
+      return it;
+    });
+  }
+
   function renderGenreNav() {
-    var items = [{ key: 'semua', label: 'Semua' }].concat(
-      GENRES.slice(0, 5).map(function (g) { return { key: g[0], label: g[0] }; })
-    );
-    $('genreNav').innerHTML = items.map(function (it) {
-      return '<button data-nav="' + esc(it.key) + '" aria-pressed="' + (settings.genre === it.key) + '">' +
-        esc(it.label) + '</button>';
-    }).join('') +
-      '<button class="navshuffle" id="btnShuffleGenre" aria-label="Acak genre">' +
+    var isEra = settings.navMode === 'era';
+    var items = navItems();
+    $('genreNav').innerHTML =
+      '<button class="navmode" id="btnNavMode" aria-label="Ganti antara genre dan tahun">' +
+        '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">' +
+        '<path d="M4 8h13M4 16h9"/><path d="M17 5l3 3-3 3"/></svg>' +
+        (isEra ? 'Tahun' : 'Genre') +
+      '</button>' +
+      items.map(function (it) {
+        return '<button data-nav="' + esc(it.key) + '" aria-pressed="' + (!!it.on) + '">' +
+          esc(it.label) + '</button>';
+      }).join('') +
+      '<button class="navshuffle" id="btnShuffleGenre" aria-label="Acak pilihan">' +
       '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
       '<path d="M16 3h5v5M4 20l6-6M21 3l-7 7M16 21h5v-5M4 4l5 5"/></svg></button>';
     updateNavScrollable();
@@ -528,6 +556,40 @@
     }).join('');
   }
 
+  /* ---------------- tema ---------------- */
+  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function resolvedTheme() {
+    if (settings.theme === 'light' || settings.theme === 'dark') return settings.theme;
+    return darkQuery.matches ? 'dark' : 'light';
+  }
+
+  function applyTheme() {
+    var t = resolvedTheme();
+    document.documentElement.dataset.theme = t;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#17100B' : '#FDF6EE');
+    var seg = $('themeSeg');
+    if (seg) {
+      seg.querySelectorAll('[data-theme-opt]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.themeOpt === settings.theme));
+      });
+    }
+  }
+
+  darkQuery.addEventListener('change', function () {
+    if (settings.theme === 'auto') applyTheme();
+  });
+
+  $('themeSeg').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-theme-opt]');
+    if (!b) return;
+    settings.theme = b.dataset.themeOpt;
+    saveSettings();
+    applyTheme();
+    toast('Tema: ' + (settings.theme === 'auto' ? 'ikut sistem' : settings.theme === 'dark' ? 'gelap' : 'terang'));
+  });
+
   function renderSettingsUI() {
     $('optHook').setAttribute('aria-pressed', String(settings.startPoint === 'hook'));
     $('optZero').setAttribute('aria-pressed', String(settings.startPoint === 'zero'));
@@ -552,19 +614,66 @@
     renderDiffList();
     bindFilterEvents();
     if (!state.pool.length) {
-      toast('Kombinasi ini kosong. Longgarkan genre, era, atau kesulitan.');
+      emptyPool();
+      return;
     }
     startSong();
   }
 
+  /* kombinasi filter tanpa lagu: jangan biarkan layar nyangkut */
+  function emptyPool() {
+    Engine.stopAll();
+    state.song = null;
+    state.rec = null;
+    state.solved = true;
+    state.loading = true;
+    state.tried = [];
+    state.triedNorm = [];
+    state.triedIds = [];
+    state.suggestions = [];
+    $('guess').value = '';
+    $('guess').disabled = true;
+    $('btnPlay').disabled = false;
+    $('suggest').hidden = true;
+    $('suggest').innerHTML = '';
+    $('tried').innerHTML = '';
+    $('hintLine').textContent = 'Tidak ada lagu untuk kombinasi ini';
+    $('btnPlay').dataset.state = 'empty';
+    $('btnPlay').setAttribute('aria-label', 'Tidak ada lagu');
+    $('btnPlay').disabled = true;
+    updateActionBtn();
+    toast('Kombinasi filter kosong. Longgarkan genre, era, atau kesulitan.');
+  }
+
   function bindFilterEvents() {
     $('genreNav').onclick = function (e) {
+      if (e.target.closest('#btnNavMode')) {
+        settings.navMode = settings.navMode === 'era' ? 'genre' : 'era';
+        saveSettings();
+        renderGenreNav();
+        bindFilterEvents();
+        return;
+      }
       var b = e.target.closest('[data-nav]');
-      if (b) { settings.genre = b.dataset.nav; saveSettings(); applyFilters(); return; }
+      if (b) {
+        if (settings.navMode === 'era') settings.era = b.dataset.nav;
+        else settings.genre = b.dataset.nav;
+        saveSettings();
+        applyFilters();
+        return;
+      }
       if (e.target.closest('#btnShuffleGenre')) {
-        var g = GENRES[Math.floor(Math.random() * GENRES.length)][0];
-        settings.genre = g; saveSettings(); applyFilters();
-        toast('Genre: ' + g);
+        if (settings.navMode === 'era') {
+          var d = DECADES[Math.floor(Math.random() * DECADES.length)][0];
+          settings.era = String(d);
+          saveSettings(); applyFilters();
+          toast('Era: ' + eraLabel(d));
+        } else {
+          var g = GENRES[Math.floor(Math.random() * GENRES.length)][0];
+          settings.genre = g;
+          saveSettings(); applyFilters();
+          toast('Genre: ' + g);
+        }
       }
     };
     $('tierPills').onclick = function (e) {
@@ -702,7 +811,7 @@
     $('hintLine').textContent = 'Menyiapkan klip…';
     setPlayState('loading');
     syncStageUI();
-    renderStreak();
+    renderLevel();
 
     var song = state.song;
     Engine.load(song).catch(function () { return Engine.load(song); })
@@ -891,23 +1000,22 @@
 
   function solveRound() {
     state.solved = true;
-    var seconds = Math.max(1, Math.round((performance.now() - state.startedAt) / 1000));
-    streak.current += 1;
-    if (streak.current > streak.best) streak.best = streak.current;
-    store.set('streak', streak);
-    renderStreak();
+    level.best = Math.max(level.best, level.current);
+    level.current = level.best + 1;
+    store.set('level', level);
+    renderLevel();
     beep('good');
     buzz(20);
     Engine.stopClip();
-    showReveal(true, seconds);
+    showReveal(true, 0);
   }
 
   function loseRound(reason) {
     if (state.solved) return;
     state.solved = true;
-    streak.current = 0;
-    store.set('streak', streak);
-    renderStreak();
+    level.best = Math.max(level.best, level.current);
+    store.set('level', level);
+    renderLevel();
     Engine.stopClip();
     showReveal(false, 0, reason);
   }
@@ -987,8 +1095,13 @@
 
   $('btnPlay').addEventListener('click', function () {
     if (state.loading) return;
+    if ($('btnPlay').dataset.state === 'playing') {
+      Engine.stopClip();
+      setPlayState('ready');
+      return;
+    }
     Engine.resume().then(function () {
-      if (state.solved) { toast('Lagu ini sudah selesai. Tekan Lagu berikutnya.'); return; }
+      if (state.solved) { toast('Lagu ini sudah selesai.'); return; }
       playStage();
     });
   });
@@ -1011,30 +1124,18 @@
   function stopFullPlayer() {
     if (fullPlayer) { try { fullPlayer.stop(); } catch (e) {} fullPlayer = null; }
     cancelAnimationFrame(fullRaf);
-    var b = $('btnReplay');
-    if (b) { b.setAttribute('aria-pressed', 'false'); b.textContent = 'Ulang Lah!'; }
   }
 
-  function mmss(sec) {
-    sec = Math.max(0, Math.round(sec));
-    return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
-  }
+  /* Ulang Lah! = ulangi level yang sama dengan lagu acak baru */
+  $('btnReplay').addEventListener('click', function () {
+    closeSheet();
+    startSong();
+  });
 
-  function toggleFull() {
-    if (fullPlayer) { stopFullPlayer(); return; }
-    if (!state.rec) return;
-    Engine.stopClip();
-    var btn = $('btnReplay');
-    fullPlayer = Engine.playFull(state.rec, function () { stopFullPlayer(); });
-    btn.setAttribute('aria-pressed', 'true');
-    btn.textContent = 'Jeda ya';
-  }
-  $('btnReplay').addEventListener('click', toggleFull);
-
-  function renderStreak() {
-    $('streakNow').textContent = streak.current;
-    $('bestNow').textContent = streak.best;
-    $('streakChip').classList.toggle('hot', streak.current >= 3);
+  function renderLevel() {
+    $('streakNow').textContent = level.current;
+    $('bestNow').textContent = level.best;
+    $('streakChip').classList.toggle('hot', level.current >= 3);
   }
 
   function showReveal(solved, seconds, reason) {
@@ -1051,26 +1152,26 @@
     if (img) img.addEventListener('error', function () { cover.innerHTML = '<span class="ph"></span>'; });
 
     var badge = $('revBadge');
-    badge.textContent = solved ? 'Anjay Bener' : 'Salah Lo!';
+    badge.textContent = solved ? 'Anjay Bener!' : 'Salah Lo!';
     badge.className = 'badge' + (solved ? ' good' : '');
 
     var apple = $('revApple');
     if (s.appleUrl) { apple.href = s.appleUrl; apple.hidden = false; } else { apple.hidden = true; }
 
+    var done = solved ? level.best : level.current;
     var v = $('revVerdict');
     v.className = 'verdict ' + (solved ? 'good' : 'neutral');
     if (solved) {
-      v.innerHTML = '<b>Beruntun ' + streak.current + '</b>' +
-        '<span>Tahap ' + (state.stage + 1) + ' · ' + secLabel(STAGES[state.stage]) +
-        ' · ' + seconds + ' detik' +
-        (streak.current === streak.best && streak.best > 1 ? ' · rekor baru' : '') + '</span>';
+      v.innerHTML = '<b>Level ' + done + ' lewat</b>' +
+        '<span>lanjut ke level ' + level.current + '</span>';
     } else {
-      var why = reason === 'giveup' ? 'Kamu nyerah' : reason === 'skip' ? 'Kamu lewati' : 'Tidak ketemu';
-      v.innerHTML = '<b>Beruntun terhenti</b>' +
-        '<span>' + why + ' · rekor kamu tetap ' + streak.best + '</span>';
+      var why = reason === 'giveup' ? 'kamu nyerah' : 'tidak ketemu';
+      v.innerHTML = '<b>Level ' + done + ' belum lewat</b>' +
+        '<span>' + why + ' · ulangi, lagunya bakal beda</span>';
     }
 
     $('btnReplay').hidden = !!solved;
+    $('btnNext').hidden = !solved;
     openSheet($('sheetReveal'));
   }
 
@@ -1125,7 +1226,8 @@
   applyFilters();
   renderStartGrid();
   renderSettingsUI();
-  renderStreak();
+  applyTheme();
+  renderLevel();
   Engine.setVolume(settings.volume);
   startSong(true);
 
@@ -1134,9 +1236,13 @@
     state: state,
     stages: STAGES,
     tiers: TIERS,
-    streak: function () { return { current: streak.current, best: streak.best }; },
+    level: function () { return { current: level.current, best: level.best }; },
+    streak: function () { return { current: level.current, best: level.best }; },
+    setLevel: function (c, b) {
+      level.current = c; level.best = b; store.set('level', level); renderLevel();
+    },
     setStreak: function (c, b) {
-      streak.current = c; streak.best = b; store.set('streak', streak); renderStreak();
+      level.current = c; level.best = b; store.set('level', level); renderLevel();
     },
     pool: function () { return state.pool; },
     answer: function () { return state.song; },
