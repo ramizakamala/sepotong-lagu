@@ -295,17 +295,48 @@ a { color: var(--accent); text-decoration: none; }
 .play[data-state="empty"] .ico-wait { display: none; }
 .play[data-state="playing"] { background: var(--accent-deep); color: var(--on-accent); box-shadow: 0 14px 30px -14px var(--shadow-accent); }
 @keyframes spin { to { transform: rotate(360deg); } }
-@keyframes beat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.045); }
+.play .disc {
+  position: absolute; inset: 0; border-radius: 50%;
+  opacity: 0; transition: opacity 220ms ease; pointer-events: none;
 }
-.play::after {
-  content: ""; position: absolute; inset: -9px; border-radius: 50%;
-  border: 1.5px dashed color-mix(in srgb, var(--accent) 55%, transparent);
-  opacity: 0; pointer-events: none; transition: opacity 200ms ease;
+.play[data-state="playing"] .disc {
+  opacity: 1;
+  /* kilau miring membuat putaran terlihat, alur saja simetris jadi tidak terbaca */
+  background:
+    conic-gradient(from 0deg at 50% 50%,
+      rgba(255, 255, 255, .22) 0deg,
+      rgba(255, 255, 255, 0) 42deg,
+      rgba(255, 255, 255, 0) 300deg,
+      rgba(255, 255, 255, .1) 360deg),
+    repeating-radial-gradient(circle at 50% 50%,
+      rgba(255, 255, 255, .05) 0 1.1px,
+      rgba(0, 0, 0, .42) 1.1px 3.2px),
+    radial-gradient(circle at 50% 50%,
+      #17100b 0 26%,
+      var(--accent) 27% 40%,
+      #1d140e 41% 100%);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .35);
+  animation: spin 3.2s linear infinite;
 }
-.play[data-state="playing"] { animation: beat 1.1s ease-in-out infinite; }
-.play[data-state="playing"]::after { opacity: .7; animation: spin 7s linear infinite; }
+.play[data-state="playing"] .disc::after {
+  content: ""; position: absolute; left: 50%; top: 11%;
+  width: 4px; height: 4px; margin-left: -2px; border-radius: 50%;
+  background: rgba(255, 255, 255, .6);
+}
+.play[data-state="playing"] { background: var(--accent-deep); }
+.play .hub {
+  position: relative; z-index: 2; display: grid; place-items: center;
+  width: 100%; height: 100%; border-radius: 50%;
+  transition: width 220ms ease, height 220ms ease, background-color 220ms ease;
+}
+.play[data-state="playing"] .hub {
+  width: 46%; height: 46%;
+  background: #FFF5EA;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-deep) 25%, transparent);
+}
+.play[data-state="playing"] .ico-pause {
+  width: 15px; height: 15px; color: var(--accent-deep);
+}
 .playsecs {
   font-size: 14px; font-weight: 700; color: var(--text);
   font-variant-numeric: tabular-nums;
