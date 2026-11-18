@@ -241,6 +241,13 @@ a { color: var(--accent); text-decoration: none; }
   background: var(--accent); border-radius: 999px;
   transition: width 200ms ease;
 }
+.track.playing .rail i { transition-timing-function: linear; }
+.track .rail i::after {
+  content: ""; float: right; width: 2px; height: 100%;
+  background: color-mix(in srgb, var(--on-accent) 85%, transparent);
+  opacity: 0; transition: opacity 160ms ease;
+}
+.track.playing .rail i::after { opacity: 1; }
 .track input[type="range"] {
   position: absolute; inset: 0; width: 100%; height: 26px;
   appearance: none; background: none; margin: 0; cursor: pointer;
@@ -264,6 +271,7 @@ a { color: var(--accent); text-decoration: none; }
   margin-top: 26px; display: flex; align-items: center; justify-content: center; gap: 16px;
 }
 .play {
+  position: relative;
   width: 104px; height: 104px; border-radius: 50%;
   background: var(--accent); color: var(--on-accent);
   display: grid; place-items: center;
@@ -287,6 +295,17 @@ a { color: var(--accent); text-decoration: none; }
 .play[data-state="empty"] .ico-wait { display: none; }
 .play[data-state="playing"] { background: var(--accent-deep); color: var(--on-accent); box-shadow: 0 14px 30px -14px var(--shadow-accent); }
 @keyframes spin { to { transform: rotate(360deg); } }
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.045); }
+}
+.play::after {
+  content: ""; position: absolute; inset: -9px; border-radius: 50%;
+  border: 1.5px dashed color-mix(in srgb, var(--accent) 55%, transparent);
+  opacity: 0; pointer-events: none; transition: opacity 200ms ease;
+}
+.play[data-state="playing"] { animation: beat 1.1s ease-in-out infinite; }
+.play[data-state="playing"]::after { opacity: .7; animation: spin 7s linear infinite; }
 .playsecs {
   font-size: 14px; font-weight: 700; color: var(--text);
   font-variant-numeric: tabular-nums;
