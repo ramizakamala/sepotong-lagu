@@ -650,7 +650,9 @@
 
   $('btnSkip').addEventListener('click', function () {
     if (state.loading || state.solved) return;
-    if (!advanceStage()) loseRound('giveup');
+    if (!advanceStage()) {
+      toast('Sudah di potongan terpanjang. Pakai Menyerah kalau mau berhenti.');
+    }
   });
 
   $('btnGiveUp').addEventListener('click', function () {
