@@ -2,7 +2,7 @@
 
 Game tebak lagu Indonesia dari potongan 0,1 detik. Pemain mendengar potongan pendek, mengetik judulnya, dan setiap tebakan yang salah membuka potongan yang sama lebih panjang: 0,1 → 0,5 → 2 → 8 → 15 detik.
 
-Satu level terdiri dari satu lagu acak. Benar berarti naik level; salah berarti level tetap di tempat dan lagunya diganti.
+Satu level terdiri dari satu lagu acak. Benar berarti naik level **dan** tingkat kesulitan ikut naik satu langkah (Easy -> Medium -> Hard -> Expert -> Impossible; di Impossible tetap Impossible, level terus bertambah). Salah berarti level tetap di tempat dan lagunya diganti.
 
 Tata letaknya mengikuti Songspot (songspot.net): tiga kolom dengan panel genre/era/kesulitan di kiri, area putar di tengah, dan panel pemutaran di kanan. Warnanya bukan tiruan Songspot: dipakai palet oranye hangat dengan dua tema, terang dan gelap.
 
@@ -44,7 +44,7 @@ Tombol di kiri baris navigasi mengganti isinya antara **Genre** dan **Tahun**; b
 | Salah sampai tahap terakhir | **Salah Lo!** — gaya sama, merah | **Ulang Lah!** | level tidak naik |
 | Benar | **Anjay Bener!** — garis luar hijau, latar transparan, miring | **Lanjut Bro!** — naik ke level berikutnya | level bertambah |
 
-Selama cuplikan berbunyi, isi slider berjalan dari awal tahap ke akhir tahap sesuai durasinya, dan tombol putar berdenyut pelan dengan cincin garis putus-putus yang berputar. Keduanya berhenti begitu cuplikan selesai atau dihentikan, dan dimatikan oleh opsi "kurangi gerak". 
+Selama cuplikan berbunyi, isi slider berjalan dari awal tahap ke akhir tahap sesuai durasinya, dan tombol putar berubah menjadi piringan hitam yang berputar dengan kilau miring serta titik penanda agar putarannya terlihat. Label kecil di tengah piringan tetap diam dan berisi ikon jeda; menekannya menghentikan cuplikan. Keduanya berhenti begitu cuplikan selesai atau dihentikan, dan putaran piringan dimatikan oleh opsi "kurangi gerak". 
 
 ## Tema dan warna
 

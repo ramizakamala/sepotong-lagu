@@ -108,6 +108,12 @@
     return map;
   })();
 
+  function nextTier(id) {
+    var i = TIERS.findIndex(function (t) { return t.id === id; });
+    if (i < 0) return TIERS[0].id;
+    return TIERS[Math.min(i + 1, TIERS.length - 1)].id;
+  }
+
   function tierOf(song) {
     return tierOfArtist.get(song.artist) || 'impossible';
   }
@@ -362,6 +368,7 @@
     triedIds: [],
     recent: [],
     startedAt: 0,
+    nextTier: null,
     suggestIndex: -1,
     suggestions: [],
     searchIndex: null,
@@ -1002,6 +1009,7 @@
     state.solved = true;
     level.best = Math.max(level.best, level.current);
     level.current = level.best + 1;
+    state.nextTier = nextTier(settings.tier);
     store.set('level', level);
     renderLevel();
     beep('good');
@@ -1209,6 +1217,15 @@
 
   $('btnNext').addEventListener('click', function () {
     closeSheet();
+    if (state.nextTier && state.nextTier !== settings.tier) {
+      settings.tier = state.nextTier;
+      saveSettings();
+      state.nextTier = null;
+      applyFilters();
+      toast('Level ' + level.current + ' · ' + settings.tier.charAt(0).toUpperCase() + settings.tier.slice(1));
+      return;
+    }
+    state.nextTier = null;
     startSong();
   });
 
