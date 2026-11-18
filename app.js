@@ -1206,7 +1206,7 @@
     var s = state.song;
     $('revTitle').textContent = s.title;
     $('revArtist').textContent = s.artist;
-    $('revLine2').textContent = (s.album ? s.album + ' (' + s.year + ')' : String(s.year)) + ' · ' + s.genre;
+    $('revLine2').textContent = s.album ? s.album + ' (' + s.year + ')' : String(s.year);
 
     var cover = $('revCover');
     cover.innerHTML = s.art ? '<img alt="" src="' + esc(s.art) + '" loading="lazy">' : '<span class="ph"></span>';
@@ -1223,6 +1223,16 @@
     $('btnReplay').hidden = !!solved;
     $('btnNext').hidden = !solved;
     showResultView();
+
+    if (solved) fireConfetti();
+
+    /* lagunya langsung diputar supaya hasilnya terasa hidup */
+    if (state.rec) {
+      Engine.resume().then(function () {
+        if (!state.rec) return;
+        Engine.playFull(state.rec);
+      }).catch(function () {});
+    }
   }
 
   $('btnNext').addEventListener('click', function () {
@@ -1238,6 +1248,78 @@
     state.nextTier = null;
     startSong();
   });
+
+  /* ---------------- confetti ---------------- */
+  var CONF_COLORS = ['#E2681F', '#F2A03D', '#1F7A4C', '#B3261E', '#6B4E9B', '#E9C75A', '#F07068'];
+  var confRaf = 0;
+  var confPieces = [];
+  var confCtx = null;
+
+  function fireConfetti() {
+    if (document.documentElement.classList.contains('reduce-motion')) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var canvas = $('confetti');
+    if (!canvas) return;
+    canvas.classList.add('on');
+    canvas.width = canvas.clientWidth * (window.devicePixelRatio || 1);
+    canvas.height = canvas.clientHeight * (window.devicePixelRatio || 1);
+    confCtx = canvas.getContext('2d');
+    confCtx.setTransform(window.devicePixelRatio || 1, 0, 0, window.devicePixelRatio || 1, 0, 0);
+
+    var w = canvas.clientWidth;
+    var h = canvas.clientHeight;
+    confPieces = [];
+    var n = 90;
+    for (var i = 0; i < n; i++) {
+      var dariKiri = Math.random() < 0.5;
+      confPieces.push({
+        x: w * (0.35 + Math.random() * 0.3),
+        y: h * 0.06,
+        vx: (dariKiri ? -1 : 1) * (60 + Math.random() * 210),
+        vy: 40 + Math.random() * 120,
+        w: 5 + Math.random() * 5,
+        h: 8 + Math.random() * 8,
+        rot: Math.random() * Math.PI,
+        vr: (Math.random() - 0.5) * 9,
+        color: CONF_COLORS[Math.floor(Math.random() * CONF_COLORS.length)],
+        life: 0
+      });
+    }
+    var last = performance.now();
+    var t0 = last;
+
+    function frame(now) {
+      var dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      confCtx.clearRect(0, 0, w, h);
+      var alive = 0;
+      for (var i = 0; i < confPieces.length; i++) {
+        var p = confPieces[i];
+        p.life += dt;
+        p.vy += 620 * dt;
+        p.vx *= 0.99;
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+        p.rot += p.vr * dt;
+        if (p.y < h + 40) alive++;
+        confCtx.save();
+        confCtx.translate(p.x, p.y);
+        confCtx.rotate(p.rot);
+        confCtx.globalAlpha = Math.max(0, 1 - Math.max(0, p.life - 2.2) / 0.8);
+        confCtx.fillStyle = p.color;
+        confCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        confCtx.restore();
+      }
+      if (alive > 0 && now - t0 < 4200) {
+        confRaf = requestAnimationFrame(frame);
+      } else {
+        confCtx.clearRect(0, 0, w, h);
+        canvas.classList.remove('on');
+      }
+    }
+    cancelAnimationFrame(confRaf);
+    confRaf = requestAnimationFrame(frame);
+  }
 
   /* ---------------- bagikan hasil ---------------- */
   function shareText(solved) {
