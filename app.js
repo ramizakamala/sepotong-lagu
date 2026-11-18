@@ -451,7 +451,7 @@
       return '<button data-nav="' + esc(it.key) + '" aria-pressed="' + (settings.genre === it.key) + '">' +
         esc(it.label) + '</button>';
     }).join('') +
-      '<button class="switch" id="btnShuffleGenre" aria-label="Acak genre">' +
+      '<button class="navshuffle" id="btnShuffleGenre" aria-label="Acak genre">' +
       '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
       '<path d="M16 3h5v5M4 20l6-6M21 3l-7 7M16 21h5v-5M4 4l5 5"/></svg></button>';
     updateNavScrollable();
@@ -516,7 +516,7 @@
   function renderDiffList() {
     $('diffList').innerHTML = TIERS.map(function (t) {
       return '<button class="diff-row" data-diff="' + t.id + '" aria-pressed="' +
-        (settings.tier === t.id) + '">' + t.label +
+        (settings.tier === t.id) + '" style="--tier:var(--' + t.id + ')">' + t.label +
         '<span class="swatch" style="background:var(--' + t.id + ')"></span></button>';
     }).join('');
   }

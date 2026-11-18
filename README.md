@@ -2,7 +2,21 @@
 
 Game tebak lagu Indonesia dengan potongan 0,1 detik. Pemain mendengar potongan pendek, mengetik judulnya, dan setiap tebakan yang salah membuka potongan yang sama lebih panjang: 0,1 → 0,5 → 2 → 8 → 15 detik. Skornya bukan poin, tapi **beruntun** (jumlah lagu yang ditebak benar tanpa terputus) dan waktu tebak.
 
-Tampilan mengikuti tata letak Songspot (songspot.net): tiga kolom dengan panel genre/era/kesulitan di kiri, area putar di tengah, dan panel pemutaran di kanan. Isinya khusus lagu Indonesia.
+Tata letaknya mengikuti Songspot (songspot.net): tiga kolom dengan panel genre/era/kesulitan di kiri, area putar di tengah, dan panel pemutaran di kanan. Warnanya bukan tiruan Songspot — dipakai palet sendiri: latar krem hangat `#FBF7F0` dengan aksen merah-oranye `#CF3218`, teks cokelat tua `#221A14`. Isinya khusus lagu Indonesia.
+
+### Warna
+
+| Token | Nilai | Dipakai untuk |
+| --- | --- | --- |
+| `--bg` | `#FBF7F0` | latar halaman dan panel samping |
+| `--center` | `#F5EEE2` | bidang trapesium area putar |
+| `--surface` | `#FFFFFF` | kartu, kolom tebakan, daftar saran |
+| `--accent` | `#CF3218` | tombol putar, tombol utama, penanda aktif |
+| `--accent-soft` | `#F7DFD6` | latar pilihan aktif |
+| `--text` / `--text-2` / `--muted` | `#221A14` / `#6B5E52` / `#7C6E60` | teks utama, kedua, label |
+| `--line` | `#E6DBCB` | garis pemisah dan tepi kartu |
+
+Tingkat kesulitan punya warnanya sendiri: Easy `#1F7A4C`, Medium `#946A00`, Hard `#B4550A`, Expert `#B3261E`, Impossible `#6B4E9B`. Kontras teks sudah diperiksa: teks utama 16,0:1, teks kedua 5,9:1, label 4,6:1, teks putih di tombol aksen 4,8:1, di badge merah 6,2:1, di badge hijau 5,0:1.
 
 ## Cara jalanin
 
@@ -85,7 +99,7 @@ Asumsinya: bank ini disusun dari lagu-lagu yang dikenal, jadi artis yang muncul 
 | File | Fungsi |
 | --- | --- |
 | `index.html` | struktur tiga kolom dan empat sheet |
-| `style.css` | token warna gelap + aksen hijau, grid, trapesium, drawer |
+| `style.css` | token warna krem + aksen merah-oranye, grid, trapesium, drawer |
 | `app.js` | mesin audio, pencarian judul, alur permainan, beruntun, panel |
 | `songs.js` | bank lagu (917 entri, 162 artis): judul, artis, tahun, genre, cover, preview |
 | `og-image.png` | gambar 1200×630 untuk pratinjau tautan |
