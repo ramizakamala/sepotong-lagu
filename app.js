@@ -1186,6 +1186,11 @@
     if (r) r.hidden = true;
     var pv = $('playView');
     if (pv) pv.hidden = false;
+    /* baris genre dan pil level kembali tampil */
+    var nav = $('genreNav');
+    if (nav) nav.hidden = false;
+    var pills = $('tierPills');
+    if (pills) pills.hidden = false;
   }
 
   function showResultView() {
@@ -1193,6 +1198,11 @@
     if (pv) pv.hidden = true;
     var r = $('resultView');
     if (r) r.hidden = false;
+    /* saat hasil tampil, baris genre dan pil level disembunyikan */
+    var nav = $('genreNav');
+    if (nav) nav.hidden = true;
+    var pills = $('tierPills');
+    if (pills) pills.hidden = true;
   }
 
   function renderLevel() {

@@ -689,14 +689,26 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
 }
 .result-actions .btn-replay,
 .result-actions .btn-next {
-  width: auto; min-width: 150px; max-width: 210px; height: 38px;
-  padding: 0 18px; font-size: 12.5px; border-radius: 10px;
+  width: auto; min-width: 148px; max-width: 200px; height: 38px;
+  padding: 0 18px; font-size: 12.5px; font-weight: 700; letter-spacing: .01em;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  box-shadow: none;
+  font-style: normal;
+  transform: none;
+}
+.result-actions .btn-replay:hover,
+.result-actions .btn-next:hover {
+  background: color-mix(in srgb, var(--accent) 11%, transparent);
 }
 .share-btn {
   width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
-  background: var(--surface); border: 1px solid var(--line); color: var(--text-2);
+  background: transparent; border: 1px solid var(--line); color: var(--text-2);
   transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
 }
+.share-btn:hover { background: var(--surface-2); }
 .share-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--surface-2); }
 @media (max-width: 900px) {
   .resultview .cover.big { width: 128px; height: 128px; }
