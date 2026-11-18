@@ -21,7 +21,7 @@ lalu buka http://127.0.0.1:8000
 | Bagian | Isi |
 | --- | --- |
 | Sidebar kiri (260px) | menu, dropdown genre, dropdown era, lima tingkat kesulitan, reroll lagu |
-| Area tengah | logo, navigasi genre cepat, pil kesulitan, slider panjang potongan, tombol putar 140px, kolom tebakan + tombol aksi, tiga kartu bantuan |
+| Area tengah | logo, navigasi genre cepat (bisa digeser kiri-kanan: drag mouse, usap jari, atau scroll), pil kesulitan, slider panjang potongan, tombol putar 140px, kolom tebakan + tombol aksi, tiga kartu bantuan |
 | Sidebar kanan (370px) | mode pemutaran, easy search, "tebak setelah" (durasi awal), volume, UI options |
 
 Area tengah memakai `clip-path` untuk siluet trapesium seperti referensi. Di layar di bawah 900px kedua sidebar berubah menjadi drawer yang dibuka dari bar atas, dan konten tengah mengalir normal tanpa gulir mendatar.
@@ -32,7 +32,16 @@ Area tengah memakai `clip-path` untuk siluet trapesium seperti referensi. Di lay
 2. Pemain mengetik judul. Saran muncul setelah 3 huruf, maksimal 4 baris, dan **hanya dicocokkan ke judul** — mengetik nama artis tidak memunculkan daftar lagunya. Memilih saran hanya mengisi kolom; tebakan dikirim lewat tombol Tebak atau Enter. Saran bisa dimatikan di panel kanan untuk mode ketik penuh.
 3. Tebakan salah: potongan dibuka ke tahap berikutnya dari titik yang sama dan diputar otomatis. Judul yang sudah ditebak hilang dari saran.
 4. Saat kolom kosong, tombol aksi berubah menjadi **Lewati ke …** dan hanya membuka potongan berikutnya. Di tahap 15 detik tombolnya menjadi **Nyerah**.
-5. Jawaban benar: beruntun bertambah, waktu tebak tercatat, layar jawaban muncul dengan cover, judul, artis, tahun, genre, pemutar 30 detik, dan tautan Apple Music bila ada.
+5. Jawaban benar: beruntun bertambah dan layar jawaban muncul. Layarnya vertikal dan rata tengah: cover album, judul, artis, album (tahun) · genre, badge hasil, ringkasan beruntun, lalu tombol.
+
+### Layar jawaban
+
+| Keadaan | Badge | Tombol |
+| --- | --- | --- |
+| Salah, nyerah, atau tidak ketemu | **Salah Lo!** (merah) | **Ulang Lah!** (ungu–merah, memutar preview 30 detik) dan **Lanjut bro!** |
+| Benar | **Anjay Bener** (hijau) | **Lanjut bro!** saja |
+
+Tautan "Buka di Apple Music" hanya muncul kalau lagunya punya URL Apple Music.
 
 ## Kesulitan
 

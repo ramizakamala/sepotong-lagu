@@ -454,7 +454,57 @@
       '<button class="switch" id="btnShuffleGenre" aria-label="Acak genre">' +
       '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
       '<path d="M16 3h5v5M4 20l6-6M21 3l-7 7M16 21h5v-5M4 4l5 5"/></svg></button>';
+    updateNavScrollable();
   }
+
+  function updateNavScrollable() {
+    var nav = $('genreNav');
+    if (!nav) return;
+    nav.classList.toggle('scrollable', nav.scrollWidth - nav.clientWidth > 4);
+  }
+
+  /* geser baris genre: drag dengan mouse, usap dengan jari, wheel vertikal jadi horizontal */
+  (function () {
+    var nav = $('genreNav');
+    var drag = null;
+    var suppress = false;
+
+    nav.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0 || nav.scrollWidth <= nav.clientWidth) return;
+      drag = { x: e.clientX, left: nav.scrollLeft, moved: false };
+      nav.classList.add('dragging');
+    });
+    nav.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.x;
+      if (Math.abs(dx) > 4) drag.moved = true;
+      nav.scrollLeft = drag.left - dx;
+    });
+    function endDrag() {
+      if (!drag) return;
+      if (drag.moved) {
+        suppress = true;
+        setTimeout(function () { suppress = false; }, 0);
+      }
+      drag = null;
+      nav.classList.remove('dragging');
+    }
+    nav.addEventListener('pointerup', endDrag);
+    nav.addEventListener('pointercancel', endDrag);
+    nav.addEventListener('pointerleave', endDrag);
+    nav.addEventListener('click', function (e) {
+      if (suppress) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+    nav.addEventListener('wheel', function (e) {
+      if (nav.scrollWidth <= nav.clientWidth) return;
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        nav.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    window.addEventListener('resize', updateNavScrollable);
+  })();
 
   function renderPills() {
     $('tierPills').innerHTML = TIERS.map(function (t) {
@@ -961,13 +1011,8 @@
   function stopFullPlayer() {
     if (fullPlayer) { try { fullPlayer.stop(); } catch (e) {} fullPlayer = null; }
     cancelAnimationFrame(fullRaf);
-    var b = $('btnFull');
-    if (b) {
-      b.setAttribute('aria-pressed', 'false');
-      $('fullLabel').textContent = 'Dengerin 30 detik';
-      $('progFill').style.width = '0%';
-      $('progTime').textContent = '0:00';
-    }
+    var b = $('btnReplay');
+    if (b) { b.setAttribute('aria-pressed', 'false'); b.textContent = 'Ulang Lah!'; }
   }
 
   function mmss(sec) {
@@ -979,21 +1024,12 @@
     if (fullPlayer) { stopFullPlayer(); return; }
     if (!state.rec) return;
     Engine.stopClip();
-    var btn = $('btnFull');
+    var btn = $('btnReplay');
     fullPlayer = Engine.playFull(state.rec, function () { stopFullPlayer(); });
     btn.setAttribute('aria-pressed', 'true');
-    $('fullLabel').textContent = 'Jeda';
-    var tick = function () {
-      if (!fullPlayer) return;
-      var d = fullPlayer.duration || 30;
-      var p = fullPlayer.position();
-      $('progFill').style.width = Math.min(100, (p / d) * 100) + '%';
-      $('progTime').textContent = mmss(p);
-      fullRaf = requestAnimationFrame(tick);
-    };
-    tick();
+    btn.textContent = 'Jeda ya';
   }
-  $('btnFull').addEventListener('click', toggleFull);
+  $('btnReplay').addEventListener('click', toggleFull);
 
   function renderStreak() {
     $('streakNow').textContent = streak.current;
@@ -1005,15 +1041,18 @@
     Engine.stopClip();
     stopFullPlayer();
     var s = state.song;
-    $('revEyebrow').textContent = solved ? 'Kena' : 'Itu tadi';
     $('revTitle').textContent = s.title;
     $('revArtist').textContent = s.artist;
-    $('revLine2').textContent = s.year + ' · ' + s.genre;
+    $('revLine2').textContent = (s.album ? s.album + ' (' + s.year + ')' : String(s.year)) + ' · ' + s.genre;
 
     var cover = $('revCover');
     cover.innerHTML = s.art ? '<img alt="" src="' + esc(s.art) + '" loading="lazy">' : '<span class="ph"></span>';
     var img = cover.querySelector('img');
     if (img) img.addEventListener('error', function () { cover.innerHTML = '<span class="ph"></span>'; });
+
+    var badge = $('revBadge');
+    badge.textContent = solved ? 'Anjay Bener' : 'Salah Lo!';
+    badge.className = 'badge' + (solved ? ' good' : '');
 
     var apple = $('revApple');
     if (s.appleUrl) { apple.href = s.appleUrl; apple.hidden = false; } else { apple.hidden = true; }
@@ -1030,6 +1069,8 @@
       v.innerHTML = '<b>Beruntun terhenti</b>' +
         '<span>' + why + ' · rekor kamu tetap ' + streak.best + '</span>';
     }
+
+    $('btnReplay').hidden = !!solved;
     openSheet($('sheetReveal'));
   }
 
