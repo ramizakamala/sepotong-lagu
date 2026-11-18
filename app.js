@@ -16,7 +16,8 @@
   ];
   var GENRE_LABEL = {
     pop: 'Pop', rock: 'Rock', folk: 'Folk', dangdut: 'Dangdut', jazz: 'Jazz',
-    indie: 'Indie', religi: 'Religi', keroncong: 'Keroncong', campursari: 'Campursari'
+    indie: 'Indie', religi: 'Religi', keroncong: 'Keroncong', campursari: 'Campursari',
+    'gen z': 'Gen Z'
   };
 
   /* ---------------- util ---------------- */

@@ -74,6 +74,8 @@ Songspot menentukan Easy–Impossible dari jumlah stream. Angka itu tidak tersed
 
 Ini proksi, bukan angka streaming, dan ditulis apa adanya.
 
+Genre yang tersedia: pop, rock, folk, dangdut, **gen z**, jazz. Daftar genre diturunkan dari isi bank, jadi genre baru otomatis muncul di dropdown dan baris navigasi. Satu lagu hanya punya satu genre: ketika daftar Gen Z (39 lagu) ditambahkan, 22 lagu yang sudah ada di bank dipindahkan dari pop, rock, dan folk ke Gen Z, dan 17 lagu baru diambil dari katalog dengan preview yang diperiksa satu per satu.
+
 ## Panel kanan
 
 - **Bagian ramai / Dari awal lagu** — titik mulai potongan.
@@ -91,7 +93,7 @@ Ini proksi, bukan angka streaming, dan ditulis apa adanya.
 
 ## Data bank lagu
 
-- 917 lagu dari 162 artis: 1970-an 9, 1980-an 43, 1990-an 70, 2000-an 248, 2010-an 291, 2020-an 256; pop 556, rock 132, folk 123, dangdut 85, jazz 21.
+- 934 lagu dari 174 artis: 1970-an 9, 1980-an 43, 1990-an 70, 2000-an 248, 2010-an 291, 2020-an 273; pop 542, rock 129, folk 118, dangdut 85, gen z 39, jazz 21.
 - Semua judul, artis, tahun, dan tautan preview diambil dari metadata iTunes Search API. Setiap tautan preview diperiksa: HTTP 200, tipe audio, ukuran di atas 50 KB.
 - Lagu live, karaoke, remix, instrumental, dan tribute dibuang saat pengambilan; tidak ada judul/artis yang dobel.
 - Tahun mengikuti metadata rilis iTunes, jadi sebagian lagu lama tercatat pada tahun album kompilasinya.
@@ -108,5 +110,5 @@ Ini proksi, bukan angka streaming, dan ditulis apa adanya.
 | `index.html` | struktur tiga kolom dan empat sheet |
 | `style.css` | token dua tema, grid, trapesium, drawer, layar hasil |
 | `app.js` | mesin audio, pencarian judul, level, panel, tema |
-| `songs.js` | bank lagu (917 entri): judul, artis, tahun, genre, cover, preview |
+| `songs.js` | bank lagu (934 entri): judul, artis, tahun, genre, cover, preview |
 | `og-image.png` | gambar 1200×630 untuk pratinjau tautan |
