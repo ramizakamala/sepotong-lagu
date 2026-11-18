@@ -581,6 +581,17 @@
     }
   }
 
+  function advanceStage() {
+    if (state.stage >= STAGES.length - 1) return false;
+    state.stage++;
+    renderStages();
+    $('guessHint').textContent = 'Potongan dibuka jadi ' + secLabel(STAGES[state.stage]) + '.';
+    setTimeout(function () {
+      if (!state.solved) playStage();
+    }, 300);
+    return true;
+  }
+
   function wrongGuess(label) {
     renderTried();
     $('guess').value = '';
@@ -593,12 +604,7 @@
       loseRound('gb');
       return;
     }
-    state.stage++;
-    renderStages();
-    $('guessHint').textContent = 'Belum tepat. Potongan dibuka jadi ' + secLabel(STAGES[state.stage]) + '.';
-    setTimeout(function () {
-      if (!state.solved) playStage();
-    }, 350);
+    advanceStage();
   }
 
   function renderTried() {
@@ -634,7 +640,7 @@
 
   $('btnSkip').addEventListener('click', function () {
     if (state.loading || state.solved) return;
-    loseRound('skip');
+    if (!advanceStage()) loseRound('giveup');
   });
 
   $('btnGiveUp').addEventListener('click', function () {
@@ -659,6 +665,10 @@
     $('tlKnob').style.left = 'calc(' + pct + '% - ' + (pct / 100 * 10) + 'px)';
     $('playSecs').textContent = secLabel(STAGES[state.stage]);
     $('stageLabel').textContent = 'Tahap ' + (state.stage + 1) + ' dari ' + STAGES.length;
+    var last = state.stage >= STAGES.length - 1;
+    var skip = $('btnSkip');
+    skip.hidden = last;
+    if (!last) skip.textContent = 'Lewati ke ' + secLabel(STAGES[state.stage + 1]);
     $('btnGiveUp').hidden = false;
   }
 
