@@ -544,3 +544,5 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
     transition-duration: .001ms !important;
   }
 }
+
+.hintline { font-size: 10.5px; line-height: 1.45; color: var(--muted); margin: 0 2px; }

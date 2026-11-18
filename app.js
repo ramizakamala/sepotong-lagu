@@ -55,7 +55,7 @@
 
   var settings = Object.assign({
     genre: 'semua', era: 'semua', tier: 'easy',
-    startStage: 0, startPoint: 'hook', easySearch: false,
+    startStage: 0, startPoint: 'hook', suggest: true,
     volume: 80, sound: true, haptic: true, reduceMotion: false
   }, store.get('settings', {}));
 
@@ -87,20 +87,26 @@
     return s.title && s.artist && s.year >= 1900 && s.previewUrl;
   });
 
-  /* kesulitan: banyaknya lagu artis itu di bank (proxy keterkenalan) */
-  var artistCount = (function () {
-    var m = new Map();
-    SONGS.forEach(function (s) { m.set(s.artist, (m.get(s.artist) || 0) + 1); });
-    return m;
+  /* kesulitan: peringkat artis menurut jumlah lagunya di bank, dibagi rata
+     per kuantil supaya tiap tingkat terisi berapa pun ukuran banknya */
+  var tierOfArtist = (function () {
+    var counts = new Map();
+    SONGS.forEach(function (s) { counts.set(s.artist, (counts.get(s.artist) || 0) + 1); });
+    var ranked = Array.from(counts.entries())
+      .sort(function (a, b) { return b[1] - a[1] || a[0].localeCompare(b[0]); });
+    var target = SONGS.length / TIERS.length;
+    var acc = 0;
+    var map = new Map();
+    ranked.forEach(function (row) {
+      var idx = Math.min(TIERS.length - 1, Math.floor(acc / target));
+      map.set(row[0], TIERS[idx].id);
+      acc += row[1];
+    });
+    return map;
   })();
 
   function tierOf(song) {
-    var n = artistCount.get(song.artist) || 1;
-    if (n >= 5) return 'easy';
-    if (n === 4) return 'medium';
-    if (n === 3) return 'hard';
-    if (n === 2) return 'expert';
-    return 'impossible';
+    return tierOfArtist.get(song.artist) || 'impossible';
   }
   SONGS.forEach(function (s) { s.tier = tierOf(s); });
 
@@ -475,10 +481,11 @@
   function renderSettingsUI() {
     $('optHook').setAttribute('aria-pressed', String(settings.startPoint === 'hook'));
     $('optZero').setAttribute('aria-pressed', String(settings.startPoint === 'zero'));
-    $('optEasy').setAttribute('aria-pressed', String(!!settings.easySearch));
+    $('optEasy').setAttribute('aria-pressed', String(!!settings.suggest));
     $('optSound').setAttribute('aria-pressed', String(!!settings.sound));
     $('optHaptic').setAttribute('aria-pressed', String(!!settings.haptic));
     $('optMotion').setAttribute('aria-pressed', String(!!settings.reduceMotion));
+    $('guess').placeholder = settings.suggest ? 'Sebutkan judul lagunya' : 'Ketik judul lengkap';
     $('volRange').value = String(settings.volume);
     $('volFill').style.width = settings.volume + '%';
     $('volPct').textContent = settings.volume + '%';
@@ -566,10 +573,13 @@
     });
   });
   $('optEasy').addEventListener('click', function () {
-    settings.easySearch = !settings.easySearch;
+    settings.suggest = !settings.suggest;
     saveSettings();
     renderSettingsUI();
-    toast(settings.easySearch ? 'Easy search nyala: ketikan sebagian diterima.' : 'Easy search mati: pilih dari saran.');
+    $('suggest').hidden = true;
+    toast(settings.suggest
+      ? 'Saran judul nyala: ketik minimal 3 huruf.'
+      : 'Saran judul mati: judul harus diketik lengkap.');
   });
   $('optSound').addEventListener('click', function () {
     settings.sound = !settings.sound; saveSettings(); renderSettingsUI();
@@ -672,17 +682,16 @@
   /* ---------------- pencarian judul ---------------- */
   function findSuggestions(q) {
     var nq = norm(q);
-    if (nq.length < 2 || !state.searchIndex) return [];
+    if (!settings.suggest) return [];
+    if (nq.length < 3 || !state.searchIndex) return [];
     var out = [];
     state.searchIndex.forEach(function (it) {
       if (state.triedIds.indexOf(it.song.id) !== -1) return;
       if (state.triedNorm.indexOf(it.t) !== -1) return;
+      /* hanya dicocokkan ke judul: mengetik nama artis tidak memunculkan daftar lagunya */
       var score = 0;
-      if (it.t.indexOf(nq) === 0) score = 4;
-      else if (it.t.indexOf(nq) > 0) score = 3;
-      else if (it.a.indexOf(nq) === 0) score = 2;
-      else if (it.a.indexOf(nq) > 0) score = 1;
-      else if (it.ta.indexOf(nq) > 0) score = 1;
+      if (it.t.indexOf(nq) === 0) score = 3;
+      else if (it.t.indexOf(nq) > 0) score = 2;
       if (score) out.push({ song: it.song, score: score });
     });
     out.sort(function (a, b) { return b.score - a.score; });
@@ -692,7 +701,7 @@
       if (seen[k]) return false;
       seen[k] = 1;
       return true;
-    }).slice(0, 6).map(function (o) { return o.song; });
+    }).slice(0, 4).map(function (o) { return o.song; });
   }
 
   function renderSuggestions() {
@@ -773,7 +782,7 @@
         if (state.searchIndex[i].t === n) { hit = state.searchIndex[i].song; break; }
       }
     }
-    if (!hit && settings.easySearch) {
+    if (!hit && settings.suggest) {
       var partial = findSuggestions(raw);
       if (partial.length) hit = partial[0];
     }

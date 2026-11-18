@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261119c">
+<link rel="stylesheet" href="style.css?v=20261119d">
 </head>
 <body>
 
@@ -147,7 +147,8 @@
 
     <section class="section">
       <span class="label">Pencarian</span>
-      <button class="opt-row" id="optEasy" aria-pressed="false">Easy search<span class="switch"></span></button>
+      <button class="opt-row" id="optEasy" aria-pressed="true">Saran judul<span class="switch"></span></button>
+      <p class="hintline" id="suggestHint">Ketik minimal 3 huruf. Saran hanya mencocokkan judul, bukan nama artis. Matikan untuk mode ketik penuh.</p>
     </section>
 
     <div class="divider"></div>
@@ -223,7 +224,7 @@
     </div>
     <ol>
       <li>Ketuk tombol putar. Kamu dengar potongan 0,1 detik.</li>
-      <li>Ketik judulnya, pilih dari saran (kolom terisi), lalu tekan <b>Tebak</b>. Enter juga bisa.</li>
+      <li>Ketik judulnya (minimal 3 huruf), pilih dari saran yang hanya mencocokkan judul, lalu tekan <b>Tebak</b>. Enter juga bisa. Saran bisa dimatikan di panel kanan.</li>
       <li>Salah tebak? Potongan yang sama dibuka lebih panjang. Judul yang sudah ditebak tidak muncul lagi.</li>
       <li>Kolom kosong membuat tombol yang sama menjadi <b>Lewati</b>; di 15 detik tombolnya menjadi <b>Nyerah</b>.</li>
       <li>Beruntun dihitung dari lagu yang kamu tebak benar tanpa terputus.</li>
@@ -271,7 +272,7 @@
 
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script src="songs.js?v=20261119c"></script>
-<script src="app.js?v=20261119c"></script>
+<script src="songs.js?v=20261119d"></script>
+<script src="app.js?v=20261119d"></script>
 </body>
 </html>
