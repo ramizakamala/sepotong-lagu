@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261119v">
+<link rel="stylesheet" href="style.css?v=20261119x">
 </head>
 <body>
 
@@ -83,6 +83,7 @@
 
       <div class="pills" id="tierPills" role="group" aria-label="Kesulitan"></div>
 
+      <div id="playView">
       <div class="track" id="trackWrap">
         <div class="rail"><i id="railFill"></i></div>
         <input type="range" id="stageRange" min="0" max="4" step="1" value="0" aria-label="Panjang potongan">
@@ -121,6 +122,26 @@
       </div>
 
       <ul class="tried" id="tried"></ul>
+      </div>
+
+      <section class="resultview" id="resultView" hidden aria-live="polite">
+        <figure class="cover big" id="revCover"></figure>
+        <p class="rev-title" id="revTitle"></p>
+        <p class="rev-artist" id="revArtist"></p>
+        <p class="rev-album" id="revLine2"></p>
+        <p class="badge" id="revBadge">Salah Lo!</p>
+        <a id="revApple" href="#" target="_blank" rel="noopener" hidden>Buka di Apple Music</a>
+        <div class="result-actions">
+          <button class="share-btn" id="btnShare" aria-label="Bagikan hasil" title="Bagikan hasil">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/>
+            </svg>
+          </button>
+          <button class="btn-replay" id="btnReplay">Ulang Lah!</button>
+          <button class="btn-next" id="btnNext">Lanjut Bro!</button>
+        </div>
+      </section>
 
       <div class="discover">
         <span class="label">Lebih banyak</span>
@@ -201,20 +222,6 @@
 <!-- ======================= SHEET: JAWABAN ======================= -->
 <div class="backdrop" id="backdrop" hidden></div>
 
-<div class="sheet" id="sheetReveal" hidden role="dialog" aria-modal="true" aria-labelledby="revTitle">
-  <div class="panel reveal">
-    <figure class="cover big" id="revCover"></figure>
-    <p class="rev-title" id="revTitle"></p>
-    <p class="rev-artist" id="revArtist"></p>
-    <p class="rev-album" id="revLine2"></p>
-    <p class="badge" id="revBadge" aria-live="polite">Salah Lo!</p>
-    <p class="verdict" id="revVerdict"></p>
-    <a id="revApple" href="#" target="_blank" rel="noopener" hidden>Buka di Apple Music</a>
-    <button class="btn-replay" id="btnReplay">Ulang Lah!</button>
-    <button class="btn-next" id="btnNext">Lanjut Bro!</button>
-  </div>
-</div>
-
 <!-- ======================= SHEET: CARA MAIN ======================= -->
 <div class="sheet" id="sheetHowTo" hidden role="dialog" aria-modal="true" aria-labelledby="howToTitle">
   <div class="panel">
@@ -274,7 +281,7 @@
 
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script src="songs.js?v=20261119v"></script>
-<script src="app.js?v=20261119v"></script>
+<script src="songs.js?v=20261119x"></script>
+<script src="app.js?v=20261119x"></script>
 </body>
 </html>

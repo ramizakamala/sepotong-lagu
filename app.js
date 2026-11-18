@@ -807,6 +807,7 @@
     state.triedIds = [];
     state.loading = true;
     state.solved = false;
+    showPlayView();
     state.rec = null;
     state.suggestIndex = -1;
     state.suggestions = [];
@@ -1175,9 +1176,23 @@
 
   /* Ulang Lah! = ulangi level yang sama dengan lagu acak baru */
   $('btnReplay').addEventListener('click', function () {
-    closeSheet();
+    showPlayView();
     startSong();
   });
+
+  function showPlayView() {
+    var r = $('resultView');
+    if (r) r.hidden = true;
+    var pv = $('playView');
+    if (pv) pv.hidden = false;
+  }
+
+  function showResultView() {
+    var pv = $('playView');
+    if (pv) pv.hidden = true;
+    var r = $('resultView');
+    if (r) r.hidden = false;
+  }
 
   function renderLevel() {
     $('streakNow').textContent = level.current;
@@ -1205,18 +1220,13 @@
     var apple = $('revApple');
     if (s.appleUrl) { apple.href = s.appleUrl; apple.hidden = false; } else { apple.hidden = true; }
 
-    /* tidak ada keterangan progres di layar hasil */
-    var v = $('revVerdict');
-    v.innerHTML = '';
-    v.hidden = true;
-
     $('btnReplay').hidden = !!solved;
     $('btnNext').hidden = !solved;
-    openSheet($('sheetReveal'));
+    showResultView();
   }
 
   $('btnNext').addEventListener('click', function () {
-    closeSheet();
+    showPlayView();
     if (state.nextTier && state.nextTier !== settings.tier) {
       settings.tier = state.nextTier;
       saveSettings();
@@ -1227,6 +1237,50 @@
     }
     state.nextTier = null;
     startSong();
+  });
+
+  /* ---------------- bagikan hasil ---------------- */
+  function shareText(solved) {
+    var s = state.song;
+    var lv = solved ? level.best : level.current;
+    if (solved) {
+      return 'Nebak "' + s.title + '" — ' + s.artist + ' cuma dari potongan pendek di Spekulasi, Level ' + lv + '.';
+    }
+    return 'Nyerah di "' + s.title + '" — ' + s.artist + ' (Level ' + lv + ') di Spekulasi. Coba kalahin.';
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        resolve();
+      } catch (e) { reject(e); }
+    });
+  }
+
+  $('btnShare').addEventListener('click', function () {
+    if (!state.song) return;
+    var solved = !!state.solved && $('revBadge').classList.contains('good');
+    var text = shareText(solved);
+    var url = location.href.split('?')[0];
+    if (navigator.share) {
+      navigator.share({ title: 'Spekulasi', text: text, url: url }).catch(function () {});
+      return;
+    }
+    copyText(text + ' ' + url)
+      .then(function () { toast('Hasil disalin, tinggal tempel.'); })
+      .catch(function () { toast('Gagal menyalin. Salin manual: ' + url); });
   });
 
   /* ---------------- sheet tambahan ---------------- */

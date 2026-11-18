@@ -674,6 +674,33 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
 
 .hintline { font-size: 10.5px; line-height: 1.45; color: var(--muted); margin: 0 2px; }
 
+/* ============================ tampilan hasil (di tempat, bukan pop-up) */
+.resultview {
+  width: 100%; max-width: 430px; margin-top: 4px;
+  display: grid; justify-items: center; gap: 8px; text-align: center;
+  animation: pop 200ms ease-out;
+}
+.resultview .cover.big { width: 150px; height: 150px; }
+.resultview .rev-title { font-size: 19px; margin-top: 2px; }
+.resultview .badge { margin-top: 2px; }
+.result-actions {
+  display: grid; grid-template-columns: 48px 1fr; gap: 8px;
+  width: 100%; margin-top: 8px; align-items: stretch;
+}
+.result-actions .btn-replay,
+.result-actions .btn-next { width: 100%; height: 46px; }
+.share-btn {
+  height: 46px; border-radius: 12px; display: grid; place-items: center;
+  background: var(--surface); border: 1px solid var(--line); color: var(--text-2);
+  transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+.share-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--surface-2); }
+@media (max-width: 900px) {
+  .resultview .cover.big { width: 128px; height: 128px; }
+  .result-actions { grid-template-columns: 44px 1fr; gap: 6px; }
+  .result-actions .btn-replay, .result-actions .btn-next { font-size: 12.5px; padding: 0 8px; }
+}
+
 /* ============================ layar jawaban (vertikal, rata tengah) */
 .panel.reveal {
   align-items: center; justify-items: center; text-align: center; gap: 10px;
