@@ -20,7 +20,7 @@ lalu buka http://127.0.0.1:8000
 
 1. Klip 0,1 detik diputar otomatis. Tombol putar dan tombol spasi memutar ulang potongan yang sama tanpa biaya.
 2. Pemain mengetik judul. Saran muncul dari bank lagu (judul dan nama artis), maksimal 6 baris, dan jawaban diambil dari saran itu supaya tidak ada salah ketik yang dihitung salah.
-3. Tebakan salah: potongan dibuka ke tahap berikutnya dari titik yang sama dan diputar otomatis. Tebakan yang sudah dicoba ditandai.
+3. Tebakan salah: potongan dibuka ke tahap berikutnya dari titik yang sama dan diputar otomatis. Tebakan yang sudah dicoba ditandai, dan judulnya tidak muncul lagi di daftar saran. Mengetik ulang judul itu akan ditolak tanpa memakai tahap.
 4. Tombol Lewati membuka potongan berikutnya tanpa menebak dan tanpa memutus beruntun; label tombolnya menyebut targetnya ("Lewati ke 2s"). Di tahap terakhir tombol ini hilang.
 5. Benar: beruntun bertambah, waktu tebak tercatat, dan layar jawaban muncul dengan cover, judul, artis, tahun, genre, pemutar 30 detik, dan tautan Apple Music kalau ada.
 6. Menyerah, atau salah di tahap terakhir: beruntun kembali ke nol, rekor tetap tersimpan. Layar jawaban menampilkan lagu yang sebenarnya.

@@ -304,6 +304,8 @@
     song: null,
     rec: null,
     tried: [],
+    triedNorm: [],
+    triedIds: [],
     pool: [],
     recent: [],
     startedAt: 0,
@@ -417,6 +419,8 @@
     state.song = pickSong();
     state.stage = 0;
     state.tried = [];
+    state.triedNorm = [];
+    state.triedIds = [];
     state.answeredWrong = false;
     state.loading = true;
     state.solved = false;
@@ -469,6 +473,8 @@
     if (nq.length < 2 || !searchIndex) return [];
     var out = [];
     searchIndex.items.forEach(function (it) {
+      if (state.triedIds.indexOf(it.song.id) !== -1) return;
+      if (state.triedNorm.indexOf(it.t) !== -1) return;
       var score = 0;
       if (it.t.indexOf(nq) === 0) score = 4;
       else if (it.t.indexOf(nq) > 0) score = 3;
@@ -562,23 +568,24 @@
     if (!song) {
       var raw = (typed || '').trim();
       if (raw.length < 2) return;
-      var key = norm(raw);
-      if (state.tried.indexOf(raw) !== -1) {
-        toast('Sudah pernah ditebak.');
+      if (state.triedNorm.indexOf(norm(raw)) !== -1) {
+        toast('Judul itu sudah ditebak.');
+        $('guess').value = '';
         return;
       }
-      state.tried.push(raw);
-      wrongGuess(raw);
+      wrongGuess(raw, null);
       return;
     }
     if (song.id === state.song.id) {
       solveRound();
-    } else {
-      var label = song.title;
-      if (state.tried.indexOf(label) !== -1) return;
-      state.tried.push(label);
-      wrongGuess(label);
+      return;
     }
+    if (state.triedIds.indexOf(song.id) !== -1 || state.triedNorm.indexOf(norm(song.title)) !== -1) {
+      toast('Judul itu sudah ditebak.');
+      $('guess').value = '';
+      return;
+    }
+    wrongGuess(song.title, song);
   }
 
   function advanceStage() {
@@ -592,7 +599,10 @@
     return true;
   }
 
-  function wrongGuess(label) {
+  function wrongGuess(label, song) {
+    state.tried.push(label);
+    state.triedNorm.push(norm(label));
+    if (song) state.triedIds.push(song.id);
     renderTried();
     $('guess').value = '';
     $('suggest').hidden = true;
