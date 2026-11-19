@@ -771,7 +771,7 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
 /* --- palet: tema gelap dinetralkan, aksen tetap oranye --- */
 :root {
   --bg: #FAF5EE;
-  --center: #FDF9F3;
+  --center: #FAF5EE;
   --surface: #FFFFFF;
   --surface-2: #F3EAE0;
   --line: #E9DED0;
@@ -782,7 +782,7 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
 }
 [data-theme="dark"] {
   --bg: #0A0A0C;
-  --center: #101013;
+  --center: #0A0A0C;
   --surface: #161619;
   --surface-2: #1E1E22;
   --line: #26262B;
@@ -791,10 +791,11 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
   --muted: #7B7570;
 }
 
-/* --- kerangka tiga kolom: tanpa garis pemisah, cukup beda bidang --- */
-.side.left, .side.right { border: 0; }
-.center { background: var(--center); }
+/* --- kerangka tiga kolom: satu bidang datar, panel samping transparan --- */
+.side.left, .side.right { background: transparent; border: 0; }
+.center { background: transparent; }
 .center::before { display: none; }
+.shell { grid-template-columns: 300px minmax(0, 1fr) 300px; }
 
 .center-inner {
   display: grid;
@@ -912,7 +913,7 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
 
 .rev-flags { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px; }
 .rev-flags .badge { margin-top: 0; }
-.rev-flags .streakchip { font-size: 12px; padding: 5px 12px; }
+.rev-flags .streakchip { font-size: 13px; padding: 6px 14px; }
 
 #revApple {
   display: inline-flex; align-items: center; height: 34px; padding: 0 16px;
@@ -940,10 +941,16 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
 .streakchip { font-weight: 600; }
 
 @media (max-width: 1500px) {
+  .shell { grid-template-columns: 260px minmax(0, 1fr) 260px; }
   .logo { font-size: 46px; }
   .play { width: 118px; height: 118px; }
 }
+@media (max-width: 1180px) {
+  .shell { grid-template-columns: 220px minmax(0, 1fr) 220px; }
+}
 @media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .side.left, .side.right { background: var(--bg); }
   .center-inner { padding: 62px 16px 18px; grid-template-rows: auto auto; align-content: start; }
   .stagewrap { justify-content: flex-start; overflow: visible; }
   .logo { display: none; }

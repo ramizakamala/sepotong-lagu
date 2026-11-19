@@ -1271,15 +1271,18 @@
     if (img) img.addEventListener('error', function () { cover.innerHTML = '<span class="ph"></span>'; });
 
     var badge = $('revBadge');
-    badge.textContent = solved
-      ? (seconds > 0 ? seconds + 'S \uD83D\uDD25' : 'Anjay Bener!')
-      : (reason === 'giveup' ? 'Gitu aja nyerah!' : 'Salah Lo!');
+    badge.textContent = solved ? 'Anjay Bener!' : (reason === 'giveup' ? 'Gitu aja nyerah!' : 'Salah Lo!');
     badge.className = 'badge' + (solved ? ' good' : '');
 
     var revStreak = $('revStreak');
     if (revStreak) {
-      revStreak.textContent = 'Level ' + level.current;
-      revStreak.classList.toggle('hot', level.current >= 3);
+      if (solved && seconds > 0) {
+        revStreak.textContent = seconds + 'S \uD83D\uDD25';
+        revStreak.classList.add('hot');
+      } else {
+        revStreak.textContent = 'Level ' + level.current;
+        revStreak.classList.toggle('hot', level.current >= 3);
+      }
     }
 
     var apple = $('revApple');
