@@ -1228,6 +1228,12 @@
     badge.textContent = solved ? 'Anjay Bener!' : (reason === 'giveup' ? 'Gitu aja nyerah!' : 'Salah Lo!');
     badge.className = 'badge' + (solved ? ' good' : '');
 
+    var revStreak = $('revStreak');
+    if (revStreak) {
+      revStreak.textContent = 'Level ' + level.current;
+      revStreak.classList.toggle('hot', level.current >= 3);
+    }
+
     var apple = $('revApple');
     if (s.appleUrl) { apple.href = s.appleUrl; apple.hidden = false; } else { apple.hidden = true; }
 
@@ -1261,7 +1267,7 @@
   });
 
   /* ---------------- confetti ---------------- */
-  var CONF_COLORS = ['#E2681F', '#F2A03D', '#1F7A4C', '#B3261E', '#6B4E9B', '#E9C75A', '#F07068'];
+  var CONF_COLORS = ['#F5863C', '#FFC08A', '#FCEBD9', '#C2591E', '#4E9E92'];
   var confRaf = 0;
   var confPieces = [];
   var confCtx = null;
@@ -1279,23 +1285,40 @@
 
     var w = canvas.clientWidth;
     var h = canvas.clientHeight;
-    confPieces = [];
-    var n = 90;
-    for (var i = 0; i < n; i++) {
-      var dariKiri = Math.random() < 0.5;
-      confPieces.push({
-        x: w * (0.35 + Math.random() * 0.3),
-        y: h * 0.06,
-        vx: (dariKiri ? -1 : 1) * (60 + Math.random() * 210),
-        vy: 40 + Math.random() * 120,
-        w: 5 + Math.random() * 5,
-        h: 8 + Math.random() * 8,
-        rot: Math.random() * Math.PI,
-        vr: (Math.random() - 0.5) * 9,
-        color: CONF_COLORS[Math.floor(Math.random() * CONF_COLORS.length)],
-        life: 0
+    var bx = w / 2;
+    var by = h * 0.4;
+    var pieces = [];
+    var meledak = false;
+
+    /* tahap satu: percikan meluncur dari bawah layar menuju titik tengah */
+    for (var i = 0; i < 3; i++) {
+      var sx = bx + (i - 1) * 52 + (Math.random() - 0.5) * 16;
+      var speed = 900 + Math.random() * 160;
+      var rise = h + 14 - by;
+      pieces.push({
+        rocket: true, x: sx, y: h + 14,
+        vx: (bx - sx) / (rise / speed), vy: -speed,
+        color: CONF_COLORS[i % CONF_COLORS.length]
       });
     }
+
+    /* tahap dua: pecahan menyebar ke segala arah dari titik itu */
+    function burst() {
+      var n = 62;
+      for (var i = 0; i < n; i++) {
+        var a = (Math.PI * 2 * i) / n + Math.random() * 0.12;
+        var sp = 180 + Math.random() * 420;
+        pieces.push({
+          rocket: false, x: bx, y: by,
+          vx: Math.cos(a) * sp, vy: Math.sin(a) * sp * 0.82 - 60,
+          w: 4 + Math.random() * 5, h: 7 + Math.random() * 7,
+          rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 12,
+          color: CONF_COLORS[Math.floor(Math.random() * CONF_COLORS.length)],
+          life: 0
+        });
+      }
+    }
+
     var last = performance.now();
     var t0 = last;
 
@@ -1304,24 +1327,47 @@
       last = now;
       confCtx.clearRect(0, 0, w, h);
       var alive = 0;
-      for (var i = 0; i < confPieces.length; i++) {
-        var p = confPieces[i];
+
+      for (var i = pieces.length - 1; i >= 0; i--) {
+        var p = pieces[i];
+
+        if (p.rocket) {
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+          confCtx.globalAlpha = 0.5;
+          confCtx.fillStyle = p.color;
+          confCtx.fillRect(p.x - 1.5, p.y, 3, 22);
+          confCtx.globalAlpha = 1;
+          if (p.y <= by) {
+            pieces.splice(i, 1);
+            meledak = true;
+            continue;
+          }
+          alive++;
+          continue;
+        }
+
         p.life += dt;
-        p.vy += 620 * dt;
-        p.vx *= 0.99;
+        p.vx *= 0.985;
+        p.vy = p.vy * 0.995 + 760 * dt;
         p.x += p.vx * dt;
         p.y += p.vy * dt;
         p.rot += p.vr * dt;
-        if (p.y < h + 40) alive++;
+        var fade = Math.max(0, 1 - Math.max(0, p.life - 1.1) / 0.9);
+        if (fade <= 0) { pieces.splice(i, 1); continue; }
+        alive++;
         confCtx.save();
         confCtx.translate(p.x, p.y);
         confCtx.rotate(p.rot);
-        confCtx.globalAlpha = Math.max(0, 1 - Math.max(0, p.life - 2.2) / 0.8);
+        confCtx.globalAlpha = fade;
         confCtx.fillStyle = p.color;
         confCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
         confCtx.restore();
       }
-      if (alive > 0 && now - t0 < 4200) {
+
+      if (meledak) { burst(); meledak = false; alive = pieces.length; }
+
+      if (alive > 0 && now - t0 < 3600) {
         confRaf = requestAnimationFrame(frame);
       } else {
         confCtx.clearRect(0, 0, w, h);
