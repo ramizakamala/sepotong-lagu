@@ -1009,6 +1009,7 @@
 
   function solveRound() {
     state.solved = true;
+    var secs = state.startedAt ? Math.max(1, Math.round((performance.now() - state.startedAt) / 1000)) : 0;
     level.best = Math.max(level.best, level.current);
     level.current = level.best + 1;
     state.nextTier = nextTier(settings.tier);
@@ -1017,7 +1018,7 @@
     beep('good');
     buzz(20);
     Engine.stopClip();
-    showReveal(true, 0);
+    showReveal(true, secs);
   }
 
   function loseRound(reason) {
@@ -1225,7 +1226,9 @@
     if (img) img.addEventListener('error', function () { cover.innerHTML = '<span class="ph"></span>'; });
 
     var badge = $('revBadge');
-    badge.textContent = solved ? 'Anjay Bener!' : (reason === 'giveup' ? 'Gitu aja nyerah!' : 'Salah Lo!');
+    badge.textContent = solved
+      ? (seconds > 0 ? seconds + 'S \uD83D\uDD25' : 'Anjay Bener!')
+      : (reason === 'giveup' ? 'Gitu aja nyerah!' : 'Salah Lo!');
     badge.className = 'badge' + (solved ? ' good' : '');
 
     var revStreak = $('revStreak');
