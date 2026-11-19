@@ -275,7 +275,7 @@ a { color: var(--accent); text-decoration: none; }
   width: 104px; height: 104px; border-radius: 50%;
   background: var(--accent); color: var(--on-accent);
   display: grid; place-items: center;
-  box-shadow: 0 10px 22px -12px var(--shadow-accent);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), 0 18px 30px -20px var(--shadow-accent);
   transition: transform 120ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 .play:active { transform: scale(.98); }
@@ -761,3 +761,196 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
   z-index: 55; pointer-events: none; display: none;
 }
 #confetti.on { display: block; }
+
+/* ============================================================
+   PENYESUAIAN TAMPILAN
+   Bidang datar tanpa sorot, garis rambut, kontrol netral,
+   panggung permainan di tengah seperti acuan Songspot.
+   ============================================================ */
+
+/* --- palet: tema gelap dinetralkan, aksen tetap oranye --- */
+:root {
+  --bg: #FAF5EE;
+  --center: #FDF9F3;
+  --surface: #FFFFFF;
+  --surface-2: #F3EAE0;
+  --line: #E9DED0;
+  --text: #241A13;
+  --text-2: #6C5949;
+  --muted: #8B7A69;
+  --knob: #FFFFFF;
+}
+[data-theme="dark"] {
+  --bg: #0A0A0C;
+  --center: #101013;
+  --surface: #161619;
+  --surface-2: #1E1E22;
+  --line: #26262B;
+  --text: #F3EFEA;
+  --text-2: #A9A39D;
+  --muted: #7B7570;
+}
+
+/* --- kerangka tiga kolom --- */
+.side.left { border-right: 1px solid var(--line); }
+.side.right { border-left: 1px solid var(--line); }
+.center { background: var(--center); }
+.center::before { display: none; }
+
+.center-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 16px;
+  max-width: 620px;
+  padding: 26px 26px 20px;
+}
+.stagewrap {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 0; overflow-y: auto; scrollbar-width: none;
+}
+.stagewrap::-webkit-scrollbar { display: none; }
+
+.logo {
+  font-size: 52px;
+  color: color-mix(in srgb, var(--text) 11%, var(--center));
+}
+.logo span { color: color-mix(in srgb, var(--text) 15%, var(--center)); }
+
+.genrenav { margin-top: 14px; }
+.pills { margin-top: 16px; }
+.pill { height: 28px; font-size: 11px; }
+
+/* --- panggung: piringan, kolom tebakan --- */
+.playrow { margin-top: 22px; }
+.play { width: 128px; height: 128px; }
+.play[data-state="playing"] { box-shadow: none; }
+.play[data-state="playing"] .disc {
+  background:
+    conic-gradient(from 0deg at 50% 50%,
+      rgba(255, 255, 255, .2) 0deg,
+      rgba(255, 255, 255, 0) 40deg,
+      rgba(255, 255, 255, 0) 300deg,
+      rgba(255, 255, 255, .09) 360deg),
+    repeating-radial-gradient(circle at 50% 50%,
+      rgba(255, 255, 255, .045) 0 1.1px,
+      rgba(0, 0, 0, .45) 1.1px 3.2px),
+    radial-gradient(circle at 50% 50%,
+      #101013 0 25%,
+      var(--accent) 26% 38%,
+      #14100d 39% 100%);
+}
+.playsecs { font-size: 15px; }
+
+.track { margin-top: 26px; }
+.track .rail, .volwrap .rail { background: color-mix(in srgb, var(--text) 12%, transparent); }
+
+.inputrow { margin-top: 28px; max-width: 460px; }
+.field { height: 48px; border-radius: 12px; }
+.field:focus-within { border-color: var(--accent); }
+.actionbtn { height: 48px; border-radius: 12px; }
+.meta { margin-top: 12px; max-width: 460px; }
+.suggest { max-width: 460px; }
+
+/* --- panel kanan: baris netral, label beraksen saat aktif --- */
+.side.right { padding: 26px 22px; gap: 20px; }
+.side.right .section { gap: 6px; }
+.opt-row {
+  height: 44px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--line);
+  color: var(--text-2); font-size: 13px; font-weight: 500;
+}
+.opt-row:hover { background: var(--surface-2); color: var(--text); }
+.opt-row[aria-pressed="true"] { background: var(--surface); color: var(--accent); border-color: var(--line); }
+.switch { width: 36px; height: 20px; background: color-mix(in srgb, var(--text) 18%, transparent); }
+.switch::after {
+  width: 16px; height: 16px; top: 2px; left: 2px;
+  background: var(--knob); box-shadow: 0 1px 2px rgba(0, 0, 0, .25);
+}
+.opt-row[aria-pressed="true"] .switch { background: var(--accent); }
+.opt-row[aria-pressed="true"] .switch::after { transform: translateX(16px); background: var(--knob); }
+.hintline { font-size: 10px; line-height: 1.5; }
+.dur-btn { height: 38px; border-radius: 9px; font-size: 12px; }
+.collapse-head { height: 44px; border-radius: 10px; border: 1px solid var(--line); font-size: 13px; font-weight: 500; }
+
+/* --- panel kiri --- */
+.side.left { padding: 26px 22px; gap: 20px; }
+.hamburger { width: 40px; height: 40px; background: var(--surface); border: 1px solid var(--line); }
+.selectwrap select { height: 44px; border-radius: 10px; font-size: 13px; }
+.diff-row { height: 44px; border-radius: 10px; font-size: 13px; }
+.diff-row[aria-pressed="true"] { background: color-mix(in srgb, var(--tier, var(--accent)) 15%, var(--surface)); }
+.ghost-row { height: 44px; font-size: 13px; }
+
+/* --- kartu di bawah panggung --- */
+.discover {
+  display: flex; flex-direction: column;
+  max-width: 520px; margin: 0 auto; padding-top: 0;
+}
+.discover .cards { order: 1; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.discover .label { order: 2; margin: 10px 0 0; text-align: center; }
+.card {
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: 62px; padding: 10px 14px; border-radius: 12px;
+}
+.card b { font-size: 14px; font-style: italic; letter-spacing: -.01em; }
+.card span { font-size: 10px; margin-top: 3px; }
+.card b, .card span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* --- layar hasil: panggung besar ala acuan --- */
+.resultview { max-width: 480px; gap: 12px; margin-top: 20px; }
+.resultview .cover.big {
+  width: 188px; height: 188px; border-radius: 12px; border: 0;
+  box-shadow: 0 26px 46px -30px rgba(0, 0, 0, .85);
+}
+.resultview .rev-title {
+  margin-top: 4px;
+  font-size: clamp(30px, 4.2vw, 42px); font-weight: 700;
+  letter-spacing: -.035em; line-height: 1.04;
+}
+.resultview .rev-artist { font-size: 15px; color: var(--text-2); opacity: 1; }
+.resultview .rev-album { font-size: 12.5px; }
+
+.rev-flags { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px; }
+.rev-flags .badge { margin-top: 0; }
+.rev-flags .streakchip { font-size: 12px; padding: 5px 12px; }
+
+#revApple {
+  display: inline-flex; align-items: center; height: 34px; padding: 0 16px;
+  border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+  color: var(--text-2); font-size: 12.5px; font-weight: 600;
+}
+#revApple:hover { color: var(--text); border-color: var(--muted); }
+
+.badge {
+  height: 46px; padding: 0 24px; margin-top: 6px;
+  font-size: 15.5px; font-weight: 800; letter-spacing: .02em;
+  border-width: 2px; transform: rotate(-3deg);
+  box-shadow: 0 0 30px -10px currentColor;
+}
+.result-actions { gap: 10px; margin-top: 6px; }
+.result-actions .btn-replay,
+.result-actions .btn-next {
+  height: 44px; min-width: 176px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line);
+  color: var(--text); font-size: 13.5px; font-weight: 600;
+}
+.result-actions .btn-replay:hover,
+.result-actions .btn-next:hover { background: var(--surface-2); border-color: var(--muted); }
+.share-btn { width: 44px; height: 44px; border-radius: 50%; }
+.streakchip { font-weight: 600; }
+
+@media (max-width: 1500px) {
+  .logo { font-size: 46px; }
+  .play { width: 118px; height: 118px; }
+}
+@media (max-width: 900px) {
+  .center-inner { padding: 62px 16px 18px; grid-template-rows: auto auto; align-content: start; }
+  .stagewrap { justify-content: flex-start; overflow: visible; }
+  .logo { display: none; }
+  .play { width: 104px; height: 104px; }
+  .resultview .cover.big { width: 150px; height: 150px; }
+  .rev-title { font-size: 30px; }
+  .result-actions .btn-replay, .result-actions .btn-next { min-width: 130px; font-size: 12.5px; }
+  .discover { padding-top: 16px; }
+}
