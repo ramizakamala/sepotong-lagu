@@ -239,7 +239,7 @@
           });
         })
         .then(function (buf) {
-          var rec = { buf: buf, offset: pickOffset(buf) };
+          var rec = { buf: buf, offset: pickOffset(buf), hook: pickHook(buf) };
           if (self.cache.size >= 12) self.cache.delete(self.cache.keys().next().value);
           self.cache.set(key, rec);
           return rec;
@@ -322,6 +322,26 @@
       };
     },
 
+    /* pemutaran setelah jawaban dibuka: mulai dari bagian ramai, lalu berulang tanpa jeda */
+    playLoop: function (rec) {
+      this.stopFull();
+      var ctx = this.init();
+      var src = ctx.createBufferSource();
+      var gain = ctx.createGain();
+      src.buffer = rec.buf;
+      gain.gain.value = 1;
+      src.connect(gain);
+      gain.connect(this.master());
+      var dur = rec.buf.duration;
+      var start = rec.hook || 0;
+      if (start > dur - 6) start = Math.max(0, dur - 6);
+      src.loop = true;
+      src.loopStart = start;
+      src.loopEnd = dur;
+      src.start(0, start);
+      this.full = { src: src, gain: gain, startedAt: ctx.currentTime, dur: dur, start: start };
+    },
+
     stopAll: function () { this.stopClip(); this.stopFull(); }
   };
 
@@ -354,6 +374,31 @@
       good = cands.slice().sort(function (a, b) { return b.rms - a.rms; }).slice(0, 3);
     }
     return good[Math.floor(Math.random() * good.length)].t;
+  }
+
+  /* titik mulai untuk pemutaran penuh: bagian paling ramai di paruh awal-tengah preview,
+     biasanya bagian reff, supaya yang diputar setelah jawaban terbuka bukan potongan pendek */
+  function pickHook(buf) {
+    var ch = buf.getChannelData(0);
+    var sr = buf.sampleRate;
+    var dur = buf.duration;
+    var lo = dur * 0.2;
+    var hi = Math.max(lo, dur * 0.6);
+    var win = Math.max(64, Math.floor(0.4 * sr));
+    var stride = Math.max(1, Math.floor(win / 600));
+    var best = { t: lo, rms: -1 };
+    for (var t = lo; t <= hi; t += 0.2) {
+      var i0 = Math.floor(t * sr);
+      var sum = 0, n = 0;
+      for (var k = 0; k < win; k += stride) {
+        var v = ch[i0 + k] || 0;
+        sum += v * v;
+        n++;
+      }
+      var rms = Math.sqrt(sum / Math.max(1, n));
+      if (rms > best.rms) best = { t: t, rms: rms };
+    }
+    return Math.max(0, best.t);
   }
 
   /* ---------------- state ---------------- */
@@ -1246,11 +1291,11 @@
 
     if (solved) fireConfetti();
 
-    /* lagunya langsung diputar supaya hasilnya terasa hidup */
+    /* lagunya langsung diputar dari bagian ramai dan berulang, tidak berhenti sendiri */
     if (state.rec) {
       Engine.resume().then(function () {
         if (!state.rec) return;
-        Engine.playFull(state.rec);
+        Engine.playLoop(state.rec);
       }).catch(function () {});
     }
   }
