@@ -791,9 +791,8 @@ html.reduce-motion *, html.reduce-motion *::before, html.reduce-motion *::after 
   --muted: #7B7570;
 }
 
-/* --- kerangka tiga kolom --- */
-.side.left { border-right: 1px solid var(--line); }
-.side.right { border-left: 1px solid var(--line); }
+/* --- kerangka tiga kolom: tanpa garis pemisah, cukup beda bidang --- */
+.side.left, .side.right { border: 0; }
 .center { background: var(--center); }
 .center::before { display: none; }
 
